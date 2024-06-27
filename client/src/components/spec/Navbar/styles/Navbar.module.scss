@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  border-bottom: 0.15rem solid hsl(0, 0%, 50%, 0.15);
+
+  .navbarHolder {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90rem;
+
+    .logoHolder {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.32rem;
+      cursor: pointer;
+
+      &:hover img {
+        transform: rotate(-90deg);
+      }
+
+      img {
+        width: 4.2rem;
+        transition: transform 0.5s ease;
+      }
+
+      p {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+    }
+
+    .navigateHolder {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+  }
+}

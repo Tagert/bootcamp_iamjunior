@@ -1,0 +1,11 @@
+.container {
+  display: flex;
+  gap: 1.5rem;
+}
+.container a {
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+.container a:hover {
+  text-decoration: underline;
+}/*# sourceMappingURL=NavList.module.css.map */

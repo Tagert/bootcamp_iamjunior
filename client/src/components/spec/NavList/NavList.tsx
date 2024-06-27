@@ -1,3 +1,4 @@
+import styles from "./styles/NavList.module.css";
 import { LinksType } from "../../../types/links.type";
 import { Link } from "react-router-dom";
 
@@ -7,9 +8,9 @@ type NavListProp = {
 
 const NavList = ({ links }: NavListProp) => {
   return (
-    <div className="flex gap-6">
+    <div className={styles.container}>
       {links.map((l) => (
-        <Link className=" text-xl font-medium" key={l.id} to={l.href}>
+        <Link key={l.id} to={l.href}>
           {l.title}
         </Link>
       ))}

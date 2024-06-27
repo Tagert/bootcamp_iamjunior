@@ -8,26 +8,30 @@ import { CategoriesType } from "../types/categories.types";
 
 export const categories: CategoriesType[] = [
   {
+    id: 1,
     imgSrc: cleaning,
     text: "Cleaning",
   },
 
-  { imgSrc: repair, text: "Repair" },
+  { id: 2, imgSrc: repair, text: "Repair" },
 
   {
+    id: 3,
     imgSrc: painting,
     text: "Painting",
   },
 
   {
+    id: 4,
     imgSrc: truck,
     text: "Shifting",
   },
 
   {
+    id: 5,
     imgSrc: plumbing,
     text: "Plumbing",
   },
 
-  { imgSrc: electric, text: "Electric" },
+  { id: 6, imgSrc: electric, text: "Electric" },
 ];

@@ -8,12 +8,17 @@ export const links: LinksType[] = [
   },
   {
     id: 2,
+    title: "About",
+    href: "/about",
+  },
+  {
+    id: 3,
     title: "Services",
     href: "/services",
   },
   {
-    id: 3,
-    title: "About Us",
-    href: "/about-us",
+    id: 4,
+    title: "Contact Us",
+    href: "/contact-us",
   },
 ];

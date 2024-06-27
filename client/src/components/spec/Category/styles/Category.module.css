@@ -1,0 +1,29 @@
+.category {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: 9rem;
+  width: 12rem;
+  padding: 1rem;
+  border: none;
+  border-radius: 0.6rem;
+  box-shadow: rgba(0, 0, 0, 0.1490196078) -0.125rem -0.125rem 0.5rem;
+  background-color: #f2eefd;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s;
+}
+.category:hover {
+  transform: translate(0.5rem, 0.5rem);
+  box-shadow: rgba(86, 20, 208, 0.2509803922) -0.32rem -0.32rem 0.94rem;
+}
+.category img {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.category p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #9977ef;
+}/*# sourceMappingURL=Category.module.css.map */

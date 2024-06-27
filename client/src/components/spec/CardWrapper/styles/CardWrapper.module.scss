@@ -1,0 +1,22 @@
+.cardWrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 90rem;
+  margin: auto;
+  gap: 2rem;
+  padding: 4rem 2rem;
+
+  .description {
+    h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+  }
+
+  .cardHolder {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

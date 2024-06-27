@@ -3,7 +3,7 @@ type ButtonImageProp = {
   className: string;
 };
 
-const ButtonImage = ({ imgSrc, className }: ButtonImageProp) => {
+export const ButtonImage = ({ imgSrc, className }: ButtonImageProp) => {
   return (
     <>
       <button className={className}>
@@ -16,5 +16,3 @@ const ButtonImage = ({ imgSrc, className }: ButtonImageProp) => {
     </>
   );
 };
-
-export default ButtonImage;

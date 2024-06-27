@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  border-bottom: 0.15rem solid hsla(0, 0%, 50%, 0.15);
+}
+.container .navbarHolder {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90rem;
+}
+.container .navbarHolder .logoHolder {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.32rem;
+  cursor: pointer;
+}
+.container .navbarHolder .logoHolder:hover img {
+  transform: rotate(-90deg);
+}
+.container .navbarHolder .logoHolder img {
+  width: 4.2rem;
+  transition: transform 0.5s ease;
+}
+.container .navbarHolder .logoHolder p {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.container .navbarHolder .navigateHolder {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}/*# sourceMappingURL=Navbar.module.css.map */
