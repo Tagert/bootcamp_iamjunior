@@ -1,4 +1,4 @@
-import styles from "./styles/Hero.module.css";
+import styles from "./Hero.module.scss";
 import search from "../../../assets/search.svg";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 
@@ -11,7 +11,7 @@ export const Hero = ({ onSearch, setOnSearch }: HeroProp) => {
   return (
     <section className={styles.container}>
       <h2>
-        Find Home <span className="text-indigo-500">Service/Repair</span>
+        Find Home <span>Service/Repair</span>
         <br /> Near You
       </h2>
 

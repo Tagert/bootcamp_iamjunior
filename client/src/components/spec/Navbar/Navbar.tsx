@@ -1,4 +1,4 @@
-import styles from "./styles/Navbar.module.scss";
+import styles from "./Navbar.module.scss";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.svg";
 import NavList from "../NavList/NavList";

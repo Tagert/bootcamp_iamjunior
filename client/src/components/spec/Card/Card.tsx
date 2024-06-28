@@ -1,5 +1,5 @@
 import { Button } from "../../common/Button/Button";
-import styles from "./styles/Card.module.css";
+import styles from "./Card.module.scss";
 
 type CardProp = {
   imgUrl: string;

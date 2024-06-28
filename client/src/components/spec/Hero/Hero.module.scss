@@ -14,18 +14,18 @@
     line-height: 5rem;
 
     span {
-      color: #8057ea;
+      color: $primary-btn-color;
       cursor: pointer;
 
       &:hover {
-        color: #5b24e7;
+        color: $primary-btn-color-hover;
       }
     }
   }
 
   h4 {
     font-size: 1.5rem;
-    color: #a8a8a8;
+    color: $grayish-text-color;
   }
 
   .searchBarHolder {
@@ -35,16 +35,16 @@
 
     input {
       width: 28rem;
-      border: 0.15rem solid hsl(0, 0%, 50%, 0.25);
+      border: 0.15rem solid $gray-color-025;
       border-radius: 2rem;
       padding: 1rem;
 
       &:hover {
-        border: 0.15rem solid hsl(0, 0%, 50%, 0.45);
+        border: 0.15rem solid $gray-color-045;
       }
 
       &:focus-visible {
-        outline-color: #8056eb;
+        outline-color: $primary-btn-color;
       }
     }
 
@@ -56,10 +56,10 @@
       height: 4rem;
       border: none;
       border-radius: 50%;
-      background-color: #8056eb;
+      background-color: $primary-btn-color;
 
       &:hover {
-        background-color: #5b24e7;
+        background-color: $primary-btn-color-hover;
       }
     }
   }

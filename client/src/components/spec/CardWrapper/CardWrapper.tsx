@@ -1,4 +1,4 @@
-import styles from "./styles/CardWrapper.module.css";
+import styles from "./CardWrapper.module.scss";
 import { services } from "../../../constants/services";
 import { Card } from "../Card/Card";
 

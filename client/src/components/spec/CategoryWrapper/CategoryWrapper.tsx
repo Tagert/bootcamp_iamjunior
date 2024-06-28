@@ -1,4 +1,4 @@
-import styles from "./styles/CategoryWrapper.module.css";
+import styles from "./CategoryWrapper.module.scss";
 import { categories } from "../../../constants/categories";
 import { Category } from "../Category/Category";
 

@@ -5,15 +5,15 @@
   flex: 1 1 calc(25% - 1rem);
   max-width: 20.751rem;
   height: 100%;
-  border: 0.1rem solid hsl(0, 0%, 0%, 0.15);
+  border: 0.1rem solid $dark-box-shadow;
   border-radius: 0.8rem;
-  box-shadow: #00000026 1.95px 1.95px 2.6px;
+  box-shadow: $dark-box-shadow $box-shadow-axis-bottom-right;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-10px);
-    box-shadow: #5614d040 5px 5px 15px;
+    box-shadow: $hover-box-shadow $box-shadow-axis-bottom-right-hover;
   }
 
   .imageBox {
@@ -45,8 +45,8 @@
         font-weight: 500;
 
         border-radius: 2rem;
-        color: #8056eb;
-        background-color: #e5ddfb;
+        color: $primary-btn-color;
+        background-color: $secondary-btn-color;
       }
 
       &:nth-child(2) {
@@ -58,12 +58,12 @@
       &:nth-child(3) {
         padding-left: 0.5rem;
         font-size: 1.1rem;
-        color: #8056eb;
+        color: $primary-btn-color;
       }
 
       &:nth-child(4) {
         padding-left: 0.5rem;
-        color: #a8a8a8;
+        color: $grayish-text-color;
       }
     }
 

@@ -1,4 +1,4 @@
-import styles from "./styles/Category.module.css";
+import styles from "./Category.module.scss";
 import { routes } from "../../../navigation/routes";
 import { useNavigate } from "react-router-dom";
 

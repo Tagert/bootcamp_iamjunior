@@ -5,9 +5,9 @@
   font-size: 1rem;
   font-weight: 600;
   color: white;
-  background-color: #8057ea;
+  background-color: $primary-btn-color;
 
   &:hover {
-    background-color: #5b24e7;
+    background-color: $primary-btn-color-hover;
   }
 }

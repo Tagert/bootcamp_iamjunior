@@ -3,13 +3,14 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import { Home } from "../Home";
-import { About } from "../pages/about";
-import { Login } from "../pages/login";
-import { Register } from "../pages/register";
+import { Home } from "../pages/home/index";
+import { About } from "../pages/about/index";
+import { Login } from "../pages/login/index";
+import { Register } from "../pages/register/index";
 import { SearchCategory } from "../pages/search/[category]";
-import { NotFound } from "../pages/not-found";
+import { NotFound } from "../pages/not-found/index";
 import { routes } from "./routes";
+import { Services } from "../pages/services/index";
 
 const routeObjects = [
   {
@@ -18,7 +19,7 @@ const routeObjects = [
   },
   {
     path: routes.SERVICES,
-    element: <Home />,
+    element: <Services />,
   },
   {
     path: routes.ABOUT,

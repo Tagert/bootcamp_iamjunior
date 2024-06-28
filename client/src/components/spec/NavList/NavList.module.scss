@@ -6,6 +6,10 @@
     font-size: 1.25rem;
     font-weight: 400;
 
+    @include xl {
+      display: none;
+    }
+
     &:hover {
       text-decoration: underline;
     }

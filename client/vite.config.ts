@@ -9,4 +9,15 @@ export default defineConfig({
       "@": "/src",
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+        @use "./src/styles/variables" as *;
+        @use "@/styles/responsive" as *;
+        `,
+        // additionalData: `@import "./src/styles/variables";`,
+      },
+    },
+  },
 });

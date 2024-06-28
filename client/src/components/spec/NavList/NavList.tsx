@@ -1,4 +1,4 @@
-import styles from "./styles/NavList.module.css";
+import styles from "./NavList.module.scss";
 import { LinksType } from "../../../types/links.type";
 import { Link } from "react-router-dom";
 

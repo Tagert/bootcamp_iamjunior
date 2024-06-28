@@ -9,14 +9,14 @@
   padding: 1rem;
   border: none;
   border-radius: 0.6rem;
-  box-shadow: #00000026 -0.125rem -0.125rem 0.5rem;
-  background-color: #f2eefd;
+  box-shadow: $dark-box-shadow $box-shadow-axis-top-left;
+  background-color: $additional-background-color;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s;
 
   &:hover {
     transform: translate(0.5rem, 0.5rem);
-    box-shadow: #5614d040 -0.32rem -0.32rem 0.94rem;
+    box-shadow: $hover-box-shadow $box-shadow-axis-top-left-hover;
   }
 
   img {
@@ -27,6 +27,6 @@
   p {
     font-size: 1.1rem;
     font-weight: 500;
-    color: #9977ef;
+    color: $additional-text-color;
   }
 }
