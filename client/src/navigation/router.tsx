@@ -3,14 +3,15 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import { Home } from "../pages/home/index";
-import { About } from "../pages/about/index";
-import { Login } from "../pages/login/index";
-import { Register } from "../pages/register/index";
-import { SearchCategory } from "../pages/search/[category]";
-import { NotFound } from "../pages/not-found/index";
+import { Home } from "../pages/home/Home";
+import { About } from "../pages/about/About";
+import { Services } from "../pages/services/Services";
+import { ContactUs } from "../pages/contact-us/ContactUs";
+import { Login } from "../pages/login/Login";
+import { Register } from "../pages/register/Register";
+import { SearchCategory } from "../pages/search/SearchCategory";
+import { NotFound } from "../pages/not-found/NotFound";
 import { routes } from "./routes";
-import { Services } from "../pages/services/index";
 
 const routeObjects = [
   {
@@ -18,12 +19,16 @@ const routeObjects = [
     element: <Home />,
   },
   {
+    path: routes.ABOUT,
+    element: <About />,
+  },
+  {
     path: routes.SERVICES,
     element: <Services />,
   },
   {
-    path: routes.ABOUT,
-    element: <About />,
+    path: routes.CONTACT_US,
+    element: <ContactUs />,
   },
   {
     path: routes.LOGIN,

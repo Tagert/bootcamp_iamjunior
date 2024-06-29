@@ -1,7 +1,9 @@
+import { Page } from "../../components/template/Page";
+
 export const Services = () => {
   return (
-    <main>
+    <Page>
       <h1>Welcome to services page!</h1>
-    </main>
+    </Page>
   );
 };

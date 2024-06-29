@@ -1,3 +1,4 @@
+import styles from "./Home.module.scss";
 import { useState } from "react";
 import { CardWrapper } from "../../components/spec/CardWrapper/CardWrapper";
 import { CategoryWrapper } from "../../components/spec/CategoryWrapper/CategoryWrapper";

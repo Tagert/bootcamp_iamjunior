@@ -1,7 +1,9 @@
+import { Page } from "../../components/template/Page";
+
 export const Register = () => {
   return (
-    <main>
+    <Page>
       <h1>Welcome to Register page!</h1>
-    </main>
+    </Page>
   );
 };

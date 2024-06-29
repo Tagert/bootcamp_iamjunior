@@ -1,7 +1,8 @@
 export const routes = {
   HOME: "/",
-  SERVICES: "/services",
   ABOUT: "/about",
+  SERVICES: "/services",
+  CONTACT_US: "/contact-us",
   LOGIN: "/login",
   REGISTER: "/register",
   SEARCH_CATEGORY: {
