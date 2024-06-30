@@ -1,4 +1,4 @@
-import { Page } from "../../components/template/Page";
+import { Page } from "../components/template/Page";
 
 export const Login = () => {
   return (

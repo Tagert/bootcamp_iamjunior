@@ -1,22 +1,22 @@
-.category {
+.searchCategoryCard {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   gap: 1rem;
-  height: 9rem;
-  width: 12rem;
+  height: 5.2rem;
+  width: 25rem;
   padding: 1rem;
-  border: none;
+  border: 0.15rem solid $gray-color-025;
   border-radius: 0.6rem;
   box-shadow: $dark-box-shadow $box-shadow-axis-top-left;
-  background-color: $additional-background-color;
   cursor: pointer;
   transition: transform 0.3s ease, box-shadow 0.3s;
 
   &:hover {
-    transform: translate(0.5rem, 0.5rem);
+    transform: translate(0.2rem, 0.2rem);
     box-shadow: $hover-box-shadow $box-shadow-axis-top-left-hover;
+    background-color: $additional-background-color;
+    border-color: $border-color;
+    color: $primary-btn-color;
   }
 
   img {
@@ -27,6 +27,11 @@
   p {
     font-size: 1.1rem;
     font-weight: 500;
-    color: $additional-text-color;
   }
+}
+
+.active {
+  background-color: $additional-background-color;
+  border-color: $border-color;
+  color: $primary-btn-color;
 }

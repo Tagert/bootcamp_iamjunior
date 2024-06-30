@@ -1,0 +1,30 @@
+.searchCategory {
+  display: flex;
+  gap: 2rem;
+  width: 90rem;
+  margin: auto;
+  padding: 4rem 0rem;
+
+  .categoryWrapperHolder {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: $primary-btn-color;
+    }
+  }
+
+  .cardWrapperHolder {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+  }
+}
