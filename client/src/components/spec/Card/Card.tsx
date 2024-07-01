@@ -1,6 +1,6 @@
 import styles from "./Card.module.scss";
 import { useEffect, useState } from "react";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaStar, FaRegStar } from "react-icons/fa";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { Button } from "../../common/Button/Button";
 
@@ -23,12 +23,14 @@ export const Card = ({
   address,
   price,
 }: CardProp) => {
-  const [favorites, setFavorites] = useLocalStorage(
-    "favorites",
-    [] as string[]
+  const nameInStorage: string = "favorites";
+
+  const [favorites, setFavorites] = useLocalStorage<string[]>(
+    nameInStorage,
+    []
   );
 
-  const [isFavorite, setIsFavorite] = useState(favorites.includes(id));
+  const [isFavorite, setIsFavorite] = useState<boolean>(favorites.includes(id));
 
   useEffect(() => {
     setIsFavorite(favorites.includes(id));
@@ -52,7 +54,11 @@ export const Card = ({
           onClick={toggleFavorite}
           // aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
-          {isFavorite ? <FaHeart color="red" /> : <FaRegHeart />}
+          {isFavorite ? (
+            <FaStar className={styles.filledStar} />
+          ) : (
+            <FaRegStar className={styles.emptyStar} />
+          )}
         </button>
       </div>
 

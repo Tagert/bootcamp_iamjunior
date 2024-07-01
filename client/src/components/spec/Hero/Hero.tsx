@@ -9,7 +9,7 @@ type HeroProp = {
 
 export const Hero = ({ onSearch, setOnSearch }: HeroProp) => {
   return (
-    <section className={styles.container}>
+    <section className={styles.hero}>
       <h2>
         Find Home <span>Service/Repair</span>
         <br /> Near You

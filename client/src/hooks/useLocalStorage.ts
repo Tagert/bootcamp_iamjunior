@@ -30,8 +30,8 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
     try {
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
       return initialValue;
     }
   });
@@ -39,8 +39,8 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
   useEffect(() => {
     try {
       localStorage.setItem(key, JSON.stringify(storedValue));
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   }, [key, storedValue]);
 
