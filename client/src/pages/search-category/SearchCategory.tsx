@@ -1,8 +1,8 @@
 import styles from "./SearchCategory.module.scss";
 import { useParams } from "react-router-dom";
-import { Page } from "../components/template/Page";
-import { SearchCategoryWrapper } from "../components/search/SearchCategoryWrapper";
-import { CardWrapper } from "../components/spec/CardWrapper/CardWrapper";
+import { Page } from "../../components/template/Page";
+import { SearchCategoryWrapper } from "../../components/search/SearchCategoryWrapper";
+import { CardWrapper } from "../../components/spec/CardWrapper/CardWrapper";
 
 export const SearchCategory = () => {
   const { category } = useParams();

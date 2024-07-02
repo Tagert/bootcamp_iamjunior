@@ -3,14 +3,14 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
-import { Home } from "../pages/Home";
-import { About } from "../pages/About";
-import { Services } from "../pages/Services";
-import { ContactUs } from "../pages/ContactUs";
-import { Login } from "../pages/Login";
-import { Register } from "../pages/Register";
-import { SearchCategory } from "../pages/SearchCategory";
-import { NotFound } from "../pages/NotFound";
+import { Home } from "../pages/home/Home";
+import { About } from "../pages/about/About";
+import { Services } from "../pages/services-list/Services";
+import { ContactUs } from "../pages/contact-us/ContactUs";
+import { Login } from "../pages/login/Login";
+import { Register } from "../pages/register/Register";
+import { SearchCategory } from "../pages/search-category/SearchCategory";
+import { NotFound } from "../pages/not-found/NotFound";
 import { routes } from "./routes";
 
 const routeObjects = [

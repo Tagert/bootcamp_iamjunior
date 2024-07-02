@@ -1,5 +1,10 @@
-import { Routes } from "./navigation/router";
+import { AuthProvider } from "./context/AuthContext";
+import { Routes } from "./routes/router";
 
 export const App = () => {
-  return <Routes />;
+  return (
+    <AuthProvider>
+      <Routes />
+    </AuthProvider>
+  );
 };

@@ -1,5 +1,5 @@
 import styles from "./CategoryCard.module.scss";
-import { routes } from "../../navigation/routes";
+import { routes } from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 
 type CategoryCardProp = {

@@ -1,6 +1,6 @@
 import styles from "./SearchCategoryCard.module.scss";
 import { useNavigate, generatePath, useParams } from "react-router-dom";
-import { routes } from "../../navigation/routes";
+import { routes } from "../../routes/routes";
 
 type SearchCategoryCardProp = {
   imgSrc: string;

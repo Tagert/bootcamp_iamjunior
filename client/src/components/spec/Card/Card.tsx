@@ -23,24 +23,23 @@ export const Card = ({
   address,
   price,
 }: CardProp) => {
-  const nameInStorage: string = "favorites";
+  const keyName: string = "favoritesId";
 
-  const [favorites, setFavorites] = useLocalStorage<string[]>(
-    nameInStorage,
-    []
+  const [favoritesId, setFavoritesId] = useLocalStorage<string[]>(keyName, []);
+
+  const [isFavorite, setIsFavorite] = useState<boolean>(
+    favoritesId.includes(id)
   );
 
-  const [isFavorite, setIsFavorite] = useState<boolean>(favorites.includes(id));
-
   useEffect(() => {
-    setIsFavorite(favorites.includes(id));
-  }, [favorites, id]);
+    setIsFavorite(favoritesId.includes(id));
+  }, [favoritesId, id]);
 
   const toggleFavorite = () => {
     if (isFavorite) {
-      setFavorites(favorites.filter((favId: string) => favId !== id));
+      setFavoritesId(favoritesId.filter((favId: string) => favId !== id));
     } else {
-      setFavorites([...favorites, id]);
+      setFavoritesId([...favoritesId, id]);
     }
   };
 
@@ -49,11 +48,7 @@ export const Card = ({
       <div className={styles.imageBox}>
         <img src={imgUrl} alt="" />
 
-        <button
-          className={styles.favoriteButton}
-          onClick={toggleFavorite}
-          // aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
-        >
+        <button className={styles.favoriteButton} onClick={toggleFavorite}>
           {isFavorite ? (
             <FaStar className={styles.filledStar} />
           ) : (

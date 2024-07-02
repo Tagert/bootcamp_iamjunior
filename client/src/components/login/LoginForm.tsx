@@ -1,68 +1,100 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import styles from "./LoginForm.module.scss";
+import eyeShow from "../../assets/eye_see_show_icon.svg";
+import eyeInactive from "../../assets/disable_eye_inactive_icon.svg";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../routes/routes";
+import { Button } from "../common/Button/Button";
+import { useAuth } from "../../context/AuthContext";
 
-interface FormState {
-  email: string;
-  password: string;
-}
+export const LoginForm = () => {
+  const navigate = useNavigate();
 
-export function LoginForm(): JSX.Element {
-  const [state, setState] = useState<FormState>({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (evt: ChangeEvent<HTMLInputElement>): void => {
-    const { name, value } = evt.target;
-    setState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+  const [showPassword, setShowPassword] = useState(false);
+
+  const { user, login, isError, errorMessage } = useAuth();
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (user !== null) {
+        navigate(routes.HOME);
+      }
+    }, 800);
+  }, [user, navigate]);
+
+  const handleLogin = () => {
+    login(email, password);
   };
 
-  const handleOnSubmit = (evt: FormEvent<HTMLFormElement>): void => {
-    evt.preventDefault();
-    const { email, password } = state;
-    alert(`You are login with email: ${email} and password: ${password}`);
-
-    setState({
-      email: "",
-      password: "",
-    });
+  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleLogin();
+    }
   };
 
   return (
-    <div className="form-container sign-in-container">
-      <form onSubmit={handleOnSubmit}>
-        <h1>Sign in</h1>
-        <div className="social-container">
-          <a href="#" className="social">
-            <i className="fab fa-facebook-f" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-google-plus-g" />
-          </a>
-          <a href="#" className="social">
-            <i className="fab fa-linkedin-in" />
-          </a>
+    <div className={styles.login_card}>
+      <div className={styles.login_modal} id="loginModal">
+        <div className={styles.active_login}>
+          <h4>Welcome back</h4>
+          <p>Please enter your login and password!</p>
+          <div className={styles.input}>
+            <div className={styles.username_box}>
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                name="email"
+                type="email"
+                placeholder="Your email"
+                autoComplete="on"
+                onKeyDown={handleKeyDown}
+              />
+            </div>
+
+            <div className={styles.username_info_error}>
+              <p className={styles.username_info}></p>
+            </div>
+          </div>
+
+          <div className={styles.input}>
+            <div className={styles.password_box}>
+              <input
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Your password"
+                onKeyDown={handleKeyDown}
+              />
+
+              <img
+                className={styles.eyeIcon}
+                src={showPassword ? eyeShow : eyeInactive}
+                alt="show/hide password"
+                onClick={() => setShowPassword(!showPassword)}
+              />
+            </div>
+
+            <div className={styles.password_info_error}>
+              <p className={styles.password_info}></p>
+            </div>
+          </div>
         </div>
-        <span>or use your account</span>
-        <input
-          type="email"
-          placeholder="Email"
-          name="email"
-          value={state.email}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={state.password}
-          onChange={handleChange}
-        />
-        <a href="#">Forgot your password?</a>
-        <button type="submit">Sign In</button>
-      </form>
+
+        <div className={styles.btn_info}>
+          <Button
+            className={styles.loginBtn}
+            onClick={handleLogin}
+            title="Login"
+          />
+
+          {isError && <p className={styles.error}>{errorMessage}</p>}
+        </div>
+      </div>
     </div>
   );
-}
+};

@@ -1,0 +1,104 @@
+.userManage {
+  display: flex;
+  gap: 2rem;
+  margin-right: 2rem;
+
+  .avatar {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+    width: 3rem;
+    border: 0.1rem solid $background-color;
+    border-radius: 50%;
+    background-color: $primary-btn-color;
+    cursor: pointer;
+
+    .initials {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: $background-color;
+    }
+
+    .userNameBox,
+    .userNameBoxHide {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 12rem;
+      top: 100%;
+      padding: 1rem;
+      border: 0.1rem solid $background-color;
+      border-radius: 0.6rem;
+      background-color: $primary-btn-color;
+      transform: translateY(2rem);
+      cursor: default;
+
+      .signOutHolder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+
+        p {
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: $background-color;
+        }
+
+        .signOut {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          cursor: pointer;
+
+          p {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: $background-color;
+          }
+
+          svg {
+            height: 1.7rem;
+          }
+        }
+      }
+    }
+
+    .userNameBoxHide {
+      display: none;
+    }
+  }
+
+  .linkHolder {
+    width: 1.8rem;
+
+    svg {
+      height: 100%;
+      width: 100%;
+      color: $primary-btn-color-hover;
+    }
+  }
+
+  .user {
+    color: $background-color;
+  }
+}
+
+.login {
+  padding: 0.38rem 1.65rem;
+  border-radius: 0.4rem;
+  border: 0.15rem solid $primary-btn-color-hover;
+
+  &:hover {
+    color: $background-color;
+    background-color: $primary-btn-color-hover;
+  }
+}
+
+.loginHide {
+  display: none;
+}
