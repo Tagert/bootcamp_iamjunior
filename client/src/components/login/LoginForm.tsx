@@ -2,7 +2,7 @@ import styles from "./LoginForm.module.scss";
 import eyeShow from "../../assets/eye_see_show_icon.svg";
 import eyeInactive from "../../assets/disable_eye_inactive_icon.svg";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { Button } from "../common/Button/Button";
 import { useAuth } from "../../context/AuthContext";
@@ -95,6 +95,10 @@ export const LoginForm = () => {
           {isError && <p className={styles.error}>{errorMessage}</p>}
         </div>
       </div>
+
+      <Link to={routes.REGISTER} className={styles.login}>
+        Don't have an account? Sign up
+      </Link>
     </div>
   );
 };
