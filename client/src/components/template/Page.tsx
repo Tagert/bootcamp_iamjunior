@@ -8,10 +8,10 @@ type PageProps = {
 
 export const Page = ({ children }: PageProps) => {
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <Navbar />
 
       <div className={styles.content}>{children}</div>
-    </div>
+    </main>
   );
 };
