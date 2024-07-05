@@ -2,20 +2,19 @@ import express from "express";
 import mongoose from "mongoose";
 import "dotenv/config";
 import cors from "cors";
-import { categoryRoutes } from "./src/routes/category.routes.js";
-import { bookingRoutes } from "./src/routes/booking.routes.js";
-import { businessRoutes } from "./src/routes/business.routes.js";
-import { userRoutes } from "./src/routes/user.routes.js";
+import { setupRoutes } from "./src/routes/setup.routes.js";
+import { loadConfig } from "./src/config/load-config.js";
 
 const server = express();
+const config = loadConfig();
 
 server.use(cors());
 server.use(express.json());
 
 const connectToDatabase = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_CONNECTION, {
-      dbName: "IamJunior",
+    await mongoose.connect(config.mongoConnection, {
+      dbName: config.dbName,
     });
     // eslint-disable-next-line no-console
     console.log("Connected to DB");
@@ -28,18 +27,11 @@ const connectToDatabase = async () => {
 const startServer = async () => {
   await connectToDatabase();
 
-  server.use(categoryRoutes);
-  server.use(bookingRoutes);
-  server.use(businessRoutes);
-  server.use(userRoutes);
+  setupRoutes(server);
 
-  server.use((req, res) => {
-    return res.status(404).json({ status: "Endpoint does not exist" });
-  });
-
-  server.listen(process.env.PORT, () => {
+  server.listen(config.port, () => {
     // eslint-disable-next-line no-console
-    console.log(`Express started on http://localhost:${process.env.PORT}`);
+    console.log(`Express started on http://localhost:${config.port}`);
   });
 };
 
