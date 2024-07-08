@@ -1,5 +1,5 @@
 import express from "express";
-import { GET_ALL_CATEGORIES, INSERT_CATEGORY } from "../controllers/category.controller";
+import { GET_ALL_CATEGORIES, INSERT_CATEGORY } from "../controllers/category.controller.js";
 
 export const categoryRoutes = express.Router();
 

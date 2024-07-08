@@ -42,9 +42,10 @@ export const GET_BUSINESSES_BY_CATEGORY = async (req, res) => {
 
 export const INSERT_BUSINESS = async (req, res) => {
   try {
-    const { name, description, category, address, contacts, images_url, price } = req.body;
+    const { user_id, name, description, category, address, contacts, images_url, price } = req.body;
 
     const business = new BusinessModel({
+      user_id,
       name,
       description,
       category,

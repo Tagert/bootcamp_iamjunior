@@ -19,14 +19,11 @@ const businessSchema = mongoose.Schema(
     price: { type: Number, required: true },
   },
   {
-    timestamps: true,
-    versionKey: false,
-  },
-  {
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at",
     },
+    versionKey: false,
   },
 );
 

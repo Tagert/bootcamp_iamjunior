@@ -67,7 +67,7 @@ export const SIGN_UP = async (req, res) => {
     const isUserExist = await UserModel.findOne({ email: req.body.email });
 
     if (isUserExist) {
-      return res.status(400).json({ message: "User with this email already exists" });
+      return res.status(409).json({ message: "User with this email already exists" });
     }
 
     const user = new UserModel({
@@ -138,8 +138,6 @@ export const DELETE_USER_BY_ID = async (req, res) => {
         message: `User with this ID (${id}) does not exist`,
       });
     }
-
-    console.log(user.id);
 
     if (user.id !== user_id) {
       return res.status(401).json({

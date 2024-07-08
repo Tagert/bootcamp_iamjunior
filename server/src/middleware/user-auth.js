@@ -11,7 +11,8 @@ export const userAuth = async (req, res, next) => {
     const decoded = await verifyToken(authorization, process.env.JWT_SECRET);
 
     req.body.user_id = decoded.userId;
-    req.body.createdByUser = decoded.name;
+    req.body.user_name = decoded.name;
+    req.body.user_email = decoded.email;
 
     next();
   } catch (err) {

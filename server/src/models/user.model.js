@@ -9,14 +9,11 @@ const userSchema = mongoose.Schema(
     role: { type: String, required: true, default: "user" },
   },
   {
-    timestamps: true,
-    versionKey: false,
-  },
-  {
     timestamps: {
       createdAt: "created_at",
       updatedAt: "updated_at",
     },
+    versionKey: false,
   },
 );
 

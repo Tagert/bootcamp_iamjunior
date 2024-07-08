@@ -6,6 +6,7 @@ import {
   GET_BUSINESS_BY_ID,
   UPDATE_BUSINESS_BY_ID,
 } from "../controllers/business.controller.js";
+import { userAuth } from "../middleware/user-auth.js";
 
 export const businessRoutes = express.Router();
 
@@ -15,6 +16,6 @@ businessRoutes.get("/businesses/category/:category", GET_BUSINESSES_BY_CATEGORY)
 
 businessRoutes.get("/business/:id", GET_BUSINESS_BY_ID);
 
-businessRoutes.post("/business", INSERT_BUSINESS);
+businessRoutes.post("/business", userAuth, INSERT_BUSINESS);
 
 businessRoutes.put("/business/:id", UPDATE_BUSINESS_BY_ID);
