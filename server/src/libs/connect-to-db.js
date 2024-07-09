@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
-import { loadEnvConfig } from "../config/load-env.config.js";
-
-const config = loadEnvConfig();
+import { config } from "../config/load-env.config.js";
 
 export const connectToDatabase = async () => {
   try {
-    await mongoose.connect(config.mongoConnection, {
-      dbName: config.dbName,
+    await mongoose.connect(config.db.connection, {
+      dbName: config.db.name,
     });
     // eslint-disable-next-line no-console
     console.log("Connected to DB");

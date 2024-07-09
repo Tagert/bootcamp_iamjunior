@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema(
     id: { type: String, required: true },
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
     role: { type: String, required: true, default: "user" },
   },
   {
@@ -21,7 +21,6 @@ userSchema.set("toJSON", {
   transform: (doc, ret) => {
     ret.id = ret._id;
     delete ret._id;
-    // delete ret.__v;
     return ret;
   },
 });

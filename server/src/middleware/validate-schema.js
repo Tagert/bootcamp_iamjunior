@@ -1,17 +1,3 @@
-// export const validateJoiSchema = (schema) => {
-//   return (req, res, next) => {
-//     const { error } = schema.validate(req.body);
-
-//     if (error) {
-//       // eslint-disable-next-line no-console
-//       console.log(error);
-//       res.status(400).json({ message: "The provided data structure (schema) is incorrect" });
-//     } else {
-//       next();
-//     }
-//   };
-// };
-
 export const validateJoiSchema = (schema, source = "body") => {
   return (req, res, next) => {
     const { error } = schema.validate(req[source], { abortEarly: false });
