@@ -1,8 +1,8 @@
 import express from "express";
-import { GET_ALL_CATEGORIES, INSERT_CATEGORY } from "../controllers/category.controller.js";
+import { GET_ALL_CATEGORIES, INSERT_CATEGORY } from "../controllers/category/index.js";
 
 export const categoryRoutes = express.Router();
 
 categoryRoutes.get("/categories", GET_ALL_CATEGORIES);
 
-categoryRoutes.post("/categories", INSERT_CATEGORY);
+categoryRoutes.post("/category", INSERT_CATEGORY);

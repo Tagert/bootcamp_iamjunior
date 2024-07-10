@@ -16,4 +16,12 @@ const categorySchema = mongoose.Schema(
   },
 );
 
+categorySchema.set("toJSON", {
+  transform: (doc, ret) => {
+    ret.id = ret._id;
+    delete ret._id;
+    return ret;
+  },
+});
+
 export const CategoryModel = mongoose.model("categories", categorySchema);

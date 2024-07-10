@@ -1,16 +1,16 @@
 /**
  * @swagger
- * /bookings/user/{email}:
+ * /bookings/user/{id}:
  *   get:
- *     summary: Retrieve all bookings for a user by email
+ *     summary: Retrieve all bookings for a user by id
  *     tags: [Booking]
  *     parameters:
  *       - in: path
- *         name: email
+ *         name: Id
  *         schema:
  *           type: string
  *         required: true
- *         description: The email of the user
+ *         description: The id of the user
  *     responses:
  *       200:
  *         description: A list of bookings
@@ -70,6 +70,7 @@
  *         schema:
  *           type: string
  *           format: date
+ *           example: "2024-07-10"
  *         required: true
  *         description: The date of the bookings
  *     responses:

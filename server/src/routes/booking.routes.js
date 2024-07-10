@@ -4,7 +4,7 @@ import {
   INSERT_BOOKING,
   GET_BUSINESS_ID_BOOKING_BY_DATE,
   DELETE_BOOKING_BY_ID,
-} from "../controllers/booking.controller.js";
+} from "../controllers/booking/index.js";
 import { userAuth } from "../middleware/user-auth.js";
 
 export const bookingRoutes = express.Router();

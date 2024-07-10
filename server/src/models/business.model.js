@@ -34,4 +34,5 @@ businessSchema.set("toJSON", {
     return ret;
   },
 });
+
 export const BusinessModel = mongoose.model("businesses", businessSchema);

@@ -4,7 +4,7 @@ export const BookingSchema = {
   properties: {
     id: { type: "string", description: "The auto-generated id of the booking" },
     business_id: { type: "string", description: "The id of the business" },
-    booking_date: { type: "string", format: "date", description: "The date of the booking" },
+    booking_date: { type: "string", format: "date", description: "The date of the booking", example: "2024-07-10" },
     time: { type: "string", description: "The time of the booking" },
     user_id: { type: "string", description: "The id of the user" },
     user_name: { type: "string", description: "The name of the user" },

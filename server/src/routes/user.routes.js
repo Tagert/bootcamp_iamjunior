@@ -1,5 +1,5 @@
 import express from "express";
-import { GET_ALL_USERS, SIGN_UP, LOG_IN, GET_USER_BY_ID, DELETE_USER_BY_ID } from "../controllers/user.controller.js";
+import { GET_ALL_USERS, SIGN_UP, LOG_IN, GET_USER_BY_ID, DELETE_USER_BY_ID } from "../controllers/user/index.js";
 import { userAuth } from "../middleware/user-auth.js";
 
 export const userRoutes = express.Router();

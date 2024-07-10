@@ -1,11 +1,11 @@
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { config } from "../load-env.config.js";
-import { UserSchema } from "./user-sw.schema.js";
-import { BusinessSchema } from "./business-sw.schema.js";
-import { ContactSchema } from "./business-sw.schema.js";
-import { BookingSchema } from "./booking-sw.schema.js";
-import { CategorySchema } from "./category-sw.schema.js";
+import { UserSchema } from "./schemas/user-sw.schema.js";
+import { BusinessSchema } from "./schemas/business-sw.schema.js";
+import { ContactSchema } from "./schemas/business-sw.schema.js";
+import { BookingSchema } from "./schemas/booking-sw.schema.js";
+import { CategorySchema } from "./schemas/category-sw.schema.js";
 
 const swaggerOptions = {
   definition: {
@@ -43,7 +43,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ["./src/**/*.js"],
+  apis: ["./src/config/**/*.js"],
 };
 
 export const configSwagger = (app) => {
