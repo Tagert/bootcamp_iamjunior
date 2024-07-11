@@ -1,17 +1,27 @@
 import styles from "./CategoryWrapper.module.scss";
-import { categories } from "../../constants/categories";
+import { CategoryType } from "../../types/category.types";
 import { CategoryCard } from "./CategoryCard";
 
-export const CategoryWrapper = () => {
+type CategoryWrapperProps = {
+  categories: CategoryType[] | undefined;
+  // error: Error | null;
+};
+
+export const CategoryWrapper = ({
+  categories,
+}: // error,
+CategoryWrapperProps) => {
   return (
     <section className={styles.categoryWrapper}>
-      {categories.map((category) => (
-        <CategoryCard
-          key={category.id}
-          imgSrc={category.imgSrc}
-          text={category.text}
-        />
-      ))}
+      {categories &&
+        categories.map((category) => (
+          <CategoryCard
+            key={category.id}
+            name={category.name}
+            icon_url={category.icon_url}
+            color={category.color}
+          />
+        ))}
     </section>
   );
 };

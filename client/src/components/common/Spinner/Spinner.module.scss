@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 2rem;
+  margin-left: 1.5rem;
+
+  .loader {
+    position: relative;
+    display: block;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    color: black;
+    animation: animeLoader 1s linear infinite alternate;
+  }
+
+  @keyframes animeLoader {
+    0% {
+      box-shadow: -38px -6px, -14px 6px, 14px -6px;
+    }
+    33% {
+      box-shadow: -38px 6px, -14px -6px, 14px 6px;
+    }
+    66% {
+      box-shadow: -38px -6px, -14px 6px, 14px -6px;
+    }
+    100% {
+      box-shadow: -38px 6px, -14px -6px, 14px 6px;
+    }
+  }
+}

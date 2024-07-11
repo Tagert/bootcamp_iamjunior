@@ -2,21 +2,20 @@ import styles from "./SearchCategoryCard.module.scss";
 import { useNavigate, generatePath, useParams } from "react-router-dom";
 import { routes } from "../../routes/routes";
 
-type SearchCategoryCardProp = {
-  imgSrc: string;
-  text: string;
+type CategoryCardProp = {
+  id?: string;
+  name: string;
+  color?: string;
+  icon_url: string;
 };
 
-export const SearchCategoryCard = ({
-  imgSrc,
-  text,
-}: SearchCategoryCardProp) => {
+export const SearchCategoryCard = ({ name, icon_url }: CategoryCardProp) => {
   const params = useParams();
 
   const navigate = useNavigate();
 
   const categoryPath = generatePath(routes.SEARCH_CATEGORY.path, {
-    category: text.toLowerCase(),
+    category: name.toLowerCase(),
   });
 
   const activeCategory = params.category?.toLowerCase();
@@ -24,13 +23,13 @@ export const SearchCategoryCard = ({
   return (
     <div
       className={`${styles.searchCategoryCard} ${
-        activeCategory === text.toLowerCase() ? styles.active : ""
+        activeCategory === name.toLowerCase() ? styles.active : ""
       }`}
       onClick={() => navigate(categoryPath)}
     >
-      <img src={imgSrc} alt={`${text} icon`} />
+      <img src={icon_url} alt={`${name} icon`} />
 
-      <p>{text}</p>
+      <p>{name}</p>
     </div>
   );
 };

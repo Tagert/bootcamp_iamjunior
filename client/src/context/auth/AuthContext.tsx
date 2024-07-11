@@ -1,6 +1,6 @@
 import axios from "axios";
 import { ReactNode, createContext, useContext, useState } from "react";
-import { UserType } from "../../types/users.types";
+import { UserType } from "../../types/user.types";
 import { validateEmail } from "../../utils/helpers/email.validation";
 
 type AuthContextType = {

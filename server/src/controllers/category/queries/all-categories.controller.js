@@ -8,7 +8,7 @@ export const GET_ALL_CATEGORIES = async (req, res) => {
       return res.status(404).json({ message: "Data not exist" });
     }
 
-    return res.status(200).json({ categories });
+    return res.status(200).json(categories);
   } catch (err) {
     console.error("HANDLED ERROR:", err);
     return res.status(500).json({

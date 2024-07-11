@@ -1,6 +1,6 @@
 import axios from "axios";
 import { create } from "zustand";
-import { UserType } from "../../types/users.types";
+import { UserType } from "../../types/user.types";
 import { validateEmail } from "../../utils/helpers/email.validation";
 
 type AuthStateType = {

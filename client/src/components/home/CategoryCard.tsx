@@ -3,22 +3,24 @@ import { routes } from "../../routes/routes";
 import { useNavigate } from "react-router-dom";
 
 type CategoryCardProp = {
-  imgSrc: string;
-  text: string;
+  id?: string;
+  name: string;
+  color?: string;
+  icon_url: string;
 };
 
-export const CategoryCard = ({ imgSrc, text }: CategoryCardProp) => {
+export const CategoryCard = ({ name, icon_url }: CategoryCardProp) => {
   const navigate = useNavigate();
 
   const handleCategoryNavigate = () => {
-    navigate(routes.SEARCH_CATEGORY.url(text).toLocaleLowerCase());
+    navigate(routes.SEARCH_CATEGORY.url(name).toLocaleLowerCase());
   };
 
   return (
     <div className={styles.categoryCard} onClick={handleCategoryNavigate}>
-      <img src={imgSrc} alt={`${text} icon`} />
+      <img src={icon_url} alt={`${name} icon`} />
 
-      <p>{text}</p>
+      <p>{name}</p>
     </div>
   );
 };
