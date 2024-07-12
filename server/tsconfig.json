@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  },
+  // "include": ["src", "index.ts", "src/types/**/*.d.ts", "src/config/swagger/*.ts"],
+  // "include": ["./src/**/*.ts"],
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "lib": ["latest"],
+  "typeRoots": ["node_modules/@types"],
+  "types": ["node", "express"]
+}

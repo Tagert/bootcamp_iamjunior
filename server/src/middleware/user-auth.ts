@@ -1,6 +1,8 @@
-import { verifyToken } from "./verify-token.js";
+import type { RequestHandler } from "express";
+import { config } from "../config/load-env.config";
+import { verifyToken } from "./verify-token";
 
-export const userAuth = async (req, res, next) => {
+export const userAuth: RequestHandler = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
 
@@ -10,7 +12,7 @@ export const userAuth = async (req, res, next) => {
 
     const token = authorization.split(" ")[1];
 
-    const decoded = await verifyToken(token, process.env.JWT_SECRET);
+    const decoded = await verifyToken(token, config.jwt.secret);
 
     req.body.user_id = decoded.userId;
     req.body.user_name = decoded.name;

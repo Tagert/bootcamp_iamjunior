@@ -1,4 +1,4 @@
-export const validatePassword = (password) => {
+export const validatePassword = (password: string) => {
   const minLengthRegex = /^.{6,}$/;
   const isMinLengthValid = minLengthRegex.test(password);
 

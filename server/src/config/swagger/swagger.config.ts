@@ -1,5 +1,6 @@
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import type { Express } from "express";
 import { config } from "../load-env.config.js";
 import { UserSchema } from "./schemas/user-sw.schema.js";
 import { BusinessSchema } from "./schemas/business-sw.schema.js";
@@ -46,7 +47,7 @@ const swaggerOptions = {
   apis: ["./src/config/**/*.js"],
 };
 
-export const configSwagger = (app) => {
+export const configSwagger = (app: Express) => {
   const swaggerDocs = swaggerJsDoc(swaggerOptions);
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 };

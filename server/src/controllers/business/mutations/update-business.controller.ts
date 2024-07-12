@@ -1,6 +1,7 @@
+import type { RequestHandler } from "express";
 import { BusinessModel } from "../../../models/business.model.js";
 
-export const UPDATE_BUSINESS_BY_ID = async (req, res) => {
+export const UPDATE_BUSINESS_BY_ID: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -26,11 +27,19 @@ export const UPDATE_BUSINESS_BY_ID = async (req, res) => {
       message: `Business with ID (${id}) was successfully updated`,
       updatedBusiness,
     });
-  } catch (err) {
-    console.error("HANDLED ERROR:", err);
-    return res.status(500).json({
-      error: "Something went wrong",
-      details: err.message,
-    });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Error during updating business data :", err);
+      return res.status(500).json({
+        error: "An unknown error occurred while trying to update the data.",
+        details: err.message,
+      });
+    } else {
+      console.error("Unknown error occurred while trying to update business data:", err);
+      return res.status(500).json({
+        error: "An unknown error occurred while trying to update the data.",
+        details: String(err),
+      });
+    }
   }
 };

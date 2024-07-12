@@ -1,6 +1,6 @@
 import { parseISO, formatISO, isValid } from "date-fns";
 
-export const formatDate = (dateString) => {
+export const formatDate = (dateString: string) => {
   const parsedDate = parseISO(dateString);
 
   if (!isValid(parsedDate)) {

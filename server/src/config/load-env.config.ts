@@ -1,4 +1,4 @@
-import { validateEnvVars } from "../utils/validations/env.validation.js";
+import { validateEnvVars } from "../utils/validations/env.validation";
 
 const { PORT, MONGO_CONNECTION, DB_NAME, JWT_SECRET, JWT_EXPIRATION } = process.env;
 
@@ -14,14 +14,14 @@ validateEnvVars(requiredEnvVars);
 
 export const config = {
   server: {
-    port: PORT,
+    port: PORT as string,
   },
   jwt: {
-    secret: JWT_SECRET,
-    expiration: JWT_EXPIRATION,
+    secret: JWT_SECRET as string,
+    expiration: JWT_EXPIRATION as string,
   },
   db: {
-    connection: MONGO_CONNECTION,
-    name: DB_NAME,
+    connection: MONGO_CONNECTION as string,
+    name: DB_NAME as string,
   },
 };
