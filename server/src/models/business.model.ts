@@ -1,12 +1,31 @@
 import mongoose from "mongoose";
 
-const contactSchema = mongoose.Schema({
+type ContactType = {
+  contact_person: string;
+  phone_number: string;
+  email: string;
+};
+
+type BusinessBody = {
+  user_id: string;
+  name: string;
+  description: string;
+  category: string;
+  address: string;
+  contacts: ContactType[];
+  images_url: string;
+  price: number;
+};
+
+type BusinessType = BusinessBody & Entity;
+
+const contactSchema = new mongoose.Schema<ContactType>({
   contact_person: { type: String, required: true },
   phone_number: { type: String, required: true },
   email: { type: String, required: true },
 });
 
-const businessSchema = mongoose.Schema(
+const businessSchema = new mongoose.Schema<BusinessType>(
   {
     id: { type: String, required: true },
     user_id: { type: String, required: true },
@@ -35,4 +54,4 @@ businessSchema.set("toJSON", {
   },
 });
 
-export const BusinessModel = mongoose.model("businesses", businessSchema);
+export const BusinessModel = mongoose.model<BusinessType>("businesses", businessSchema);

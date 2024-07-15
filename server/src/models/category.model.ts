@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 
-const categorySchema = mongoose.Schema(
+type CategoryBody = {
+  name: string;
+  color: string;
+  icon_url: string;
+};
+
+type CategoryType = CategoryBody & Entity;
+
+const categorySchema = new mongoose.Schema<CategoryType>(
   {
     id: { type: String, required: true },
     name: { type: String, required: true },
@@ -24,4 +32,4 @@ categorySchema.set("toJSON", {
   },
 });
 
-export const CategoryModel = mongoose.model("categories", categorySchema);
+export const CategoryModel = mongoose.model<CategoryType>("categories", categorySchema);

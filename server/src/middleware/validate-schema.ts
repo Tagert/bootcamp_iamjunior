@@ -1,4 +1,9 @@
-export const validateJoiSchema = (schema, source = "body") => {
+import type { RequestHandler } from "express";
+import type { Schema } from "joi";
+
+type SourceType = "body" | "query" | "params";
+
+export const validateJoiSchema = (schema: Schema, source: SourceType = "body"): RequestHandler => {
   return (req, res, next) => {
     const { error } = schema.validate(req[source], { abortEarly: false });
 

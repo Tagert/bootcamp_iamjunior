@@ -1,18 +1,22 @@
 import jwt from "jsonwebtoken";
+import { config } from "../config/load-env.config";
 
-const JWT_EXPIRY = "2h";
-const REFRESH_JWT_EXPIRY = "24h";
+type TokenPayloadType = {
+  userId: string;
+  email: string;
+  name: string;
+};
 
-const createToken = (payload, secret, expiresIn) => {
+const createToken = (payload: TokenPayloadType, secret: string, expiresIn: string) => {
   return jwt.sign(payload, secret, { expiresIn });
 };
 
-const createPayload = (userId, email, name) => ({ userId, email, name });
+const createPayload = (userId: string, email: string, name: string) => ({ userId, email, name });
 
-const generateToken = (secret, expiresIn) => (userId, email, name) => {
+const generateToken = (secret: string, expiresIn: string) => (userId: string, email: string, name: string) => {
   const payload = createPayload(userId, email, name);
   return createToken(payload, secret, expiresIn);
 };
 
-export const generateJwt = generateToken(process.env.JWT_SECRET, JWT_EXPIRY);
-export const generateRefreshJwt = generateToken(process.env.REFRESH_JWT_SECRET, REFRESH_JWT_EXPIRY);
+export const generateJwt = generateToken(config.jwt.secret, config.jwt.expiration);
+export const generateRefreshJwt = generateToken(config.jwt_refresh.secret, config.jwt_refresh.expiration);

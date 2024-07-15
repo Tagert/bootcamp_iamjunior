@@ -1,6 +1,7 @@
+import type { RequestHandler } from "express";
 import { UserModel } from "../../../models/user.model.js";
 
-export const DELETE_USER_BY_ID = async (req, res) => {
+export const DELETE_USER_BY_ID: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
     const { user_id } = req.body;
@@ -25,11 +26,19 @@ export const DELETE_USER_BY_ID = async (req, res) => {
       message: `User with ID (${id}) was deleted`,
       response: deletionResult,
     });
-  } catch (err) {
-    console.error("Error during user deletion:", err);
-    return res.status(500).json({
-      error: "An error occurred during the deletion process.",
-      details: err.message,
-    });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Error during user deletion:", err);
+      return res.status(500).json({
+        error: "An error occurred during the deletion process.",
+        details: err.message,
+      });
+    } else {
+      console.error("Unknown error during user deletion:", err);
+      return res.status(500).json({
+        error: "An unknown error occurred during the deletion process.",
+        details: String(err),
+      });
+    }
   }
 };

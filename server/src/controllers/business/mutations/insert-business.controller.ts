@@ -1,6 +1,7 @@
+import type { RequestHandler } from "express";
 import { BusinessModel } from "../../../models/business.model.js";
 
-export const INSERT_BUSINESS = async (req, res) => {
+export const INSERT_BUSINESS: RequestHandler = async (req, res) => {
   try {
     const { user_id, name, description, category, address, contacts, images_url, price } = req.body;
 
@@ -23,11 +24,19 @@ export const INSERT_BUSINESS = async (req, res) => {
       response: response,
       message: `This (${name}) business was added successfully`,
     });
-  } catch (err) {
-    console.error("HANDLED ERROR:", err);
-    return res.status(500).json({
-      error: "Something went wrong",
-      details: err.message,
-    });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Error during adding booking:", err);
+      return res.status(500).json({
+        error: "An error occurred during the adding process.",
+        details: err.message,
+      });
+    } else {
+      console.error("Unknown error during the adding process:", err);
+      return res.status(500).json({
+        error: "An unknown error occurred during the adding process.",
+        details: String(err),
+      });
+    }
   }
 };

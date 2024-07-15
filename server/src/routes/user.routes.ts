@@ -8,7 +8,7 @@ userRoutes.post("/register", SIGN_UP);
 
 userRoutes.post("/login", LOG_IN);
 
-userRoutes.get("/users", userAuth, GET_ALL_USERS);
+userRoutes.get("/users", GET_ALL_USERS);
 
 userRoutes.get("/user/:id", GET_USER_BY_ID);
 

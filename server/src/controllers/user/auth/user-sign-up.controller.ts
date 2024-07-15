@@ -1,13 +1,12 @@
 import bcrypt from "bcrypt";
+import type { RequestHandler } from "express";
 import { UserModel } from "../../../models/user.model.js";
 import { validateEmail } from "../../../utils/validations/email.validation.js";
 import { validatePassword } from "../../../utils/validations/password.validation.js";
 import { toUpperCase } from "../../../utils/helpers/to-upper-case.js";
 
-export const SIGN_UP = async (req, res) => {
+export const SIGN_UP: RequestHandler = async (req, res) => {
   try {
-    // const dateTime = formatISO(new Date());
-
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(req.body.password, salt);
 
@@ -42,11 +41,19 @@ export const SIGN_UP = async (req, res) => {
       user: response,
       message: `User (${req.body.email}) was added successfully`,
     });
-  } catch (err) {
-    console.error("HANDLED ERROR:", err);
-    return res.status(500).json({
-      error: "Something went wrong during user registration",
-      details: err.message,
-    });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Error during sing up:", err);
+      return res.status(500).json({
+        error: "An error occurred during the sing up.",
+        details: err.message,
+      });
+    } else {
+      console.error("Unknown error during booking deletion:", err);
+      return res.status(500).json({
+        error: "An unknown error occurred during the sing up.",
+        details: String(err),
+      });
+    }
   }
 };

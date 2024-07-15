@@ -1,8 +1,9 @@
+import type { Express } from "express";
 import { config } from "../config/load-env.config.js";
 import { configRoutes } from "../config/routes.config.js";
 import { connectToDatabase } from "../libs/connect-to-db.js";
 
-export const startServer = async (server) => {
+export const startServer = async (server: Express) => {
   await connectToDatabase();
 
   configRoutes(server);

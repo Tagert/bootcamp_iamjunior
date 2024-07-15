@@ -1,5 +1,7 @@
 {
   "watch": ["src"],
-  "ext": ".ts,.js",
-  "exec": "ts-node ./src/index.ts"
+  "ext": "ts, js, json",
+  "execMap": {
+    "ts": "node --trace-warnings --loader ts-node/esm ./src/index.ts"
+  }
 }

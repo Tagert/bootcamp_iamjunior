@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 
-const bookingSchema = mongoose.Schema(
+type BookingBody = {
+  business_id: string;
+  booking_date: Date;
+  time: string;
+  user_id: string;
+  user_name: string;
+  user_email: string;
+  status: string;
+};
+
+export type BookingType = BookingBody & Entity;
+
+const bookingSchema = new mongoose.Schema<BookingType>(
   {
     id: { type: String, required: true },
     business_id: { type: String, required: true },
@@ -28,4 +40,4 @@ bookingSchema.set("toJSON", {
   },
 });
 
-export const BookingModel = mongoose.model("bookings", bookingSchema);
+export const BookingModel = mongoose.model<BookingType>("bookings", bookingSchema);

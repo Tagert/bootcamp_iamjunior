@@ -1,6 +1,18 @@
 import mongoose from "mongoose";
 
-const userSchema = mongoose.Schema(
+type UserBody = {
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+  role: string;
+};
+
+type UserType = UserBody & Entity;
+
+type UserModel = mongoose.Model<UserType>;
+
+const userSchema = new mongoose.Schema<UserType>(
   {
     id: { type: String, required: true },
     name: { type: String, required: true },
@@ -25,4 +37,4 @@ userSchema.set("toJSON", {
   },
 });
 
-export const UserModel = mongoose.model("users", userSchema);
+export const UserModel = mongoose.model<UserType>("users", userSchema);

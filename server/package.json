@@ -2,13 +2,12 @@
   "name": "2024-06-25_services",
   "version": "0.0.1",
   "description": "Node practice",
-  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "nodemon",
-    "dev1": "npx tsx src/index.ts",
+    "nodemon": "nodemon",
+    "tsx": "tsx watch src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
@@ -31,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.6.0",
+    "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^4.17.21",

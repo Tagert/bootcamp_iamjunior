@@ -1,8 +1,9 @@
+import type { RequestHandler } from "express";
 import bcrypt from "bcrypt";
 import { UserModel } from "../../../models/user.model.js";
 import { generateJwt, generateRefreshJwt } from "../../../middleware/generate-tokens.js";
 
-export const LOG_IN = async (req, res) => {
+export const LOG_IN: RequestHandler = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -26,11 +27,19 @@ export const LOG_IN = async (req, res) => {
       jwt_token: jwt_token,
       jwt_refresh_token: jwt_refresh_token,
     });
-  } catch (err) {
-    console.error("HANDLED ERROR:", err);
-    return res.status(500).json({
-      error: "Something went wrong during user login",
-      details: err.message,
-    });
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Error during logging:", err);
+      return res.status(500).json({
+        error: "An error occurred during the logging.",
+        details: err.message,
+      });
+    } else {
+      console.error("Unknown error during logging:", err);
+      return res.status(500).json({
+        error: "An unknown error occurred during logging.",
+        details: String(err),
+      });
+    }
   }
 };

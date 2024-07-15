@@ -20,6 +20,10 @@ export const config = {
     secret: JWT_SECRET as string,
     expiration: JWT_EXPIRATION as string,
   },
+  jwt_refresh: {
+    secret: JWT_SECRET as string,
+    expiration: JWT_EXPIRATION as string,
+  },
   db: {
     connection: MONGO_CONNECTION as string,
     name: DB_NAME as string,
