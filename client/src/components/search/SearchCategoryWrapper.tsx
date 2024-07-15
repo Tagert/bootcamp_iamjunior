@@ -1,10 +1,10 @@
-import { useFetch } from "../../hooks/useFetch";
+import { useApi } from "../../hooks/useApi";
 import { CategoryType } from "../../types/category.types";
 import { SearchCategoryCard } from "./SearchCategoryCard";
 import styles from "./SearchCategoryWrapper.module.scss";
 
 export const SearchCategoryWrapper = () => {
-  const [categories] = useFetch<CategoryType[] | undefined>(
+  const [categories] = useApi<CategoryType[] | undefined>(
     `${import.meta.env.VITE_API_URL}/categories`
   );
 

@@ -1,6 +1,6 @@
 import styles from "./Home.module.scss";
 import { useState } from "react";
-import { useFetch } from "../../hooks/useFetch";
+import { useApi } from "../../hooks/useApi";
 import { CategoryType } from "../../types/category.types";
 import { CardWrapper } from "../../components/spec/CardWrapper/CardWrapper";
 import { CategoryWrapper } from "../../components/home/CategoryWrapper";
@@ -11,9 +11,9 @@ import { Spinner } from "../../components/common/Spinner/Spinner";
 export const Home = () => {
   const [onSearch, setOnSearch] = useState<string>("");
 
-  const [categories, { isLoading, error }] = useFetch<
-    CategoryType[] | undefined
-  >(`${import.meta.env.VITE_API_URL}/categories`);
+  const [categories, { isLoading, error }] = useApi<CategoryType[] | undefined>(
+    `${import.meta.env.VITE_API_URL}/categories`
+  );
 
   return (
     <Page>
