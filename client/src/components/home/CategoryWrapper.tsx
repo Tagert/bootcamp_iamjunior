@@ -3,14 +3,14 @@ import { CategoryType } from "../../types/category.types";
 import { CategoryCard } from "./CategoryCard";
 
 type CategoryWrapperProps = {
-  categories: CategoryType[] | undefined;
-  // error: Error | null;
+  categories: CategoryType[];
+  error: Error | undefined;
 };
 
 export const CategoryWrapper = ({
   categories,
-}: // error,
-CategoryWrapperProps) => {
+  error,
+}: CategoryWrapperProps) => {
   return (
     <section className={styles.categoryWrapper}>
       {categories &&
@@ -22,6 +22,8 @@ CategoryWrapperProps) => {
             color={category.color}
           />
         ))}
+
+      {error && <p>{error.message}</p>}
     </section>
   );
 };

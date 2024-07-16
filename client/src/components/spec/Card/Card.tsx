@@ -3,24 +3,29 @@ import { useEffect, useState } from "react";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { Button } from "../../common/Button/Button";
+import { ContactType } from "../../../types/contact.type";
 
 type CardProp = {
   id: string;
-  imgUrl: string;
+  user_id: string;
+  name: string;
+  description: string;
   category: string;
-  title: string;
-  provider: string;
   address: string;
+  contacts: ContactType[];
+  images_url: string;
   price: number;
 };
 
 export const Card = ({
   id,
-  imgUrl,
+  // user_id,
+  name,
   category,
-  title,
-  provider,
   address,
+  description,
+  // contacts,
+  images_url,
   price,
 }: CardProp) => {
   const keyName: string = "favoritesId";
@@ -36,6 +41,11 @@ export const Card = ({
   }, [favoritesId, id]);
 
   const toggleFavorite = () => {
+    if (id === undefined) {
+      console.error("Id is undefined. Cannot toggle favorite");
+      return;
+    }
+
     if (isFavorite) {
       setFavoritesId(favoritesId.filter((favId: string) => favId !== id));
     } else {
@@ -46,7 +56,7 @@ export const Card = ({
   return (
     <div className={styles.card}>
       <div className={styles.imageBox}>
-        <img src={imgUrl} alt="" />
+        <img src={images_url} alt="" />
 
         <button className={styles.favoriteButton} onClick={toggleFavorite}>
           {isFavorite ? (
@@ -60,9 +70,9 @@ export const Card = ({
       <div className={styles.descriptionBox}>
         <p>{category}</p>
 
-        <p>{title}</p>
+        <p>{name}</p>
 
-        <p>{provider}</p>
+        <p>{description}</p>
 
         <p>{address}</p>
 
