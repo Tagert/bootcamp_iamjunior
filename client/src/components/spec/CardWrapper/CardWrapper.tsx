@@ -5,7 +5,7 @@ import { BusinessType } from "../../../types/business.type";
 type CardWrapperProp = {
   category?: string;
   businesses?: BusinessType[] | undefined;
-  error?: Error | undefined;
+  error?: Error | null;
   isLoading?: boolean;
 };
 

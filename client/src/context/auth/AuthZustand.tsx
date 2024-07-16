@@ -59,6 +59,7 @@ export const useAuthZustand = create<AuthStateType>((set) => ({
         return false;
       }
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log("err:", err);
       set({ isError: true });
       set({

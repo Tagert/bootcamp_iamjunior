@@ -3,8 +3,8 @@ import { CategoryType } from "../../types/category.types";
 import { CategoryCard } from "./CategoryCard";
 
 type CategoryWrapperProps = {
-  categories: CategoryType[];
-  error: Error | undefined;
+  categories: CategoryType[] | undefined;
+  error: Error | null;
 };
 
 export const CategoryWrapper = ({

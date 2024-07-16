@@ -5,28 +5,36 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { Button } from "../common/Button/Button";
-import { useAuth } from "../../context/auth/AuthContext";
+import { useLoginUser } from "../../api/loginUser";
 
-export const LoginForm = () => {
+type LoginFormProps = {
+  email: string;
+  setEmail: (email: string) => void;
+  password: string;
+  setPassword: (password: string) => void;
+};
+
+export const LoginForm = ({
+  email,
+  setEmail,
+  password,
+  setPassword,
+}: LoginFormProps) => {
   const navigate = useNavigate();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const { user, login, isError, errorMessage } = useAuth();
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (user !== null) {
-        navigate(routes.HOME);
-      }
-    }, 800);
-  }, [user, navigate]);
+  const { mutate: loginUser, isPending, isError, error } = useLoginUser();
 
   const handleLogin = () => {
-    login(email, password);
+    loginUser(
+      { email, password },
+      {
+        onSuccess: () => {
+          navigate(routes.HOME);
+        },
+      }
+    );
   };
 
   const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -35,6 +43,17 @@ export const LoginForm = () => {
       handleLogin();
     }
   };
+
+  const getErrorMessage = (error: any): string => {
+    if (error?.response?.data?.message) {
+      return error.response.data.message;
+    }
+    return error?.message || "An unexpected error occurred";
+  };
+
+  if (error) {
+    console.log(error.response?.data?.message || error.message);
+  }
 
   return (
     <div className={styles.login_card}>
@@ -90,9 +109,10 @@ export const LoginForm = () => {
             className={styles.loginBtn}
             onClick={handleLogin}
             title="Login"
+            disabled={isPending}
           />
 
-          {isError && <p className={styles.error}>{errorMessage}</p>}
+          {isError && <p className={styles.error}>{getErrorMessage(error)}</p>}
         </div>
       </div>
 
