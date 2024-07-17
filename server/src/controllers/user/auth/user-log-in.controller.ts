@@ -22,10 +22,12 @@ export const LOG_IN: RequestHandler = async (req, res) => {
     const jwt_token = generateJwt(user.id, user.email, user.name);
     const jwt_refresh_token = generateRefreshJwt(user.id, user.email, user.name);
 
+    const userWithoutPassword = await UserModel.findById(user._id).select("-password");
+
     return res.status(200).json({
       status: `User (${user.email}) have been logged in successfully`,
-      jwt_token: jwt_token,
-      jwt_refresh_token: jwt_refresh_token,
+      token: jwt_token,
+      user: userWithoutPassword,
     });
   } catch (err: unknown) {
     if (err instanceof Error) {

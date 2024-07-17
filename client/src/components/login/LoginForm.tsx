@@ -1,11 +1,12 @@
 import styles from "./LoginForm.module.scss";
 import eyeShow from "../../assets/eye_see_show_icon.svg";
 import eyeInactive from "../../assets/disable_eye_inactive_icon.svg";
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { Button } from "../common/Button/Button";
 import { useLoginUser } from "../../api/loginUser";
+import { useAuthStore } from "../../store/auth/index";
 
 type LoginFormProps = {
   email: string;
@@ -20,21 +21,13 @@ export const LoginForm = ({
   password,
   setPassword,
 }: LoginFormProps) => {
-  const navigate = useNavigate();
-
   const [showPassword, setShowPassword] = useState(false);
 
-  const { mutate: loginUser, isPending, isError, error } = useLoginUser();
+  const { validateAndLogin, isPending } = useLoginUser();
+  const { isError, errorMessage } = useAuthStore();
 
   const handleLogin = () => {
-    loginUser(
-      { email, password },
-      {
-        onSuccess: () => {
-          navigate(routes.HOME);
-        },
-      }
-    );
+    validateAndLogin(email, password);
   };
 
   const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
@@ -43,17 +36,6 @@ export const LoginForm = ({
       handleLogin();
     }
   };
-
-  const getErrorMessage = (error: any): string => {
-    if (error?.response?.data?.message) {
-      return error.response.data.message;
-    }
-    return error?.message || "An unexpected error occurred";
-  };
-
-  if (error) {
-    console.log(error.response?.data?.message || error.message);
-  }
 
   return (
     <div className={styles.login_card}>
@@ -112,7 +94,7 @@ export const LoginForm = ({
             disabled={isPending}
           />
 
-          {isError && <p className={styles.error}>{getErrorMessage(error)}</p>}
+          {isError && <p className={styles.error}>{errorMessage}</p>}
         </div>
       </div>
 

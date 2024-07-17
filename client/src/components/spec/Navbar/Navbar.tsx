@@ -4,14 +4,14 @@ import logo from "../../../assets/logo.svg";
 import NavList from "../NavList/NavList";
 import { Button } from "../../common/Button/Button";
 import { links } from "../../../constants/links";
-import { useAuth } from "../../../context/auth/AuthContext";
+import { useAuthStore } from "../../../store/auth/index";
 import { UserManage } from "../UserManage/UserManage";
 import { routes } from "../../../routes/routes";
 
 export const Navbar = () => {
   const navigate = useNavigate();
 
-  const { user } = useAuth();
+  const { user } = useAuthStore();
 
   const handleLoginNavigate = () => {
     navigate(routes.LOGIN);

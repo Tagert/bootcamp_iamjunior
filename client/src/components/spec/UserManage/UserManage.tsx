@@ -1,10 +1,10 @@
 import styles from "./UserManage.module.scss";
 import { useState } from "react";
 import { GoSignOut } from "react-icons/go";
-import { useAuth } from "../../../context/auth/AuthContext";
+import { useAuthStore } from "../../../store/auth/index";
 
 const UserManage = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuthStore();
 
   const [isUserBoxVisible, setUserBoxVisible] = useState(false);
 
@@ -20,7 +20,7 @@ const UserManage = () => {
   };
 
   const handleSignOut = () => {
-    console.log("User signed out");
+    logout();
   };
 
   if (!user) {

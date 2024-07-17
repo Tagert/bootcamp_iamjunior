@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 import axios, { AxiosError } from "axios";
 import { axiosConfig } from "../config/axios.config";
 
@@ -7,7 +6,7 @@ export const ApiService = axios.create(axiosConfig);
 ApiService.interceptors.request.use(
   async (config) => {
     try {
-      const token = Cookies.get("AccessToken");
+      const token = localStorage.getItem("token");
 
       if (token) {
         const parsedToken = JSON.parse(token);
