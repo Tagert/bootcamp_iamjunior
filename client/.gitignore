@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 .env
+.vscode/settings.json
 dist
 dist-ssr
 *.local

@@ -8,16 +8,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 3rem;
-    width: 3rem;
-    border: 0.1rem solid $background-color;
+    height: 3.4rem;
+    width: 3.4rem;
+    border: 0.35rem double $secondary-btn-color;
     border-radius: 50%;
     background-color: $primary-btn-color;
     cursor: pointer;
 
     .initials {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       font-weight: 500;
+      letter-spacing: 0.1rem;
       color: $background-color;
     }
 

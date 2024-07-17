@@ -10,6 +10,13 @@ export type LoginResponseType = {
   user: UserResponseType;
 };
 
+export type RegisterFormValues = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+};
+
 // type UserBody = {
 //   name: string;
 //   email: string;
