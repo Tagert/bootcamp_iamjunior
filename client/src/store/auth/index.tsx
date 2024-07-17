@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { LoginResponseType, UserResponseType } from "../../types/user.types";
+import { validateToken } from "../../api/validate-token";
 
 type AuthStateType = {
   user: UserResponseType | null;
@@ -9,6 +10,7 @@ type AuthStateType = {
   login: (loginResponse: LoginResponseType) => void;
   logout: () => void;
   setError: (isError: boolean, errorMessage: string) => void;
+  checkToken: () => Promise<void>;
 };
 
 const initialState: AuthStateType = {
@@ -19,6 +21,7 @@ const initialState: AuthStateType = {
   login: () => {},
   logout: () => {},
   setError: () => {},
+  checkToken: async () => {},
 };
 
 export const useAuthStore = create<AuthStateType>((set) => ({
@@ -41,4 +44,15 @@ export const useAuthStore = create<AuthStateType>((set) => ({
 
   setError: (isError: boolean, errorMessage: string) =>
     set({ isError, errorMessage }),
+
+  checkToken: async () => {
+    const isValid = await validateToken();
+
+    if (!isValid) {
+      set((state) => {
+        state.logout();
+        return {};
+      });
+    }
+  },
 }));

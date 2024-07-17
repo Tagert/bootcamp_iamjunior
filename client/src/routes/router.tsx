@@ -12,11 +12,16 @@ import { Register } from "../pages/register/Register";
 import { SearchCategory } from "../pages/search-category/SearchCategory";
 import { NotFound } from "../pages/not-found/NotFound";
 import { routes } from "./routes";
+import { AuthWrapper } from "../components/spec/AuthWrapper/AuthWrapper";
+
+const protectedRoute = (element: JSX.Element) => (
+  <AuthWrapper>{element}</AuthWrapper>
+);
 
 const routeObjects = [
   {
     path: routes.HOME,
-    element: <Home />,
+    element: protectedRoute(<Home />),
   },
   {
     path: routes.ABOUT,
