@@ -1,5 +1,5 @@
 import styles from "./Home.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CardWrapper } from "../../components/spec/CardWrapper/CardWrapper";
 import { CategoryWrapper } from "../../components/home/CategoryWrapper";
 import { Hero } from "../../components/spec/Hero/Hero";
@@ -7,9 +7,27 @@ import { Page } from "../../components/template/Page";
 import { Spinner } from "../../components/common/Spinner/Spinner";
 import { useBusinesses } from "../../api/fetchBusinesses";
 import { useCategories } from "../../api/fetchCategories";
+import { useLocation } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+
+type LocationState = {
+  fromLogin?: boolean;
+};
 
 export const Home = () => {
   const [onSearch, setOnSearch] = useState<string>("");
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const state = location.state as LocationState;
+
+    if (state?.fromLogin) {
+      toast.success(`Successfully logged in!`);
+
+      window.history.replaceState({}, document.title);
+    }
+  }, [location.state]);
 
   const {
     data: categories,
@@ -24,6 +42,7 @@ export const Home = () => {
 
   return (
     <Page>
+      <ToastContainer />
       <main className={styles.homePage}>
         <Hero onSearch={onSearch} setOnSearch={setOnSearch} />
         {!isCategoriesLoading ? (

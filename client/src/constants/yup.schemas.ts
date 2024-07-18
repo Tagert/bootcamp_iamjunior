@@ -17,3 +17,10 @@ export const registerValidationSchema = Yup.object().shape({
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Confirm password required"),
 });
+
+export const loginValidationSchema = Yup.object().shape({
+  email: Yup.string()
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Invalid email format")
+    .required("Email required"),
+  password: Yup.string().required("Password required"),
+});

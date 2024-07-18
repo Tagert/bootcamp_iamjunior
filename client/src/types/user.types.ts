@@ -22,6 +22,11 @@ export type RegisterFormValues = {
   confirmPassword: string;
 };
 
+export type LoginFormValues = {
+  email: string;
+  password: string;
+};
+
 // type UserBody = {
 //   name: string;
 //   email: string;

@@ -1,4 +1,5 @@
 import styles from "./RegisterForm.module.scss";
+import { AxiosError } from "axios";
 import { RegisterFormValues } from "../../types/user.types";
 import { Link, useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
@@ -8,7 +9,6 @@ import { registerValidationSchema } from "../../constants/yup.schemas";
 import { useCreateUser } from "../../api/createUser";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AxiosError } from "axios";
 
 const initialValues: RegisterFormValues = {
   name: "",
@@ -28,12 +28,9 @@ export const RegisterForm = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...userValues } = values;
     mutate(userValues, {
-      onSuccess: (data) => {
-        toast.success(`User ${data.user.name} was created successfully`);
+      onSuccess: () => {
+        navigate(routes.LOGIN, { state: { fromRegister: true } });
 
-        setTimeout(() => {
-          navigate(routes.LOGIN);
-        }, 3500);
         setSubmitting(false);
         resetForm();
       },

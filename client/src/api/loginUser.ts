@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 import { routes } from "../routes/routes";
 import { validateEmail } from "../utils/helpers/email.validation";
 import { loginApiCall, LoginCredentials } from "../services/auth.service";
@@ -23,15 +25,23 @@ export const useLoginUser = () => {
     onSuccess: (data) => {
       login(data);
       setError(false, "");
-      navigate(routes.HOME);
+      // toast.success("Login successful!");
+      // setTimeout(() => {
+      //   navigate(routes.HOME);
+      // }, 1500);
+      navigate(routes.HOME, { state: { fromLogin: true } });
 
       queryClient.invalidateQueries({
         queryKey: [LOGIN_USER_QUERY_KEY],
       });
     },
-    onError: (error) => {
+    onError: (error: Error) => {
+      const axiosError = error as AxiosError<{ message: string }>;
       console.error("Login error:", error);
       setError(true, getErrorMessage(error));
+      toast.error(
+        axiosError.response?.data.message || "Login failed. Please try again."
+      );
     },
   });
 
