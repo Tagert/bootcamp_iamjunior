@@ -4,14 +4,16 @@ export const registerValidationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Your name is too short!")
     .max(30, "Sorry, but your name is too long!")
-    .required("Required field"),
-  email: Yup.string().email("Invalid email").required("Required field"),
+    .required("Name required"),
+  email: Yup.string()
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Invalid email format")
+    .required("Email required"),
   password: Yup.string()
-    .min(6, "Password is too short - the minimum length is 6 characters")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/\d/, "Password must contain at least one number")
-    .required("Required field"),
+    .min(6, "Min 6 characters")
+    .matches(/[A-Z]/, "Need at least one uppercase letter")
+    .matches(/\d/, "Need at least one number")
+    .required("Password required"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
-    .required("Required field"),
+    .required("Confirm password required"),
 });

@@ -1,13 +1,18 @@
-export type UserResponseType = {
+export type LoginUserResponse = {
   id: string;
   name: string;
   email: string;
 };
 
+export type CreateUserResponse = {
+  user: UserType;
+  message: string;
+};
+
 export type LoginResponseType = {
   status: string;
   token: string;
-  user: UserResponseType;
+  user: LoginUserResponse;
 };
 
 export type RegisterFormValues = {
@@ -30,4 +35,6 @@ export type UserType = {
   email: string;
   password: string;
   role?: string;
+  created_at?: Date;
+  updated_at?: Date;
 };

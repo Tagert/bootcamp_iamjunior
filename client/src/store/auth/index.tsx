@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { LoginResponseType, UserResponseType } from "../../types/user.types";
+import { LoginResponseType, LoginUserResponse } from "../../types/user.types";
 import { validateToken } from "../../api/validate-token";
 
 type AuthStateType = {
-  user: UserResponseType | null;
+  user: LoginUserResponse | null;
   isLoggedIn: boolean;
   isError: boolean;
   errorMessage: string;
