@@ -3,6 +3,7 @@ import {
   RouterProvider,
   createBrowserRouter,
 } from "react-router-dom";
+import { routes } from "./routes";
 import { Home } from "../pages/home/Home";
 import { About } from "../pages/about/About";
 import { Services } from "../pages/services-list/Services";
@@ -11,7 +12,7 @@ import { Login } from "../pages/login/Login";
 import { Register } from "../pages/register/Register";
 import { SearchCategory } from "../pages/search-category/SearchCategory";
 import { NotFound } from "../pages/not-found/NotFound";
-import { routes } from "./routes";
+import { Business } from "../pages/business/Business";
 import { AuthWrapper } from "../components/spec/AuthWrapper/AuthWrapper";
 
 const protectedRoute = (element: JSX.Element) => (
@@ -47,6 +48,7 @@ const routeObjects = [
     path: routes.SEARCH_CATEGORY.path,
     element: <SearchCategory />,
   },
+  { path: routes.BUSINESS_ID.path, element: <Business /> },
   {
     path: routes.NOT_FOUND,
     element: <NotFound />,

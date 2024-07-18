@@ -37,7 +37,7 @@ export const INSERT_BOOKING: RequestHandler = async (req, res) => {
     const response = await booking.save();
 
     return res.status(201).json({
-      response: response,
+      response,
       message: `Booking for ${user_name} was added successfully`,
     });
   } catch (err: unknown) {

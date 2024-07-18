@@ -5,8 +5,8 @@ import { BusinessType } from "../../../types/business.type";
 type CardWrapperProp = {
   category?: string;
   businesses?: BusinessType[] | undefined;
-  error?: Error | null;
   isLoading?: boolean;
+  error?: Error | null;
 };
 
 export const CardWrapper = ({

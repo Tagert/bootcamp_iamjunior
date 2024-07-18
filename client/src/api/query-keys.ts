@@ -1,5 +1,7 @@
 export const BUSINESSES_QUERY_KEY = "businesses";
 
+export const BUSINESS_QUERY_KEY = "business";
+
 export const CATEGORIES_QUERY_KEY = "categories";
 
 export const CREATE_USER_QUERY_KEY = "newUser";
