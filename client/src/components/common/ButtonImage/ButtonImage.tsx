@@ -1,9 +1,10 @@
 type ButtonImageProp = {
   imgSrc: string;
   className: string;
+  text?: string;
 };
 
-export const ButtonImage = ({ imgSrc, className }: ButtonImageProp) => {
+export const ButtonImage = ({ imgSrc, className, text }: ButtonImageProp) => {
   return (
     <>
       <button className={className}>
@@ -12,6 +13,7 @@ export const ButtonImage = ({ imgSrc, className }: ButtonImageProp) => {
           src={imgSrc}
           alt="search icon"
         />
+        <p>{text}</p>
       </button>
     </>
   );

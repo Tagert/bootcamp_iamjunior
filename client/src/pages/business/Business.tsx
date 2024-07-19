@@ -18,11 +18,7 @@ export const Business = () => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <BusinessWrapper
-            business={business}
-            isLoading={isLoading}
-            error={error}
-          />
+          <BusinessWrapper business={business} error={error} />
         )}
       </main>
     </Page>

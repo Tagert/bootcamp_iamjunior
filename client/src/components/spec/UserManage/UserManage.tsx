@@ -40,10 +40,12 @@ const UserManage = () => {
               }
             >
               <div className={styles.signOutHolder}>
-                <p>{user.name}</p>
+                <h3>{user.name}</h3>
+
+                <p>My Bookings</p>
 
                 <button className={styles.signOut} onClick={handleSignOut}>
-                  <p>Sign Out</p>
+                  <p>Logout</p>
 
                   <GoSignOut />
                 </button>

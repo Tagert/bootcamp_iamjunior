@@ -6,6 +6,7 @@ export type BusinessType = {
   name: string;
   description: string;
   category: string;
+  provider: string;
   address: string;
   contacts: ContactType[];
   images_url: string;

@@ -13,6 +13,7 @@ type CardProp = {
   name: string;
   description: string;
   category: string;
+  provider: string;
   address: string;
   contacts: ContactType[];
   images_url: string;
@@ -23,9 +24,10 @@ export const Card = ({
   id,
   // user_id,
   name,
+  // description,
   category,
+  provider,
   address,
-  description,
   // contacts,
   images_url,
   price,
@@ -78,7 +80,7 @@ export const Card = ({
 
         <p>{name}</p>
 
-        <p>{description}</p>
+        <p>{provider}</p>
 
         <p>{address}</p>
 

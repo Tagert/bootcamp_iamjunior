@@ -1,0 +1,61 @@
+.businessCard {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 0rem;
+
+  .businessDetails {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .imageBox {
+      width: 18rem;
+      height: 18rem;
+      border-radius: 50%;
+      overflow: hidden;
+
+      img {
+        width: 15rem;
+        height: 15rem;
+        object-fit: cover;
+      }
+    }
+
+    .businessBox {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      p {
+        text-transform: capitalize;
+
+        &:nth-child(1) {
+          display: flex;
+          justify-content: center;
+          max-width: 6.5rem;
+          padding: 0.5rem 1rem;
+          font-size: 0.9rem;
+          font-weight: 600;
+          letter-spacing: 0.05rem;
+          border-radius: 2rem;
+          color: $primary-btn-color;
+          background-color: $secondary-btn-color;
+        }
+
+        &:nth-child(3) {
+          font-weight: 500;
+          color: $grayish-text-color;
+        }
+      }
+
+      h2 {
+        font-size: 2rem;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .descriptionText {
+    text-align: justify;
+  }
+}

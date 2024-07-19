@@ -11,6 +11,7 @@ type BusinessBody = {
   name: string;
   description: string;
   category: string;
+  provider: string;
   address: string;
   contacts: ContactType[];
   images_url: string;
@@ -32,6 +33,7 @@ const businessSchema = new mongoose.Schema<BusinessType>(
     name: { type: String, required: true, min: 3 },
     description: { type: String, required: false, default: "" },
     category: { type: String, required: true },
+    provider: { type: String, required: true },
     address: { type: String, required: true },
     contacts: { type: [contactSchema], required: true },
     images_url: { type: String, required: true },

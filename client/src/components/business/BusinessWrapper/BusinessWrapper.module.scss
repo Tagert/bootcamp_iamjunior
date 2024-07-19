@@ -1,0 +1,14 @@
+.businessWrapper {
+  display: flex;
+  gap: 2rem;
+  padding: 0rem 4.5rem;
+
+  .businessCard {
+    max-width: 70%;
+  }
+
+  .businessExtrasWrapper {
+    display: flex;
+    flex: 1;
+  }
+}

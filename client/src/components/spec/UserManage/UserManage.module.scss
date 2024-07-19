@@ -1,7 +1,6 @@
 .userManage {
   display: flex;
   gap: 2rem;
-  margin-right: 2rem;
 
   .avatar {
     position: relative;
@@ -41,25 +40,25 @@
       .signOutHolder {
         display: flex;
         flex-direction: column;
-        align-items: center;
         gap: 1rem;
 
-        p {
-          font-size: 0.95rem;
+        h3 {
+          font-size: 1.05rem;
+          letter-spacing: 0.1rem;
           font-weight: 600;
           color: $background-color;
+          padding-bottom: 0.5rem;
         }
 
         .signOut {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.6rem;
           cursor: pointer;
           height: 1.5rem;
 
           p {
-            font-size: 0.9rem;
-            font-weight: 300;
+            font-size: 1rem;
             color: $background-color;
           }
 

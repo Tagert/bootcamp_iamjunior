@@ -17,6 +17,7 @@ export const BusinessSchema = {
     name: { type: "string", description: "Business name", minLength: 3 },
     description: { type: "string", description: "Business description", default: "" },
     category: { type: "string", description: "Business category" },
+    provider: { type: "string", description: "Provider title" },
     address: { type: "string", description: "Business address" },
     contacts: {
       type: "array",
