@@ -3,7 +3,8 @@ import { BusinessModel } from "../../../models/business.model.js";
 
 export const INSERT_BUSINESS: RequestHandler = async (req, res) => {
   try {
-    const { user_id, name, description, category, provider, address, contacts, images_url, price } = req.body;
+    const { user_id, name, description, category, provider, address, contacts, images_url, price, working_hours } =
+      req.body;
 
     const business = new BusinessModel({
       user_id,
@@ -15,6 +16,7 @@ export const INSERT_BUSINESS: RequestHandler = async (req, res) => {
       contacts,
       images_url,
       price,
+      working_hours,
     });
 
     business.id = business._id.toString();
