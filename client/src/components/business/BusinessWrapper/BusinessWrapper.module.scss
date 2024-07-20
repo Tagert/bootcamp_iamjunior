@@ -1,14 +1,27 @@
 .businessWrapper {
   display: flex;
+  flex-direction: column;
   gap: 2rem;
   padding: 0rem 4.5rem;
-
-  .businessCard {
-    max-width: 70%;
-  }
 
   .businessExtrasWrapper {
     display: flex;
     flex: 1;
+  }
+
+  .descriptionBox {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .descriptionText {
+      font-size: 1.05rem;
+      text-align: justify;
+    }
   }
 }

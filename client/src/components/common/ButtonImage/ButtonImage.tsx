@@ -1,3 +1,5 @@
+import styles from "./ButtonImage.module.scss";
+
 type ButtonImageProp = {
   imgSrc: string;
   className: string;
@@ -7,7 +9,7 @@ type ButtonImageProp = {
 export const ButtonImage = ({ imgSrc, className, text }: ButtonImageProp) => {
   return (
     <>
-      <button className={className}>
+      <button className={`${styles.buttonImage} ${className}`}>
         <img
           className="fill-current text-white"
           src={imgSrc}

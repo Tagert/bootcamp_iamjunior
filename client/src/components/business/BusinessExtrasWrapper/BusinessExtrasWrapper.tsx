@@ -1,6 +1,6 @@
 import styles from "./BusinessExtrasWrapper.module.scss";
 import bookingIcon from "../../../assets/booking_icon.svg";
-import uploadIcon from "../../../assets/upload_icon.svg";
+
 import { ContactType } from "../../../types/contact.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 
@@ -22,14 +22,23 @@ export const BusinessExtrasWrapper = ({
 }: BusinessExtrasWrapperProps) => {
   return (
     <section className={`${styles.businessExtrasWrapper} ${className}`}>
-      <ButtonImage imgSrc={uploadIcon} className={styles.uploadBtn} />
-      <p>test</p>
-      <p>test</p>
-      <ButtonImage
+      {/* {contacts.map((contact, index) => (
+        <div key={index} className={styles.contact}>
+          <h4>{contact.contact_person}</h4>
+          <h4>{contact.phone_number}</h4>
+          <h4>{contact.email}</h4>
+        </div>
+      ))} */}
+
+      {/* <ButtonImage
         imgSrc={bookingIcon}
         className={styles.bookingBtn}
         text={"Booking Appointment"}
-      />
+      /> */}
+      <div className={styles.descriptionBox}>
+        <h4>Description</h4>
+        {/* <p className={styles.descriptionText}>{description}</p> */}
+      </div>
     </section>
   );
 };
