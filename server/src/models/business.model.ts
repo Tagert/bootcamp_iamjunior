@@ -6,6 +6,12 @@ type ContactType = {
   email: string;
 };
 
+type DayWorkingHours = {
+  open?: string;
+  close?: string;
+  status: "open" | "closed";
+};
+
 type BusinessBody = {
   user_id: string;
   name: string;
@@ -16,6 +22,15 @@ type BusinessBody = {
   contacts: ContactType[];
   images_url: string;
   price: number;
+  working_hours: {
+    monday: DayWorkingHours;
+    tuesday: DayWorkingHours;
+    wednesday: DayWorkingHours;
+    thursday: DayWorkingHours;
+    friday: DayWorkingHours;
+    saturday: DayWorkingHours;
+    sunday: DayWorkingHours;
+  };
 };
 
 type BusinessType = BusinessBody & Entity;
@@ -24,6 +39,12 @@ const contactSchema = new mongoose.Schema<ContactType>({
   contact_person: { type: String, required: true },
   phone_number: { type: String, required: true },
   email: { type: String, required: true },
+});
+
+const dayWorkingHoursSchema = new mongoose.Schema({
+  open: { type: String, required: false },
+  close: { type: String, required: false },
+  status: { type: String, enum: ["open", "closed"], required: true },
 });
 
 const businessSchema = new mongoose.Schema<BusinessType>(
@@ -38,6 +59,15 @@ const businessSchema = new mongoose.Schema<BusinessType>(
     contacts: { type: [contactSchema], required: true },
     images_url: { type: String, required: true },
     price: { type: Number, required: true },
+    working_hours: {
+      monday: { type: dayWorkingHoursSchema, required: true },
+      tuesday: { type: dayWorkingHoursSchema, required: true },
+      wednesday: { type: dayWorkingHoursSchema, required: true },
+      thursday: { type: dayWorkingHoursSchema, required: true },
+      friday: { type: dayWorkingHoursSchema, required: true },
+      saturday: { type: dayWorkingHoursSchema, required: true },
+      sunday: { type: dayWorkingHoursSchema, required: true },
+    },
   },
   {
     timestamps: {

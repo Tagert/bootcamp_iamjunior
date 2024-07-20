@@ -3,7 +3,7 @@ import swaggerUi from "swagger-ui-express";
 import type { Express } from "express";
 import { config } from "../load-env.config";
 import { UserSchema } from "./schemas/user-sw.schema";
-import { BusinessSchema } from "./schemas/business-sw.schema";
+import { BusinessSchema, DayWorkingHoursSchema, WorkingHoursSchema } from "./schemas/business-sw.schema";
 import { ContactSchema } from "./schemas/business-sw.schema";
 import { BookingSchema } from "./schemas/booking-sw.schema";
 import { CategorySchema } from "./schemas/category-sw.schema";
@@ -28,6 +28,8 @@ const swaggerOptions = {
         User: UserSchema,
         Business: BusinessSchema,
         Contact: ContactSchema,
+        DayWorkingHours: DayWorkingHoursSchema,
+        WorkingHoursStructure: WorkingHoursSchema,
         Booking: BookingSchema,
         Category: CategorySchema,
       },
