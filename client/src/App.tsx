@@ -1,7 +1,8 @@
 import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+import { MantineProvider } from "@mantine/core";
 import { Routes } from "./routes/router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MantineProvider } from "@mantine/core";
 
 const queryClient = new QueryClient();
 

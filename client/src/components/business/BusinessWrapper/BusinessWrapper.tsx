@@ -5,10 +5,15 @@ import { BusinessType } from "../../../types/business.type";
 
 type BusinessWrapperProps = {
   business: BusinessType | undefined;
+  business_params_id: string;
   error: Error | null;
 };
 
-export const BusinessWrapper = ({ business, error }: BusinessWrapperProps) => {
+export const BusinessWrapper = ({
+  business,
+  business_params_id,
+  error,
+}: BusinessWrapperProps) => {
   return (
     <section className={styles.businessWrapper}>
       {business && (
@@ -21,7 +26,9 @@ export const BusinessWrapper = ({ business, error }: BusinessWrapperProps) => {
 
           <BusinessExtrasWrapper
             className={styles.businessExtrasWrapper}
-            {...business}
+            business_id={business_params_id}
+            description={business.description}
+            working_hours={business.working_hours}
           />
         </>
       )}

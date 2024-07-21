@@ -4,12 +4,21 @@ type ButtonImageProp = {
   imgSrc: string;
   className: string;
   text?: string;
+  onClick?: () => void;
 };
 
-export const ButtonImage = ({ imgSrc, className, text }: ButtonImageProp) => {
+export const ButtonImage = ({
+  imgSrc,
+  className,
+  text,
+  onClick,
+}: ButtonImageProp) => {
   return (
     <>
-      <button className={`${styles.buttonImage} ${className}`}>
+      <button
+        className={`${styles.buttonImage} ${className}`}
+        onClick={onClick}
+      >
         <img
           className="fill-current text-white"
           src={imgSrc}

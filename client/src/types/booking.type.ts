@@ -6,5 +6,5 @@ export type BookingType = {
   user_id?: string;
   user_name?: string;
   user_email?: string;
-  status?: number;
+  status?: string;
 };

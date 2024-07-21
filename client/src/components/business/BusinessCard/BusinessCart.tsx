@@ -1,13 +1,14 @@
 import styles from "./BusinessCard.module.scss";
-import test from "./test.module.css";
+import modal_style from "../../../styles/mantine_ui/modal.module.scss";
 import uploadIcon from "../../../assets/upload_icon.svg";
 import { Modal } from "@mantine/core";
+import { Tooltip } from "@mantine/core";
 import { ContactType } from "../../../types/contact.type";
 import { WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useState } from "react";
 import { findFirstOpenDay } from "../../../utils/find-first-open-day";
-import { formatWorkingHours } from "../../../utils/formating-working-hours";
+import { formatWorkingHours } from "../../../utils/format-working-hours";
 
 export type BusinessCardProps = {
   className?: string;
@@ -97,30 +98,40 @@ export const BusinessCard = ({
                 alt="clock icon"
               />
 
-              {firstOpenDay && (
-                <p id={styles["workingHours"]} onClick={showModal}>
-                  {`Available from ${firstOpenDay.hours.open} to
+              <Tooltip
+                label="Press to see the full working hours."
+                offset={15}
+                position="bottom-end"
+              >
+                {firstOpenDay && (
+                  <p id={styles["workingHours"]} onClick={showModal}>
+                    {`Available from ${firstOpenDay.hours.open} to
                   ${firstOpenDay.hours.close}.`}
-                </p>
-              )}
+                  </p>
+                )}
+              </Tooltip>
 
               <Modal
                 classNames={{
-                  close: test.close,
-                  content: test.content,
-                  title: test.title,
-                  inner: test.inner,
-                  root: test.root,
-                  header: test.header,
-                  body: test.body,
+                  close: modal_style.close,
+                  content: modal_style.content,
+                  title: modal_style.title,
+                  inner: modal_style.inner,
+                  root: modal_style.root,
+                  header: modal_style.header,
+                  body: modal_style.body,
                 }}
                 opened={isModalVisible}
                 onClose={closeModal}
                 title="Working Hours"
-                transitionProps={{ transition: "rotate-left" }}
+                transitionProps={{ transition: "rotate-right" }}
+                size={325}
               >
                 {Object.entries(working_hours).map(([day, hours]) => (
-                  <p key={day}>{formatWorkingHours(day, hours)}</p>
+                  <div key={day} className={styles.workingHoursEntry}>
+                    <p className={styles.day}>{`${day}:`}</p>
+                    <p className={styles.hours}>{formatWorkingHours(hours)}</p>
+                  </div>
                 ))}
               </Modal>
             </div>

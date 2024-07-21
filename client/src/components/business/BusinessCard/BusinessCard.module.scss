@@ -99,7 +99,7 @@
           gap: 1rem;
 
           p {
-            letter-spacing: 0.1rem;
+            letter-spacing: 0.05rem;
             font-weight: 500;
             color: $grayish-text-color;
           }
@@ -110,6 +110,19 @@
           cursor: pointer;
         }
       }
+    }
+  }
+}
+
+.workingHoursEntry {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    text-transform: capitalize;
+
+    &:nth-child(2) {
+      font-weight: 500;
     }
   }
 }

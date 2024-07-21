@@ -5,6 +5,7 @@ import { BUSINESS_QUERY_KEY } from "./query-keys";
 
 const fetchBusinessesById = async (id: string): Promise<BusinessType> => {
   const response = await ApiService.get(`/business/${id}`);
+
   return response.data;
 };
 
