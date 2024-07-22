@@ -13,5 +13,9 @@ export const routes = {
     path: "/business/:id",
     url: (id: string) => `business/${id}`,
   },
+  USER_BOOKINGS: {
+    path: "/bookings/user/:id",
+    url: (id: string) => `/bookings/user/${id}`,
+  },
   NOT_FOUND: "/not-found",
 };

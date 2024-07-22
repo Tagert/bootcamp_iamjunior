@@ -1,0 +1,21 @@
+.list {
+  padding: 0.5rem;
+  border-radius: 0.4rem;
+  background-color: $gray-color-010;
+  margin-bottom: 2rem;
+}
+
+.tabLabel {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.tab {
+  margin-right: 0.5rem;
+}
+
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

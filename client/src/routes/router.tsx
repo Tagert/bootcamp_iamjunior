@@ -14,6 +14,7 @@ import { SearchCategory } from "../pages/search-category/SearchCategory";
 import { NotFound } from "../pages/not-found/NotFound";
 import { Business } from "../pages/business/Business";
 import { AuthWrapper } from "../components/spec/AuthWrapper/AuthWrapper";
+import { MyBookings } from "../pages/my-bookings/MyBookings";
 
 const protectedRoute = (element: JSX.Element) => (
   <AuthWrapper>{element}</AuthWrapper>
@@ -22,7 +23,7 @@ const protectedRoute = (element: JSX.Element) => (
 const routeObjects = [
   {
     path: routes.HOME,
-    element: protectedRoute(<Home />),
+    element: <Home />,
   },
   {
     path: routes.ABOUT,
@@ -48,7 +49,11 @@ const routeObjects = [
     path: routes.SEARCH_CATEGORY.path,
     element: <SearchCategory />,
   },
-  { path: routes.BUSINESS_ID.path, element: <Business /> },
+  { path: routes.BUSINESS_ID.path, element: protectedRoute(<Business />) },
+  {
+    path: routes.USER_BOOKINGS.path,
+    element: <MyBookings />,
+  },
   {
     path: routes.NOT_FOUND,
     element: <NotFound />,

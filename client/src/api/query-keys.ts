@@ -9,3 +9,5 @@ export const CREATE_USER_QUERY_KEY = "newUser";
 export const LOGIN_USER_QUERY_KEY = "loginUser";
 
 export const INSERT_BOOKING = "insertBooking";
+
+export const USER_BOOKINGS = "BookingsByUserId";

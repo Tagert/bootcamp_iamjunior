@@ -6,8 +6,8 @@ import { DatePicker } from "@mantine/dates";
 import { WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useInsertBooking } from "../../../api/insertBooking";
-import { format } from "date-fns";
 import { handleDateChange } from "../../../utils/handle-date-change";
+import { formatDate } from "../../../utils/format_date";
 
 type BusinessExtrasWrapperProps = {
   className?: string;
@@ -22,11 +22,12 @@ export const BusinessExtrasWrapper = ({
   description,
   working_hours,
 }: BusinessExtrasWrapperProps) => {
+  //TODO: implement loading, error handling and add success message
   const {
     mutate: insertBooking,
-    isPending,
-    isError,
-    isSuccess,
+    // isPending,
+    // isError,
+    // isSuccess,
   } = useInsertBooking();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -48,7 +49,7 @@ export const BusinessExtrasWrapper = ({
 
   const handleBooking = () => {
     if (business_id && selectedDate && selectedTime) {
-      const formattedDate = format(selectedDate, "yyyy-MM-dd");
+      const formattedDate = formatDate(selectedDate);
       const newBooking = {
         booking_date: formattedDate,
         time: selectedTime,
@@ -96,25 +97,28 @@ export const BusinessExtrasWrapper = ({
       <Modal
         classNames={{
           close: calendar_modal.close,
-          content: calendar_modal.content,
           title: calendar_modal.title,
-          inner: calendar_modal.inner,
-          root: calendar_modal.root,
-          header: calendar_modal.header,
-          body: calendar_modal.body,
+          content: calendar_modal.content,
         }}
         opened={isModalVisible}
         onClose={closeModal}
         title="Book a Service"
-        transitionProps={{ transition: "scale-y" }}
+        transitionProps={{ transition: "rotate-right" }}
       >
         <div className={styles.modalContent}>
-          <h2>Book a Service</h2>
           <h3>Select Date and Time to book a service</h3>
+
           <h4>Select Date</h4>
+
           <DatePicker
+            classNames={{
+              levelsGroup: calendar_modal.levelsGroup,
+              calendarHeaderControl: calendar_modal.calendarHeaderControl,
+            }}
+            className={styles.calendarBody}
             value={selectedDate}
             minDate={new Date()}
+            highlightToday={true}
             size="lg"
             onChange={(date) =>
               handleDateChange({
@@ -125,9 +129,10 @@ export const BusinessExtrasWrapper = ({
               })
             }
           />
+
           {timeSlots.length > 0 ? (
             <>
-              <p>Select Time Slot</p>
+              <h5>Select Time Slot</h5>
 
               <div className={styles.timeSlots}>
                 {timeSlots.map((slot) => (
@@ -148,11 +153,13 @@ export const BusinessExtrasWrapper = ({
             </p>
           )}
           <div className={styles.modalActions}>
-            <Button variant="outline" onClick={closeModal}>
-              Cancel
+            <Button onClick={handleBooking} size="md">
+              Book Now
             </Button>
 
-            <Button onClick={handleBooking}>Book Now</Button>
+            <Button variant="outline" onClick={closeModal} size="md">
+              Cancel
+            </Button>
           </div>
         </div>
       </Modal>
