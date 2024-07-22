@@ -1,0 +1,45 @@
+.bookingCard {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 0.1rem solid $gray-color-025;
+  border-radius: 0.6rem;
+  width: calc(50% - 0.5rem);
+
+  .imageContainer {
+    display: flex;
+    align-items: center;
+    width: 15rem;
+    border-radius: 0.6rem;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .bookingDetailsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    img {
+      width: 2rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .contactName,
+    .contactAddress,
+    .bookingDate,
+    .bookingTime {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}
