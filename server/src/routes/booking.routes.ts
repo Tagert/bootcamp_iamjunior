@@ -9,7 +9,7 @@ import { userAuth } from "../middleware/user-auth.js";
 
 export const bookingRoutes = express.Router();
 
-bookingRoutes.get("/bookings/user/:email", GET_ALL_USER_BOOKINGS);
+bookingRoutes.get("/bookings/user/:id", userAuth, GET_ALL_USER_BOOKINGS);
 
 bookingRoutes.post("/business/:business_id/booking", userAuth, INSERT_BOOKING);
 

@@ -12,9 +12,9 @@ export const GET_ALL_USER_BOOKINGS: RequestHandler = async (req, res) => {
       return res.status(404).json({ message: "Data not exist" });
     }
 
-    const filteredBookingsByUser = bookings.filter((booking: BookingType) => booking.user_id !== id);
+    const filteredBookingsByUser = bookings.filter((booking: BookingType) => booking.user_id === id);
 
-    return res.status(200).json({ filteredBookingsByUser });
+    return res.status(200).json(filteredBookingsByUser);
   } catch (err: unknown) {
     if (err instanceof Error) {
       console.error("Error during getting all bookings:", err);

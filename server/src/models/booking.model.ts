@@ -7,7 +7,7 @@ type BookingBody = {
   user_id: string;
   user_name: string;
   user_email: string;
-  status: string;
+  status: "pending" | "approved" | "completed";
 };
 
 export type BookingType = BookingBody & Entity;
