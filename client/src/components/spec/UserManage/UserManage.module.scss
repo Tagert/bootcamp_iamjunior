@@ -50,12 +50,25 @@
           padding-bottom: 0.5rem;
         }
 
+        .myBookings {
+          display: flex;
+          cursor: pointer;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
         .signOut {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
+          gap: 1rem;
           cursor: pointer;
           height: 1.5rem;
+
+          &:hover {
+            scale: 1.1;
+          }
 
           p {
             font-size: 1rem;
@@ -64,7 +77,6 @@
 
           svg {
             width: 1rem;
-            margin-bottom: 0.1rem;
           }
         }
       }

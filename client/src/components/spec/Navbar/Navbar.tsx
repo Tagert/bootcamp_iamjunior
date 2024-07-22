@@ -13,14 +13,17 @@ export const Navbar = () => {
 
   const { user } = useAuthStore();
 
-  const handleLoginNavigate = () => {
-    navigate(routes.LOGIN);
+  const handleNavigate = (path: string) => () => {
+    navigate(path);
   };
 
   return (
     <nav className={styles.container}>
       <div className={styles.navbarHolder}>
-        <div className={styles.logoHolder}>
+        <div
+          className={styles.logoHolder}
+          onClick={handleNavigate(routes.HOME)}
+        >
           <img src={logo} alt="logo" />
           <p>FindService</p>
         </div>
@@ -32,7 +35,7 @@ export const Navbar = () => {
             <UserManage />
           ) : (
             <Button
-              onClick={handleLoginNavigate}
+              onClick={handleNavigate(routes.LOGIN)}
               className={styles.loginBtn}
               title={"Login / Sign Up"}
             />

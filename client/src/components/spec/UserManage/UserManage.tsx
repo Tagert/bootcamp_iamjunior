@@ -1,18 +1,23 @@
 import styles from "./UserManage.module.scss";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { routes } from "../../../routes/routes";
 import { GoSignOut } from "react-icons/go";
 import { useAuthStore } from "../../../store/auth/index";
+import { getInitials } from "../../../utils/get-initials";
 
 const UserManage = () => {
+  const navigate = useNavigate();
   const { user, logout } = useAuthStore();
 
   const [isUserBoxVisible, setUserBoxVisible] = useState(false);
 
-  const getInitials = (name: string) => {
-    if (!name) return "";
-    const firstLetter = name.charAt(0).toUpperCase();
-    const secondLetter = name.charAt(1).toLowerCase();
-    return `${firstLetter}${secondLetter}`;
+  if (!user) {
+    return null;
+  }
+
+  const handleNavigateToMyBookings = () => {
+    navigate(routes.USER_BOOKINGS.url(user.id).toLocaleLowerCase());
   };
 
   const toggleUserBox = () => {
@@ -22,10 +27,6 @@ const UserManage = () => {
   const handleSignOut = () => {
     logout();
   };
-
-  if (!user) {
-    return null;
-  }
 
   return (
     <>
@@ -41,8 +42,12 @@ const UserManage = () => {
             >
               <div className={styles.signOutHolder}>
                 <h3>{user.name}</h3>
-
-                <p>My Bookings</p>
+                <button
+                  className={styles.myBookings}
+                  onClick={handleNavigateToMyBookings}
+                >
+                  <p>My Bookings</p>
+                </button>
 
                 <button className={styles.signOut} onClick={handleSignOut}>
                   <p>Logout</p>

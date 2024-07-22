@@ -5,7 +5,7 @@ import {
 } from "@tanstack/react-query";
 import { ApiService } from "../services/api.services";
 import { BookingType } from "../types/booking.type";
-import { INSERT_BOOKING } from "./query-keys";
+import { INSERT_BOOKING, USER_BOOKINGS } from "./query-keys";
 
 const insertBooking = async (
   booking: BookingType,
@@ -30,7 +30,9 @@ export const useInsertBooking = (): UseMutationResult<
   return useMutation({
     mutationFn: ({ booking, business_id }) =>
       insertBooking(booking, business_id),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: [INSERT_BOOKING] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [INSERT_BOOKING] });
+      queryClient.invalidateQueries({ queryKey: [USER_BOOKINGS] });
+    },
   });
 };

@@ -22,13 +22,10 @@ type CardProp = {
 
 export const Card = ({
   id,
-  // user_id,
   name,
-  // description,
   category,
   provider,
   address,
-  // contacts,
   images_url,
   price,
 }: CardProp) => {
