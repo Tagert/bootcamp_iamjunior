@@ -63,6 +63,36 @@
 
 /**
  * @swagger
+ * /business/{id}/similar:
+ *   get:
+ *     summary: Retrieve a list of similar businesses by ID
+ *     tags: [Business]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the business
+ *     responses:
+ *       200:
+ *         description: A list of similar businesses
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Business'
+ *       400:
+ *         description: Business ID parameter is required
+ *       404:
+ *         description: Business not found
+ *       500:
+ *         description: Internal server error
+ */
+
+/**
+ * @swagger
  * /business:
  *   post:
  *     summary: Create a new business

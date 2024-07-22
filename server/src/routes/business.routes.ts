@@ -5,6 +5,7 @@ import {
   INSERT_BUSINESS,
   GET_BUSINESS_BY_ID,
   UPDATE_BUSINESS_BY_ID,
+  GET_SIMILAR_BUSINESSES,
 } from "../controllers/business/index.js";
 import { userAuth } from "../middleware/user-auth.js";
 
@@ -15,6 +16,8 @@ businessRoutes.get("/businesses", GET_ALL_BUSINESSES);
 businessRoutes.get("/businesses/category/:category", GET_BUSINESSES_BY_CATEGORY);
 
 businessRoutes.get("/business/:id", GET_BUSINESS_BY_ID);
+
+businessRoutes.get("/business/:id/similar", GET_SIMILAR_BUSINESSES);
 
 businessRoutes.post("/business", userAuth, INSERT_BUSINESS);
 
