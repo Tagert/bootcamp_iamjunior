@@ -16,6 +16,12 @@ export type WorkingHoursType = {
   sunday: DayWorkingHours;
 };
 
+export type ImagesType = {
+  id?: string;
+  url: string;
+  alt_text: string;
+};
+
 export type BusinessType = {
   id?: string;
   user_id?: string;
@@ -25,7 +31,7 @@ export type BusinessType = {
   provider: string;
   address: string;
   contacts: ContactType[];
-  images_url: string;
+  images_url: ImagesType[];
   price: number;
   working_hours: WorkingHoursType;
 };

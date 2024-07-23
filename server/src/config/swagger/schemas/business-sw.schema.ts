@@ -30,6 +30,15 @@ export const ContactSchema = {
   },
 };
 
+export const ImagesSchema = {
+  type: "object",
+  required: ["url"],
+  properties: {
+    url: { type: "string", description: "Image url" },
+    alt_text: { type: "string", description: "Short image description" },
+  },
+};
+
 export const BusinessSchema = {
   type: "object",
   required: ["name", "category", "address", "contacts", "images_url", "price", "working_hours"],
@@ -42,11 +51,15 @@ export const BusinessSchema = {
     provider: { type: "string", description: "Provider title" },
     address: { type: "string", description: "Business address" },
     contacts: {
-      type: "array",
-      items: { $ref: "#/components/schemas/Contact" },
+      type: "object",
+      $ref: "#/components/schemas/Contact",
       description: "Contact information",
     },
-    images_url: { type: "string", description: "URL of the business images" },
+    images_url: {
+      type: "object",
+      $ref: "#/components/schemas/Images",
+      description: "URL of the business images",
+    },
     price: { type: "number", description: "Price of the business" },
     working_hours: {
       type: "object",

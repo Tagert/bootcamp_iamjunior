@@ -144,9 +144,13 @@
  *                     phone_number: "+1234567890"
  *                     email: "jane.smith@example.com"
  *               images_url:
- *                 type: string
+ *                 type: array
+ *                 items:
+ *                   $ref: "#/components/schemas/Images"
  *                 description: URL to the business's images
- *                 example: "http://example.com/images/business.jpg"
+ *                 example:
+ *                   - url: "http://example.com/images/business.jpg"
+ *                     alt_text: "Business shop view"
  *               price:
  *                 type: number
  *                 description: The price or cost associated with the business
