@@ -1,6 +1,7 @@
 .businessExtrasWrapper {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 
   h2 {
     font-size: 1.4rem;
@@ -14,7 +15,34 @@
     gap: 2rem;
 
     .descriptionBox {
-      max-width: 55rem;
+      max-width: 50rem;
+
+      p {
+        text-align: justify;
+      }
+    }
+
+    .galleryBox {
+      display: flex;
+      flex-direction: column;
+
+      .imagesWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+
+        .imageBox {
+          border: 0.1rem solid $gray-color-025;
+          border-radius: 0.6rem;
+          overflow: hidden;
+          cursor: pointer;
+
+          img {
+            object-fit: cover;
+            width: 14rem;
+          }
+        }
+      }
     }
   }
 
@@ -39,10 +67,17 @@
     .similarBusinessWrapper {
       display: flex;
       flex-direction: column;
+      gap: 1rem;
 
       h3 {
         font-size: 1.2rem;
         font-weight: 700;
+      }
+
+      .similarBusinessList {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
       }
     }
   }

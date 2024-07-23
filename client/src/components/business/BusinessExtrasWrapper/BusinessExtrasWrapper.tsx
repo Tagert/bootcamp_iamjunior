@@ -3,16 +3,21 @@ import calendar_modal from "../../../styles/mantine_ui/calendar-modal.module.scs
 import { useState } from "react";
 import { Modal, Button } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
-import { WorkingHoursType } from "../../../types/business.type";
+import { ImagesType, WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useInsertBooking } from "../../../api/insertBooking";
 import { handleDateChange } from "../../../utils/handle-date-change";
 import { formatDate } from "../../../utils/format_date";
+import { useSimilarBusiness } from "../../../api/fetchSimilarBusinesses";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { SimilarBusinessesCard } from "../SimilarBusinessesCard/SimilarBusinessesCard";
+import { useNavigate } from "react-router-dom";
 
 type BusinessExtrasWrapperProps = {
   className?: string;
   business_id: string;
   description: string;
+  images_url: ImagesType[];
   working_hours: WorkingHoursType;
 };
 
@@ -20,8 +25,10 @@ export const BusinessExtrasWrapper = ({
   className,
   business_id,
   description,
+  images_url,
   working_hours,
 }: BusinessExtrasWrapperProps) => {
+  const navigate = useNavigate();
   //TODO: implement loading, error handling and add success message
   const {
     mutate: insertBooking,
@@ -30,12 +37,20 @@ export const BusinessExtrasWrapper = ({
     // isSuccess,
   } = useInsertBooking();
 
+  const {
+    data: similarBusinesses,
+    isLoading,
+    error,
+  } = useSimilarBusiness(business_id);
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
+
+  const [enlargedImage, setEnlargedImage] = useState<ImagesType | null>(null);
 
   const openModal = () => {
     setIsModalVisible(true);
@@ -45,6 +60,10 @@ export const BusinessExtrasWrapper = ({
     setIsModalVisible(false);
     setSelectedDate(null);
     setSelectedTime(null);
+  };
+
+  const handleCardClick = (id: string) => {
+    navigate(`/business/${id}`);
   };
 
   const handleBooking = () => {
@@ -65,6 +84,14 @@ export const BusinessExtrasWrapper = ({
     }
   };
 
+  const handleImageClick = (image: ImagesType) => {
+    setEnlargedImage(image);
+  };
+
+  const closeImageModal = () => {
+    setEnlargedImage(null);
+  };
+
   return (
     <section className={`${styles.businessExtrasWrapper} ${className}`}>
       <div className={styles.descriptionContainer}>
@@ -76,6 +103,18 @@ export const BusinessExtrasWrapper = ({
 
         <div className={styles.galleryBox}>
           <h2>Gallery</h2>
+
+          <div className={styles.imagesWrapper}>
+            {images_url.map((image) => (
+              <div className={styles.imageBox} key={image.id ?? image.url}>
+                <img
+                  src={image.url}
+                  alt={image.alt_text}
+                  onClick={() => handleImageClick(image)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -91,6 +130,33 @@ export const BusinessExtrasWrapper = ({
 
         <div className={styles.similarBusinessWrapper}>
           <h3>Similar business</h3>
+          {isLoading && <Spinner />}
+          {error && <p>Error loading similar businesses: {error.message}</p>}
+          {!isLoading &&
+            !error &&
+            similarBusinesses &&
+            similarBusinesses.length > 0 && (
+              <div className={styles.similarBusinessList}>
+                {similarBusinesses.map((similarBusiness) => (
+                  <SimilarBusinessesCard
+                    key={similarBusiness.id}
+                    className={styles.similarBusinessCard}
+                    id={similarBusiness.id as string}
+                    name={similarBusiness.name}
+                    provider={similarBusiness.provider}
+                    address={similarBusiness.address}
+                    images_url={similarBusiness.images_url}
+                    onClick={handleCardClick}
+                  />
+                ))}
+              </div>
+            )}
+          {!isLoading &&
+            !error &&
+            similarBusinesses &&
+            similarBusinesses.length === 0 && (
+              <p>No similar businesses found.</p>
+            )}
         </div>
       </div>
 
@@ -163,6 +229,23 @@ export const BusinessExtrasWrapper = ({
           </div>
         </div>
       </Modal>
+
+      {enlargedImage && (
+        <Modal
+          opened={true}
+          onClose={closeImageModal}
+          size={1000}
+          title="Image Preview"
+        >
+          <div className={styles.enlargedImageWrapper}>
+            <img
+              src={enlargedImage.url}
+              alt={enlargedImage.alt_text}
+              className={styles.enlargedImage}
+            />
+          </div>
+        </Modal>
+      )}
     </section>
   );
 };

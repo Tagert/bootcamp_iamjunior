@@ -4,7 +4,7 @@ import uploadIcon from "../../../assets/upload_icon.svg";
 import { Modal } from "@mantine/core";
 import { Tooltip } from "@mantine/core";
 import { ContactType } from "../../../types/contact.type";
-import { WorkingHoursType } from "../../../types/business.type";
+import { ImagesType, WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useState } from "react";
 import { findFirstOpenDay } from "../../../utils/find-first-open-day";
@@ -18,7 +18,7 @@ export type BusinessCardProps = {
   category: string;
   address: string;
   contacts: ContactType[];
-  images_url: string;
+  images_url: ImagesType[];
   price: number;
   working_hours: WorkingHoursType;
 };
@@ -48,7 +48,7 @@ export const BusinessCard = ({
     <div className={`${styles.businessCard} ${className}`}>
       <div className={styles.businessDetails}>
         <div className={styles.imageBox}>
-          <img src={images_url} alt={`${name} business`} />
+          <img src={images_url[0].url} alt={`${name} business`} />
         </div>
 
         <div className={styles.businessBox}>

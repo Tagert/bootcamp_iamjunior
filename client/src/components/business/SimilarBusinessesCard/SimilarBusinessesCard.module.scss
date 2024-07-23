@@ -1,0 +1,43 @@
+.SimilarBusinessesCard {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+
+  &:hover {
+    outline: 0.2rem solid $gray-color-010;
+  }
+
+  .imageBox {
+    border-radius: 0.6rem;
+    overflow: hidden;
+
+    img {
+      width: 9rem;
+      height: 8rem;
+      object-fit: cover;
+      opacity: 0.8;
+    }
+  }
+
+  .businessDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    h2 {
+      font-size: 1.2rem;
+      padding-bottom: 0.5rem;
+    }
+
+    h4 {
+      font-weight: 500;
+      color: $primary-btn-color;
+    }
+
+    p {
+      font-weight: 500;
+      color: $grayish-text-color;
+    }
+  }
+}

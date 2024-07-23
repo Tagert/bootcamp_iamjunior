@@ -1,4 +1,6 @@
 import styles from "./CardWrapper.module.scss";
+import carousel from "../../../styles/mantine_ui/carousel.module.scss";
+import { Carousel } from "@mantine/carousel";
 import { Card } from "../Card/Card";
 import { BusinessType } from "../../../types/business.type";
 
@@ -34,6 +36,17 @@ export const CardWrapper = ({
   return (
     <section className={styles.cardWrapper}>
       <div className={styles.cardHolder}>
+        {/* TODO:implement Carousel for popular businesses */}
+        {/* <Carousel
+          classNames={{
+            container: carousel.container,
+          }}
+          withIndicators
+          // slideSize="100%"
+          loop
+          slidesToScroll={1}
+          controlSize={45}
+        > */}
         {filteredBusinesses.map((business) => (
           <Card
             key={business.id}
@@ -46,6 +59,7 @@ export const CardWrapper = ({
         {!filteredBusinesses?.length && (
           <p>There is no businesses in this category</p>
         )}
+        {/* </Carousel> */}
       </div>
     </section>
   );

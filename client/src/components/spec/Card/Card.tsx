@@ -6,6 +6,7 @@ import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { Button } from "../../common/Button/Button";
 import { ContactType } from "../../../types/contact.type";
 import { useNavigate } from "react-router-dom";
+import { ImagesType } from "../../../types/business.type";
 
 type CardProp = {
   id: string;
@@ -16,7 +17,7 @@ type CardProp = {
   provider: string;
   address: string;
   contacts: ContactType[];
-  images_url: string;
+  images_url: ImagesType[];
   price: number;
 };
 
@@ -61,7 +62,7 @@ export const Card = ({
   return (
     <div className={styles.card}>
       <div className={styles.imageBox}>
-        <img src={images_url} alt="" />
+        <img src={images_url[0].url} alt={images_url[0].alt_text} />
 
         <button className={styles.favoriteButton} onClick={toggleFavorite}>
           {isFavorite ? (
