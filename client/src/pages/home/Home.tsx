@@ -9,6 +9,7 @@ import { useBusinesses } from "../../api/fetchBusinesses";
 import { useCategories } from "../../api/fetchCategories";
 import { useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { PopularBusinessesWrapper } from "../../components/home/PopularBusinesses/PopularBusinessesWrapper";
 
 type LocationState = {
   fromLogin?: boolean;
@@ -55,6 +56,16 @@ export const Home = () => {
         </div>
         {!isBusinessesLoading ? (
           <CardWrapper
+            businesses={businesses}
+            isLoading={isBusinessesLoading}
+            error={businessesError}
+          />
+        ) : (
+          <Spinner />
+        )}
+
+        {!isBusinessesLoading ? (
+          <PopularBusinessesWrapper
             businesses={businesses}
             isLoading={isBusinessesLoading}
             error={businessesError}
