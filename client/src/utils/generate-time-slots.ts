@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { TIME_SLOT_INTERVAL } from "../constants/time-slot-interval";
 
 export const generateTimeSlots = (open: string, close: string) => {
   const timeSlots: string[] = [];
@@ -10,7 +11,7 @@ export const generateTimeSlots = (open: string, close: string) => {
 
   while (start < end) {
     timeSlots.push(format(start, "HH:mm"));
-    start.setMinutes(start.getMinutes() + 30);
+    start.setMinutes(start.getMinutes() + TIME_SLOT_INTERVAL);
   }
 
   return timeSlots;

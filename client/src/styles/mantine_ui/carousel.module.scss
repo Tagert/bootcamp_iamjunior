@@ -1,6 +1,13 @@
 .container {
   display: flex;
   gap: 1rem;
-  max-width: 90rem;
+  width: 90rem;
   padding: 2rem 0rem;
+}
+
+.indicator {
+  background-color: $gray-color-045;
+}
+
+.slide {
 }

@@ -3,7 +3,7 @@ import tabs from "../../styles/mantine_ui/tabs.module.scss";
 import { useState } from "react";
 import { Tabs } from "@mantine/core";
 import { Page } from "../../components/template/Page";
-import { useUserBookings } from "../../api/fetchBookingsByUser";
+import { useUserBookings } from "../../api/booking/queries/fetchBookingsByUser";
 import { useParams } from "react-router-dom";
 import { BookingCard } from "../../components/my-bookings/BookingCard";
 import { BookingType } from "../../types/booking.type";

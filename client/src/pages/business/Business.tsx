@@ -2,7 +2,7 @@ import styles from "./Business.module.scss";
 import { useParams } from "react-router-dom";
 import { Page } from "../../components/template/Page";
 import { BusinessWrapper } from "../../components/business/BusinessWrapper/BusinessWrapper";
-import { useBusiness } from "../../api/fetchBusinessById";
+import { useBusiness } from "../../api/business/queries/fetchBusinessById";
 import { Spinner } from "../../components/common/Spinner/Spinner";
 
 export const Business = () => {

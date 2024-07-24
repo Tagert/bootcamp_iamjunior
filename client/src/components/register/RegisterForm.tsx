@@ -6,7 +6,7 @@ import { routes } from "../../routes/routes";
 import { Button } from "../common/Button/Button";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import { registerValidationSchema } from "../../constants/yup.schemas";
-import { useCreateUser } from "../../api/createUser";
+import { useCreateUser } from "../../api/auth/createUser";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

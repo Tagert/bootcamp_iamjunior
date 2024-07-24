@@ -13,7 +13,7 @@ import { Register } from "../pages/register/Register";
 import { SearchCategory } from "../pages/search-category/SearchCategory";
 import { NotFound } from "../pages/not-found/NotFound";
 import { Business } from "../pages/business/Business";
-import { AuthWrapper } from "../components/spec/AuthWrapper/AuthWrapper";
+import { AuthWrapper } from "../components/specific/AuthWrapper/AuthWrapper";
 import { MyBookings } from "../pages/my-bookings/MyBookings";
 
 const protectedRoute = (element: JSX.Element) => (

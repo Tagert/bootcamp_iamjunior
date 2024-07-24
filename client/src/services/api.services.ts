@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { axiosConfig } from "../config/axios.config";
-import { useAuthStore } from "../store/auth";
+import { useAuthStore } from "../store/use-auth.store";
 
 export const ApiService = axios.create(axiosConfig);
 

@@ -1,18 +1,15 @@
 import styles from "./SearchCategory.module.scss";
 import { useParams } from "react-router-dom";
 import { Page } from "../../components/template/Page";
-import { SearchCategoryWrapper } from "../../components/search/SearchCategoryWrapper";
-import { CardWrapper } from "../../components/spec/CardWrapper/CardWrapper";
-import { BusinessType } from "../../types/business.type";
-import { useApi } from "../../hooks/useApi";
+import { SearchCategoryWrapper } from "../../components/search/SearchCategoryWrapper/SearchCategoryWrapper";
+import { CardWrapper } from "../../components/specific/CardWrapper/CardWrapper";
 import { Spinner } from "../../components/common/Spinner/Spinner";
+import { useBusinesses } from "../../api/business/queries/fetchBusinesses";
 
 export const SearchCategory = () => {
   const { category } = useParams();
 
-  const [businesses, { isLoading, error }] = useApi<BusinessType[] | undefined>(
-    "/businesses"
-  );
+  const { data: businesses, isLoading, isError, error } = useBusinesses();
 
   return (
     <Page>
@@ -33,7 +30,7 @@ export const SearchCategory = () => {
           )}
         </div>
 
-        {error && <p>{error.message}</p>}
+        {isError && <p>{error.message}</p>}
       </section>
     </Page>
   );

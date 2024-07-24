@@ -1,7 +1,7 @@
 import styles from "./BookingCard.module.scss";
 import { BookingType } from "../../types/booking.type";
-import { useBusiness } from "../../api/fetchBusinessById";
-import { formatDate } from "../../utils/format_date";
+import { useBusiness } from "../../api/business/queries/fetchBusinessById";
+import { formatDate } from "../../utils/format-date";
 
 type BookingCardProps = {
   booking: BookingType;
@@ -23,7 +23,7 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
   return (
     <section className={styles.bookingCard}>
       <div className={styles.imageContainer}>
-        <img src={business.images_url} alt="" />
+        <img src={business.images_url[0].url} alt="" />
       </div>
 
       <div className={styles.bookingDetailsContainer}>

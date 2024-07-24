@@ -1,4 +1,4 @@
-import { Navbar } from "../spec/Navbar/Navbar";
+import { Navbar } from "../specific/Navbar/Navbar";
 import styles from "./Page.module.scss";
 import { ReactNode } from "react";
 

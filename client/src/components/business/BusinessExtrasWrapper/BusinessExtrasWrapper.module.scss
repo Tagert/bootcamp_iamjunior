@@ -30,6 +30,14 @@
         display: flex;
         flex-wrap: wrap;
         gap: 2rem;
+        padding: 1rem 0.5rem;
+        border-radius: 0.6rem;
+        box-shadow: $dark-box-shadow $box-shadow-axis-top-left;
+        cursor: pointer;
+
+        &:hover {
+          box-shadow: $hover-box-shadow $box-shadow-axis-top-left-hover;
+        }
 
         .imageBox {
           border: 0.1rem solid $gray-color-025;
@@ -39,7 +47,7 @@
 
           img {
             object-fit: cover;
-            width: 14rem;
+            width: 12rem;
           }
         }
       }
@@ -106,12 +114,20 @@
       border: 0.1rem solid $gray-color-025;
       border-radius: 0.6rem;
       color: $grayish-text-color;
+
+      &:hover {
+        background-color: $gray-color-010;
+      }
     }
 
     .selected {
       background-color: $btn-color-focus;
       color: $white-text-color;
       border: 0.1rem solid $btn-color-focus;
+
+      &:hover {
+        background-color: $btn-color-selected-hover;
+      }
     }
   }
 

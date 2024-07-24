@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import { Button } from "../common/Button/Button";
-import { useLoginUser } from "../../api/loginUser";
+import { useLoginUser } from "../../api/auth/loginUser";
 import { LoginFormValues } from "../../types/user.types";
 import { loginValidationSchema } from "../../constants/yup.schemas";
 
