@@ -3,7 +3,7 @@ import eyeShow from "../../assets/eye_see_show_icon.svg";
 import eyeInactive from "../../assets/disable_eye_inactive_icon.svg";
 import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link, useLocation } from "react-router-dom";
 import { routes } from "../../routes/routes";
@@ -53,77 +53,74 @@ export const LoginForm = () => {
   };
 
   return (
-    <>
-      <ToastContainer />
-      <Formik
-        initialValues={initialValues}
-        validationSchema={loginValidationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ submitForm }) => (
-          <Form
-            className={styles.login_card}
-            onKeyDown={(e) => handleKeyDown(e, submitForm)}
-          >
-            <div className={styles.login_modal} id="loginModal">
-              <div className={styles.active_login}>
-                <h4>Welcome back</h4>
-                <p>Please enter your login and password!</p>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={loginValidationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ submitForm }) => (
+        <Form
+          className={styles.login_card}
+          onKeyDown={(e) => handleKeyDown(e, submitForm)}
+        >
+          <div className={styles.login_modal} id="loginModal">
+            <div className={styles.active_login}>
+              <h4>Welcome back</h4>
+              <p>Please enter your login and password!</p>
 
-                <div className={styles.input}>
-                  <div className={styles.username_box}>
-                    <Field
-                      name="email"
-                      type="email"
-                      placeholder="Your email"
-                      autoComplete="on"
-                    />
-                  </div>
-                  <ErrorMessage
+              <div className={styles.input}>
+                <div className={styles.username_box}>
+                  <Field
                     name="email"
-                    component="div"
-                    className={styles.error}
+                    type="email"
+                    placeholder="Your email"
+                    autoComplete="on"
                   />
                 </div>
-
-                <div className={styles.input}>
-                  <div className={styles.password_box}>
-                    <Field
-                      name="password"
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Your password"
-                    />
-                    <img
-                      className={styles.eyeIcon}
-                      src={showPassword ? eyeShow : eyeInactive}
-                      alt="show/hide password"
-                      onClick={() => setShowPassword(!showPassword)}
-                    />
-                  </div>
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className={styles.error}
-                  />
-                </div>
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className={styles.error}
+                />
               </div>
 
-              <div className={styles.btn_info}>
-                <Button
-                  type="submit"
-                  className={styles.loginBtn}
-                  title="Login"
-                  disabled={isPending}
+              <div className={styles.input}>
+                <div className={styles.password_box}>
+                  <Field
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Your password"
+                  />
+                  <img
+                    className={styles.eyeIcon}
+                    src={showPassword ? eyeShow : eyeInactive}
+                    alt="show/hide password"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                </div>
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={styles.error}
                 />
               </div>
             </div>
 
-            <Link to={routes.REGISTER} className={styles.login}>
-              Don't have an account? Sign up
-            </Link>
-          </Form>
-        )}
-      </Formik>
-    </>
+            <div className={styles.btn_info}>
+              <Button
+                type="submit"
+                className={styles.loginBtn}
+                title="Login"
+                disabled={isPending}
+              />
+            </div>
+          </div>
+
+          <Link to={routes.REGISTER} className={styles.login}>
+            Don't have an account? Sign up
+          </Link>
+        </Form>
+      )}
+    </Formik>
   );
 };

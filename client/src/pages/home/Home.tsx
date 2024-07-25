@@ -7,7 +7,7 @@ import { Spinner } from "../../components/common/Spinner/Spinner";
 import { useBusinesses } from "../../api/business/queries/fetchBusinesses";
 import { useCategories } from "../../api/category/queries/fetchCategories";
 import { useLocation } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { PopularBusinessesWrapper } from "../../components/home/PopularBusinessesWrapper/PopularBusinessesWrapper";
 
 type LocationState = {
@@ -42,7 +42,6 @@ export const Home = () => {
 
   return (
     <Page>
-      <ToastContainer />
       <main className={styles.homePage}>
         <Hero onSearch={onSearch} setOnSearch={setOnSearch} />
         {!isCategoriesLoading ? (

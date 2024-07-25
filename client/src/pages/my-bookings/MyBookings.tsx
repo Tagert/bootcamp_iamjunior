@@ -10,6 +10,7 @@ import { BookingType } from "../../types/booking.type";
 
 export const MyBookings = () => {
   const { id } = useParams<{ id: string }>();
+
   const [activeTab, setActiveTab] = useState<string | null>("booked");
 
   const validId = id ?? "";

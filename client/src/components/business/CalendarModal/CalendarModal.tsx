@@ -1,6 +1,7 @@
 import styles from "./CalendarModal.module.scss";
 import calendar_modal from "../../../styles/mantine_ui/calendar-modal.module.scss";
 import { useState } from "react";
+import { toast } from "react-toastify";
 import { Modal, Button } from "@mantine/core";
 import { DatePicker } from "@mantine/dates";
 import { WorkingHoursType } from "../../../types/business.type";
@@ -49,6 +50,8 @@ export const CalendarModal = ({
 
       insertBooking({ booking: newBooking, business_id });
       closeModal();
+
+      toast.success(`Success, Date: ${formattedDate} Time: ${selectedTime}`);
     } else {
       console.error(
         "Business ID, selected date, or selected time is not available",

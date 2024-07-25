@@ -32,7 +32,7 @@ export const useInsertBooking = (): UseMutationResult<
       insertBooking(booking, business_id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [INSERT_BOOKING] });
-      queryClient.invalidateQueries({ queryKey: [USER_BOOKINGS] });
+      queryClient.refetchQueries({ queryKey: [USER_BOOKINGS] });
     },
   });
 };

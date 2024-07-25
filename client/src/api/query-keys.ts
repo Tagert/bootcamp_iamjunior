@@ -10,6 +10,8 @@ export const LOGIN_USER_QUERY_KEY = "loginUser";
 
 export const INSERT_BOOKING = "insertBooking";
 
+export const DELETE_BOOKING = "deleteBooking";
+
 export const USER_BOOKINGS = "bookingsByUserId";
 
 export const SIMILAR_BUSINESSES = "similarBusinesses";
