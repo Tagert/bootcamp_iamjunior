@@ -8,7 +8,7 @@ import { ContactType } from "../../../types/contact.type";
 import { useNavigate } from "react-router-dom";
 import { ImagesType } from "../../../types/business.type";
 
-type CardProp = {
+export type CardProp = {
   id: string;
   user_id: string;
   name: string;
