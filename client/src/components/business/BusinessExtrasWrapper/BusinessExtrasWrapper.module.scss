@@ -31,19 +31,18 @@
         flex-wrap: wrap;
         gap: 2rem;
         padding: 1rem 0.5rem;
-        border-radius: 0.6rem;
-        box-shadow: $dark-box-shadow $box-shadow-axis-top-left;
         cursor: pointer;
-
-        &:hover {
-          box-shadow: $hover-box-shadow $box-shadow-axis-top-left-hover;
-        }
 
         .imageBox {
           border: 0.1rem solid $gray-color-025;
           border-radius: 0.6rem;
+          box-shadow: $dark-box-shadow $box-shadow-axis-bottom-right;
           overflow: hidden;
           cursor: pointer;
+
+          &:hover {
+            box-shadow: $hover-box-shadow $box-shadow-axis-bottom-right-hover;
+          }
 
           img {
             object-fit: cover;
@@ -65,7 +64,7 @@
       justify-content: center;
       align-items: center;
       gap: 1rem;
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1rem;
 
       p {
         font-size: 1.05rem;
@@ -85,66 +84,7 @@
       .similarBusinessList {
         display: flex;
         flex-direction: column;
-        gap: 2rem;
-      }
-    }
-  }
-}
-
-.modalContent {
-  h4 {
-    margin-top: 2rem;
-    font-weight: 600;
-  }
-
-  h5 {
-    margin-top: 2rem;
-    font-weight: 600;
-  }
-  .timeSlots {
-    margin: 2rem 0rem;
-
-    button {
-      width: 5rem;
-      padding: 0.2rem 0.6rem;
-      margin: 0.5rem;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: 0.2rem;
-      border: 0.1rem solid $gray-color-025;
-      border-radius: 0.6rem;
-      color: $grayish-text-color;
-
-      &:hover {
-        background-color: $gray-color-010;
-      }
-    }
-
-    .selected {
-      background-color: $btn-color-focus;
-      color: $white-text-color;
-      border: 0.1rem solid $btn-color-focus;
-
-      &:hover {
-        background-color: $btn-color-selected-hover;
-      }
-    }
-  }
-
-  .modalActions {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 2rem;
-
-    button {
-      border-radius: 0.6rem;
-
-      &:nth-child(1) {
-        margin-left: 2rem;
-      }
-
-      &:nth-child(2) {
-        margin-right: 2rem;
+        gap: 1.5rem;
       }
     }
   }

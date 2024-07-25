@@ -1,12 +1,13 @@
 .SimilarBusinessesCard {
   display: flex;
   gap: 1rem;
-  padding: 0.5rem;
+  padding: 0.6rem;
   border-radius: 0.6rem;
+  outline: 0.2rem solid $gray-color-010;
   cursor: pointer;
 
   &:hover {
-    outline: 0.2rem solid $gray-color-010;
+    outline: 0.2rem solid $gray-color-025;
   }
 
   .imageBox {
@@ -17,7 +18,7 @@
       width: 9rem;
       height: 8rem;
       object-fit: cover;
-      opacity: 0.8;
+      opacity: 0.9;
     }
   }
 

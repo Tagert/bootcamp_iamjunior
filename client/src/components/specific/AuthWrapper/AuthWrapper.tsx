@@ -2,9 +2,9 @@ import { ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../store/use-auth.store";
 
-interface AuthWrapperProps {
+type AuthWrapperProps = {
   children: ReactNode;
-}
+};
 
 export const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const navigate = useNavigate();
