@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { WorkingHoursType } from "../types/business.type";
+import { BookingType } from "../types/booking.type";
 import { generateTimeSlots } from "./generate-time-slots";
 import { isPastDate } from "./is-past-date";
 
@@ -8,6 +9,7 @@ type HandleDateChangeParams = {
   working_hours: WorkingHoursType;
   setSelectedDate: (date: Date | null) => void;
   setTimeSlots: (slots: string[]) => void;
+  bookings: BookingType[];
 };
 
 export const handleDateChange = ({
@@ -15,6 +17,7 @@ export const handleDateChange = ({
   working_hours,
   setSelectedDate,
   setTimeSlots,
+  bookings,
 }: HandleDateChangeParams) => {
   setSelectedDate(date);
 
@@ -32,7 +35,18 @@ export const handleDateChange = ({
       dayHours.close
     ) {
       const slots = generateTimeSlots(dayHours.open, dayHours.close);
-      const validSlots = slots.filter((slot) => !isPastDate(slot, date));
+
+      const reservedSlots = bookings
+        .filter(
+          (booking) => booking.booking_date === format(date, "yyyy-MM-dd")
+        )
+        .map((booking) => booking.time);
+
+      console.log("slots:", reservedSlots);
+
+      const validSlots = slots.filter(
+        (slot) => !isPastDate(slot, date) && !reservedSlots.includes(slot)
+      );
 
       setTimeSlots(validSlots);
     } else {

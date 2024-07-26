@@ -9,6 +9,7 @@ import { WorkingHoursType } from "../../../types/business.type";
 import { useInsertBooking } from "../../../api/booking/mutation/insertBooking";
 import { formatDate } from ".././../../utils/format-date";
 import { handleDateChange } from "../../../utils/handle-date-change";
+import { useBusinessBookings } from "../../../api/booking/queries/fetchBookingsByBusiness";
 
 type CalendarModalProps = {
   business_id: string;
@@ -34,6 +35,7 @@ export const CalendarModal = ({
     // isError,
     // isSuccess,
   } = useInsertBooking();
+  const { data: bookings = [] } = useBusinessBookings(business_id);
 
   const closeModal = () => {
     setIsCalendarModalVisible(false);
@@ -96,6 +98,7 @@ export const CalendarModal = ({
                 working_hours,
                 setSelectedDate,
                 setTimeSlots,
+                bookings,
               })
             }
           />
