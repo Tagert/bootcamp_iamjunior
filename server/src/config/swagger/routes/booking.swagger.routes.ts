@@ -24,6 +24,34 @@
 
 /**
  * @swagger
+ * /bookings/business/{id}:
+ *   get:
+ *     summary: Retrieve all bookings for a business by id
+ *     tags: [Booking]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The id of the business
+ *     responses:
+ *       200:
+ *         description: A list of bookings for the specified business
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Booking'
+ *       404:
+ *         description: No bookings found for the specified business
+ *       500:
+ *         description: An error occurred during the getting process
+ */
+
+/**
+ * @swagger
  * /business/{business_id}/booking:
  *   post:
  *     summary: Create a new booking for a business
