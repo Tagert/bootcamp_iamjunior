@@ -1,4 +1,5 @@
 import styles from "./BookingCard.module.scss";
+import open_modal from "../../styles/mantine_ui/open-confirm-modal.module.scss";
 import { toast } from "react-toastify";
 import { AxiosError } from "axios";
 import { BookingType } from "../../types/booking.type";
@@ -7,6 +8,8 @@ import { formatDate } from "../../utils/format-date";
 import { ButtonImage } from "../common/ButtonImage/ButtonImage";
 import { useDeleteBooking } from "../../api/booking/mutation/deleteBooking";
 import { useAuthStore } from "../../store/use-auth.store";
+import { Text } from "@mantine/core";
+import { modals } from "@mantine/modals";
 
 type BookingCardProps = {
   booking: BookingType;
@@ -28,20 +31,53 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
       return;
     }
 
-    deleteBooking(
-      { booking_id: booking.id, user_id: user.id },
-      {
-        onSuccess: () => {
-          toast.success(`Booking was canceled successfully`);
-        },
-        onError: (error) => {
-          const axiosError = error as AxiosError<{ message: string }>;
-          toast.error(
-            axiosError.response?.data?.message || "An error occurred"
+    modals.openConfirmModal({
+      title: "Cancel Booking",
+      centered: true,
+      children: (
+        <Text size="lg">
+          Are you sure you want to cancel this booking? This action cannot be
+          undone.
+        </Text>
+      ),
+      labels: { confirm: "Cancel Booking", cancel: "No, don't cancel it" },
+      confirmProps: { color: "red" },
+      classNames: {
+        title: open_modal.title,
+        content: open_modal.content,
+        body: open_modal.body,
+      },
+      onCancel: () =>
+        toast("Till the next time", {
+          position: "bottom-right",
+          autoClose: 1000,
+          hideProgressBar: true,
+          draggable: true,
+          progress: undefined,
+        }),
+      onConfirm: () => {
+        if (booking.id && user.id) {
+          deleteBooking(
+            { booking_id: booking.id, user_id: user.id },
+            {
+              onSuccess: () => {
+                toast.success(
+                  `Booking cancellation request has been successful.`
+                );
+              },
+              onError: (error) => {
+                const axiosError = error as AxiosError<{ message: string }>;
+                toast.error(
+                  axiosError.response?.data?.message || "An error occurred"
+                );
+              },
+            }
           );
-        },
-      }
-    );
+        } else {
+          console.error("Booking ID or User ID is missing");
+        }
+      },
+    });
   };
 
   if (!business) {
