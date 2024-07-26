@@ -35,36 +35,36 @@ export const PopularBusinessesWrapper = ({
 
   return (
     <section className={styles.popularBusinessesWrapper}>
-      <div className={styles.cardHolder}>
-        <Carousel
-          classNames={{
-            container: carousel.container,
-            indicator: carousel.indicator,
-            slide: carousel.slide,
-          }}
-          withIndicators
-          skipSnaps={true}
-          slidesToScroll={"auto"}
-          speed={3}
-          controlSize={45}
-          containScroll={"keepSnaps"}
-          controlsOffset={"lg"}
-          slideSize={{ base: "100%", sm: "50%", md: "25%" }}
-        >
-          {filteredBusinesses.map((business) => (
+      <Carousel
+        classNames={{
+          container: carousel.container,
+          indicator: carousel.indicator,
+          slide: carousel.slide,
+          viewport: carousel.viewport,
+          root: carousel.root,
+        }}
+        withIndicators
+        slidesToScroll={4}
+        speed={3}
+        controlSize={45}
+        containScroll={"trimSnaps"}
+        controlsOffset={"lg"}
+        slideSize={{ base: "100%", sm: "50%", md: "25%" }}
+      >
+        {filteredBusinesses.map((business) => (
+          <Carousel.Slide key={business.id}>
             <PopularBusinessCard
-              key={business.id}
               id={business.id ?? "unknown-id"}
               user_id={business.user_id ?? "unknown-user-id"}
               {...business}
             />
-          ))}
+          </Carousel.Slide>
+        ))}
 
-          {!filteredBusinesses?.length && (
-            <p>There is no businesses in this category</p>
-          )}
-        </Carousel>
-      </div>
+        {!filteredBusinesses?.length && (
+          <p>There is no businesses in this category</p>
+        )}
+      </Carousel>
     </section>
   );
 };

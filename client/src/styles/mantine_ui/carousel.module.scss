@@ -1,7 +1,7 @@
 .container {
   display: flex;
   gap: 1rem;
-  width: 90rem;
+  max-width: 90rem;
   padding: 2rem 0rem;
 }
 
@@ -10,4 +10,5 @@
 }
 
 .slide {
+  max-width: 21.75rem;
 }

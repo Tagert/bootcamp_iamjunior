@@ -1,16 +1,10 @@
 .popularBusinessesWrapper {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   max-width: 90rem;
   margin-left: auto;
   margin-right: auto;
   gap: 2rem;
   padding: 2rem 0rem;
-
-  .cardHolder {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-  }
 }

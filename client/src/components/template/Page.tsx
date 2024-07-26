@@ -10,7 +10,7 @@ type PageProps = {
 export const Page = ({ children }: PageProps) => {
   return (
     <>
-      <ToastContainer />
+      <ToastContainer autoClose={2000} />
       <main className={styles.container}>
         <Navbar />
 

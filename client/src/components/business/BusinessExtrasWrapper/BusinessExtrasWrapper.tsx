@@ -88,6 +88,13 @@ export const BusinessExtrasWrapper = ({
           onClick={openModal}
         />
 
+        <CalendarModal
+          business_id={business_id}
+          working_hours={working_hours}
+          isCalendarModalVisible={isCalendarModalVisible}
+          setIsCalendarModalVisible={setIsCalendarModalVisible}
+        />
+
         <div className={styles.similarBusinessWrapper}>
           <h3>Similar business</h3>
           {isLoading && <Spinner />}
@@ -119,13 +126,6 @@ export const BusinessExtrasWrapper = ({
             )}
         </div>
       </div>
-
-      <CalendarModal
-        business_id={business_id}
-        working_hours={working_hours}
-        isCalendarModalVisible={isCalendarModalVisible}
-        setIsCalendarModalVisible={setIsCalendarModalVisible}
-      />
 
       {enlargedImage && (
         <Modal
