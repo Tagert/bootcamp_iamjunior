@@ -69,7 +69,7 @@ describe("Card", () => {
     fireEvent.click(bookButton);
     expect(navigateMock).toHaveBeenCalledTimes(1);
     expect(navigateMock).toHaveBeenCalledWith(
-      routes.BUSINESS_ID.url(props.id).toLocaleLowerCase()
+      `/${routes.BUSINESS_ID.url(props.id).toLocaleLowerCase()}`
     );
   });
 });

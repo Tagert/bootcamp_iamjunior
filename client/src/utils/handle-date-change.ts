@@ -1,6 +1,7 @@
-import { format, isBefore, startOfDay } from "date-fns";
+import { format } from "date-fns";
 import { WorkingHoursType } from "../types/business.type";
 import { generateTimeSlots } from "./generate-time-slots";
+import { isPastDate } from "./is-past-date";
 
 type HandleDateChangeParams = {
   date: Date | null;
@@ -9,20 +10,12 @@ type HandleDateChangeParams = {
   setTimeSlots: (slots: string[]) => void;
 };
 
-const isPastDate = (date: Date) => {
-  return isBefore(startOfDay(date), startOfDay(new Date()));
-};
-
 export const handleDateChange = ({
   date,
   working_hours,
   setSelectedDate,
   setTimeSlots,
 }: HandleDateChangeParams) => {
-  if (date && isPastDate(date)) {
-    return;
-  }
-
   setSelectedDate(date);
 
   if (date) {
@@ -30,7 +23,6 @@ export const handleDateChange = ({
       date,
       "EEEE"
     ).toLowerCase() as keyof WorkingHoursType;
-
     const dayHours = working_hours[dayOfWeek];
 
     if (
@@ -40,8 +32,9 @@ export const handleDateChange = ({
       dayHours.close
     ) {
       const slots = generateTimeSlots(dayHours.open, dayHours.close);
+      const validSlots = slots.filter((slot) => !isPastDate(slot, date));
 
-      setTimeSlots(slots);
+      setTimeSlots(validSlots);
     } else {
       setTimeSlots([]);
     }

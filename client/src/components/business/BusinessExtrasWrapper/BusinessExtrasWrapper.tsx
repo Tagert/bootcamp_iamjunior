@@ -1,13 +1,11 @@
 import styles from "./BusinessExtrasWrapper.module.scss";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Modal } from "@mantine/core";
 import { ImagesType, WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
-import { Spinner } from "../../common/Spinner/Spinner";
 import { useSimilarBusiness } from "../../../api/business/queries/fetchSimilarBusinesses";
-import { SimilarBusinessesCard } from "../SimilarBusinessesCard/SimilarBusinessesCard";
 import { CalendarModal } from "../CalendarModal/CalendarModal";
+import { SimilarBusinessWrapper } from "../SimilarBusinessesWrapper/SimilarBusinessesWrapper";
 
 type BusinessExtrasWrapperProps = {
   className?: string;
@@ -24,8 +22,6 @@ export const BusinessExtrasWrapper = ({
   images_url,
   working_hours,
 }: BusinessExtrasWrapperProps) => {
-  const navigate = useNavigate();
-
   const {
     data: similarBusinesses,
     isLoading,
@@ -38,10 +34,6 @@ export const BusinessExtrasWrapper = ({
 
   const openModal = () => {
     setIsCalendarModalVisible(true);
-  };
-
-  const handleCardClick = (id: string) => {
-    navigate(`/business/${id}`);
   };
 
   const handleImageClick = (image: ImagesType) => {
@@ -95,36 +87,13 @@ export const BusinessExtrasWrapper = ({
           setIsCalendarModalVisible={setIsCalendarModalVisible}
         />
 
-        <div className={styles.similarBusinessWrapper}>
-          <h3>Similar business</h3>
-          {isLoading && <Spinner />}
-          {error && <p>Error loading similar businesses: {error.message}</p>}
-          {!isLoading &&
-            !error &&
-            similarBusinesses &&
-            similarBusinesses.length > 0 && (
-              <div className={styles.similarBusinessList}>
-                {similarBusinesses.map((similarBusiness) => (
-                  <SimilarBusinessesCard
-                    key={similarBusiness.id}
-                    className={styles.similarBusinessCard}
-                    id={similarBusiness.id as string}
-                    name={similarBusiness.name}
-                    provider={similarBusiness.provider}
-                    address={similarBusiness.address}
-                    images_url={similarBusiness.images_url}
-                    onClick={handleCardClick}
-                  />
-                ))}
-              </div>
-            )}
-          {!isLoading &&
-            !error &&
-            similarBusinesses &&
-            similarBusinesses.length === 0 && (
-              <p>No similar businesses found.</p>
-            )}
-        </div>
+        {similarBusinesses && (
+          <SimilarBusinessWrapper
+            similarBusinesses={similarBusinesses}
+            isLoading={isLoading}
+            error={error}
+          />
+        )}
       </div>
 
       {enlargedImage && (
