@@ -56,7 +56,7 @@ export const Card = ({
   };
 
   const handleNavigateToBusinessId = () => {
-    navigate(routes.BUSINESS_ID.url(id).toLocaleLowerCase());
+    navigate(`/${routes.BUSINESS_ID.url(id).toLocaleLowerCase()}`);
   };
 
   return (
