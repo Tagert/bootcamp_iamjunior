@@ -3,7 +3,7 @@ import { BookingModel } from "../../../models/booking.model.js";
 import { BusinessModel } from "../../../models/business.model.js";
 import { formatDate } from "../../../utils/helpers/format-date.js";
 
-export const GET_BUSINESS_ID_BOOKING_BY_DATE: RequestHandler = async (req, res) => {
+export const GET_BUSINESS_ID_BOOKINGS_BY_DATE: RequestHandler = async (req, res) => {
   try {
     const { id, date } = req.params;
 
