@@ -28,14 +28,8 @@ export const CalendarModal = ({
 
   const [timeSlots, setTimeSlots] = useState<string[]>([]);
 
-  //TODO: implement loading, error handling and add success message
-  const {
-    mutate: insertBooking,
-    // isPending,
-    // isError,
-    // isSuccess,
-  } = useInsertBooking();
-  const { data: bookings = [] } = useBusinessBookings(business_id);
+  const { mutate: insertBooking } = useInsertBooking();
+  const { data: bookings = [], refetch } = useBusinessBookings(business_id);
 
   const closeModal = () => {
     setIsCalendarModalVisible(false);
@@ -51,10 +45,18 @@ export const CalendarModal = ({
         time: selectedTime,
       };
 
-      insertBooking({ booking: newBooking, business_id });
-      closeModal();
-
-      toast.success(`Success, Date: ${formattedDate} Time: ${selectedTime}`);
+      insertBooking(
+        { booking: newBooking, business_id },
+        {
+          onSuccess: () => {
+            refetch();
+            closeModal();
+            toast.success(
+              `Success, Date: ${formattedDate} Time: ${selectedTime}`
+            );
+          },
+        }
+      );
     } else {
       toast.error("Please select a booking date and time.");
       console.error(

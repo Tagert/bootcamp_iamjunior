@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { WorkingHoursType } from "../types/business.type";
 import { BookingType } from "../types/booking.type";
 import { generateTimeSlots } from "./generate-time-slots";
@@ -35,14 +35,18 @@ export const handleDateChange = ({
       dayHours.close
     ) {
       const slots = generateTimeSlots(dayHours.open, dayHours.close);
+      const selectedDateString = format(date, "yyyy-MM-dd");
 
       const reservedSlots = bookings
-        .filter(
-          (booking) => booking.booking_date === format(date, "yyyy-MM-dd")
-        )
-        .map((booking) => booking.time);
+        .filter((booking) => {
+          const formattedBookingDate = format(
+            parseISO(booking.booking_date),
+            "yyyy-MM-dd"
+          );
 
-      console.log("slots:", reservedSlots);
+          return formattedBookingDate === selectedDateString;
+        })
+        .map((booking) => booking.time);
 
       const validSlots = slots.filter(
         (slot) => !isPastDate(slot, date) && !reservedSlots.includes(slot)

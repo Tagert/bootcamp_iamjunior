@@ -10,12 +10,14 @@ import { useDeleteBooking } from "../../api/booking/mutation/deleteBooking";
 import { useAuthStore } from "../../store/use-auth.store";
 import { Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
+import { useNavigate } from "react-router-dom";
 
 type BookingCardProps = {
   booking: BookingType;
 };
 
 export const BookingCard = ({ booking }: BookingCardProps) => {
+  const navigate = useNavigate();
   const { data: business } = useBusiness(booking.business_id ?? "");
   const { mutate: deleteBooking, isPending } = useDeleteBooking();
   const { user } = useAuthStore();
@@ -80,6 +82,12 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
     });
   };
 
+  const handleNavigateToBusinessCard = () => {
+    if (business?.id) {
+      navigate(`/business/${business.id}`);
+    }
+  };
+
   if (!business) {
     return (
       <section className={styles.bookingCard}>
@@ -92,7 +100,10 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
 
   return (
     <section className={styles.bookingCard}>
-      <div className={styles.imageContainer}>
+      <div
+        className={styles.imageContainer}
+        onClick={handleNavigateToBusinessCard}
+      >
         <img src={business.images_url[0].url} alt="" />
       </div>
 
