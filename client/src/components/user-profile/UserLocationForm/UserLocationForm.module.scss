@@ -1,0 +1,8 @@
+@use "../../../styles/form-styles";
+
+.userAddress {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 600px;
+}

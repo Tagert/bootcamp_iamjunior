@@ -1,0 +1,32 @@
+.userProfile {
+  max-width: 90rem;
+  margin: auto;
+  padding: 0 4rem;
+
+  .titleContainer {
+    margin-top: 4rem;
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .formsContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    .formHolder {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 2rem;
+      border: solid 0.1rem $gray-color-025;
+      border-radius: 0.6rem;
+      width: 25rem;
+    }
+  }
+}

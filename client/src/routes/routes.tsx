@@ -5,6 +5,7 @@ export const routes = {
   CONTACT_US: "/contact-us",
   LOGIN: "/login",
   REGISTER: "/register",
+  USER_PROFILE: "/user/profile",
   SEARCH_CATEGORY: {
     path: "/search/:category",
     url: (category: string) => `search/${category}`,

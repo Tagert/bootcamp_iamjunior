@@ -20,6 +20,10 @@ const UserManage = () => {
     navigate(routes.USER_BOOKINGS.url(user.id).toLocaleLowerCase());
   };
 
+  const handleNavigateToProfile = () => {
+    navigate(routes.USER_PROFILE);
+  };
+
   const toggleUserBox = () => {
     setUserBoxVisible(!isUserBoxVisible);
   };
@@ -42,6 +46,14 @@ const UserManage = () => {
             >
               <div className={styles.signOutHolder}>
                 <h3>{user.name}</h3>
+
+                <button
+                  className={styles.userProfile}
+                  onClick={handleNavigateToProfile}
+                >
+                  <p>Profile</p>
+                </button>
+
                 <button
                   className={styles.myBookings}
                   onClick={handleNavigateToMyBookings}

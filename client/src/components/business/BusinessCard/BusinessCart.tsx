@@ -2,6 +2,7 @@ import styles from "./BusinessCard.module.scss";
 import modal_style from "../../../styles/mantine_ui/modal.module.scss";
 import uploadIcon from "../../../assets/upload_icon.svg";
 import { Modal } from "@mantine/core";
+import { toast } from "react-toastify";
 import { Tooltip } from "@mantine/core";
 import { ContactType } from "../../../types/contact.type";
 import { ImagesType, WorkingHoursType } from "../../../types/business.type";
@@ -36,6 +37,16 @@ export const BusinessCard = ({
 
   const firstOpenDay = findFirstOpenDay(working_hours);
 
+  //TODO: Implement in a server an API endpoint for sending messages and logic for it.
+  const handleSendEmail = () => {
+    const businessEmail = contacts.find((contact) => contact.email)?.email;
+    if (businessEmail) {
+      window.location.href = `mailto:${businessEmail}`;
+    } else {
+      toast.error("No email address available for the business");
+    }
+  };
+
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -57,7 +68,11 @@ export const BusinessCard = ({
           <div className={styles.serviceBox}>
             <h2>{name}</h2>
 
-            <ButtonImage imgSrc={uploadIcon} className={styles.uploadBtn} />
+            <ButtonImage
+              imgSrc={uploadIcon}
+              className={styles.uploadBtn}
+              onClick={handleSendEmail}
+            />
           </div>
 
           {contacts.map((contact, index) => (

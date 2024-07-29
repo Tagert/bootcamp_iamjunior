@@ -15,6 +15,7 @@ import { NotFound } from "../pages/not-found/NotFound";
 import { Business } from "../pages/business/Business";
 import { AuthWrapper } from "../components/specific/AuthWrapper/AuthWrapper";
 import { MyBookings } from "../pages/my-bookings/MyBookings";
+import { UserProfile } from "../pages/user-profile/UserProfile";
 
 const protectedRoute = (element: JSX.Element) => (
   <AuthWrapper>{element}</AuthWrapper>
@@ -44,6 +45,10 @@ const routeObjects = [
   {
     path: routes.REGISTER,
     element: <Register />,
+  },
+  {
+    path: routes.USER_PROFILE,
+    element: <UserProfile />,
   },
   {
     path: routes.SEARCH_CATEGORY.path,
