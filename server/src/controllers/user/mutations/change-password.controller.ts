@@ -2,6 +2,8 @@ import bcrypt from "bcrypt";
 import type { RequestHandler } from "express";
 import { UserModel } from "../../../models/user.model";
 import { validatePassword } from "../../../utils/validations/password.validation";
+import { handleError } from "../../../utils/handleError";
+import { hashPassword } from "../../../utils/hashPassword";
 
 export const CHANGE_PASSWORD: RequestHandler = async (req, res) => {
   const { id } = req.params;
@@ -26,8 +28,7 @@ export const CHANGE_PASSWORD: RequestHandler = async (req, res) => {
       return res.status(400).json({ message: passwordValidation });
     }
 
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(newPassword, salt);
+    user.password = await hashPassword(newPassword);
 
     const response = await user.save();
 
@@ -36,12 +37,6 @@ export const CHANGE_PASSWORD: RequestHandler = async (req, res) => {
       message: `Password (${req.body.email}) was changed successfully`,
     });
   } catch (err: unknown) {
-    const errorMessage = err instanceof Error ? err.message : String(err);
-    console.error("Error during changing password:", errorMessage);
-
-    return res.status(500).json({
-      error: "An error occurred during the changing password process.",
-      details: errorMessage,
-    });
+    handleError(err, res, "changing password");
   }
 };

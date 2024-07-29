@@ -15,6 +15,11 @@ export type LoginResponseType = {
   user: LoginUserResponse;
 };
 
+export type ChangePasswordResponse = {
+  user: UserType;
+  message: string;
+};
+
 export type RegisterFormValues = {
   name: string;
   email: string;
@@ -27,18 +32,11 @@ export type LoginFormValues = {
   password: string;
 };
 
-// type UserBody = {
-//   name: string;
-//   email: string;
-//   password: string;
-//   role: string;
-// };
-
 export type UserType = {
   id?: number;
   name?: string;
   email: string;
-  password: string;
+  password?: string;
   role?: string;
   created_at?: Date;
   updated_at?: Date;

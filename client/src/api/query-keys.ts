@@ -17,3 +17,5 @@ export const USER_BOOKINGS = "bookingsByUserId";
 export const BUSINESS_BOOKINGS = "bookingsByBusinessId";
 
 export const SIMILAR_BUSINESSES = "similarBusinesses";
+
+export const CHANGE_PASSWORD = "changePassword";

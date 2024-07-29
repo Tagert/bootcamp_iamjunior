@@ -1,14 +1,20 @@
 import styles from "./UserPasswordChangeForm.module.scss";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useChangePassword } from "../../../api/user/mutation/changePassword";
+import { toast } from "react-toastify";
 
 type UserPasswordChangeFormProps = {
   className?: string;
+  user_id: string | null;
 };
 
 export const UserPasswordChangeForm = ({
   className,
+  user_id,
 }: UserPasswordChangeFormProps) => {
+  const changePasswordMutation = useChangePassword();
+
   const passwordFormik = useFormik({
     initialValues: {
       currentPassword: "",
@@ -22,9 +28,26 @@ export const UserPasswordChangeForm = ({
         .oneOf([Yup.ref("newPassword")], "Passwords must match")
         .required("Required"),
     }),
-    onSubmit: (values) => {
-      // eslint-disable-next-line no-console
-      console.log("Password Changed:", values);
+    onSubmit: async (values, { resetForm }) => {
+      if (!user_id) {
+        toast.error("User information is not available. Please log in again.");
+        return;
+      }
+
+      try {
+        await changePasswordMutation.mutateAsync({
+          id: user_id,
+          currentPassword: values.currentPassword,
+          newPassword: values.newPassword,
+        });
+
+        toast.success("Password changed successfully");
+        resetForm();
+      } catch {
+        toast.error(
+          "Failed to change password. Please check your current password and try again."
+        );
+      }
     },
   });
 
