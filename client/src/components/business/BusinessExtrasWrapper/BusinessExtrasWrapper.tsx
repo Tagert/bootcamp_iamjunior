@@ -10,6 +10,7 @@ import { SimilarBusinessWrapper } from "../SimilarBusinessesWrapper/SimilarBusin
 type BusinessExtrasWrapperProps = {
   className?: string;
   business_id: string;
+  business_category: string;
   description: string;
   images_url: ImagesType[];
   working_hours: WorkingHoursType;
@@ -18,6 +19,7 @@ type BusinessExtrasWrapperProps = {
 export const BusinessExtrasWrapper = ({
   className,
   business_id,
+  business_category,
   description,
   images_url,
   working_hours,
@@ -82,6 +84,7 @@ export const BusinessExtrasWrapper = ({
 
         <CalendarModal
           business_id={business_id}
+          business_category={business_category}
           working_hours={working_hours}
           isCalendarModalVisible={isCalendarModalVisible}
           setIsCalendarModalVisible={setIsCalendarModalVisible}

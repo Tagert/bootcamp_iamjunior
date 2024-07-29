@@ -27,6 +27,7 @@ export const BusinessWrapper = ({
           <BusinessExtrasWrapper
             className={styles.businessExtrasWrapper}
             business_id={business_params_id}
+            business_category={business.category}
             description={business.description}
             images_url={business.images_url}
             working_hours={business.working_hours}

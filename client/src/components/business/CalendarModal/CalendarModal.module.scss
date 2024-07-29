@@ -1,13 +1,19 @@
 .modalContent {
+  h3 {
+    font-weight: 600;
+  }
+
   h4 {
+    font-size: 1.1rem;
     margin-top: 2rem;
     font-weight: 600;
   }
 
   h5 {
     margin-top: 2rem;
-    font-weight: 600;
+    font-weight: 500;
   }
+
   .timeSlots {
     margin: 2rem 0rem;
 
@@ -38,6 +44,22 @@
     }
   }
 
+  .noTimeSlotsTex {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 3rem 1rem 1rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 0.05rem;
+
+    span {
+      font-weight: 400;
+      text-align: justify;
+    }
+  }
+
   .modalActions {
     display: flex;
     justify-content: space-between;
@@ -54,5 +76,14 @@
         margin-right: 2rem;
       }
     }
+  }
+}
+
+.modalText {
+  text-align: justify;
+  line-height: 2;
+
+  span {
+    font-weight: 500;
   }
 }

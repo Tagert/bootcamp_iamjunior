@@ -20,7 +20,7 @@ export const SimilarBusinessWrapper = ({
     navigate(`/business/${id}`);
   };
   return (
-    <section className={styles.similarBusinessesWrapper}>
+    <div className={styles.similarBusinessWrapper}>
       <h3>Similar business</h3>
 
       {isLoading && <Spinner />}
@@ -49,6 +49,6 @@ export const SimilarBusinessWrapper = ({
         !error &&
         similarBusinesses &&
         similarBusinesses.length === 0 && <p>No similar businesses found.</p>}
-    </section>
+    </div>
   );
 };

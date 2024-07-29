@@ -1,9 +1,11 @@
 import styles from "./CalendarModal.module.scss";
 import calendar_modal from "../../../styles/mantine_ui/calendar-modal.module.scss";
+import open_modal from "../../../styles/mantine_ui/open-confirm-modal.module.scss";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { addHours } from "date-fns";
-import { Modal, Button } from "@mantine/core";
+import { Modal, Button, Text } from "@mantine/core";
+import { modals } from "@mantine/modals";
 import { DatePicker } from "@mantine/dates";
 import { WorkingHoursType } from "../../../types/business.type";
 import { useInsertBooking } from "../../../api/booking/mutation/insertBooking";
@@ -13,12 +15,14 @@ import { useBusinessBookings } from "../../../api/booking/queries/fetchBookingsB
 
 type CalendarModalProps = {
   business_id: string;
+  business_category: string;
   working_hours: WorkingHoursType;
   isCalendarModalVisible: boolean;
   setIsCalendarModalVisible: (state: boolean) => void;
 };
 export const CalendarModal = ({
   business_id,
+  business_category,
   working_hours,
   isCalendarModalVisible,
   setIsCalendarModalVisible,
@@ -35,6 +39,44 @@ export const CalendarModal = ({
     setIsCalendarModalVisible(false);
     setSelectedDate(null);
     setSelectedTime(null);
+    setTimeSlots([]);
+  };
+
+  const openConfirmationModal = () => {
+    if (business_id && selectedDate && selectedTime) {
+      const formattedDate = formatDate(selectedDate);
+      modals.openConfirmModal({
+        title: "Please confirm your booking",
+        children: (
+          <Text size="lg" className={styles.modalText}>
+            Are you sure you want to book a {business_category.toLowerCase()}{" "}
+            service on <span>{formattedDate}</span> at{" "}
+            <span>{selectedTime}</span> for this business?
+          </Text>
+        ),
+        labels: { confirm: "Confirm", cancel: "Cancel" },
+        onCancel: () =>
+          toast("Booking cancelled. Please choose another date.", {
+            position: "bottom-right",
+            autoClose: 1000,
+            hideProgressBar: true,
+            draggable: true,
+            progress: undefined,
+          }),
+        onConfirm: handleBooking,
+        classNames: {
+          title: open_modal.title,
+          content: open_modal.content,
+          body: open_modal.body,
+        },
+      });
+    } else {
+      toast.error("Please select a booking date and time.");
+      console.error(
+        "Business ID, selected date, or selected time is not available",
+        { business_id, selectedDate, selectedTime }
+      );
+    }
   };
 
   const handleBooking = () => {
@@ -51,9 +93,7 @@ export const CalendarModal = ({
           onSuccess: () => {
             refetch();
             closeModal();
-            toast.success(
-              `Success, Date: ${formattedDate} Time: ${selectedTime}`
-            );
+            toast.success("Booking confirmed! Your appointment is set.");
           },
         }
       );
@@ -122,13 +162,17 @@ export const CalendarModal = ({
               </div>
             </>
           ) : (
-            <p>
-              No time slots available for the selected date. The business may be
-              closed on this day.
+            <p className={styles.noTimeSlotsTex}>
+              No available time slots.*
+              <span>
+                *This could be because you haven't selected a date yet, the
+                business is not operating on the chosen date, or the business is
+                fully booked. Please select a date to view available time slots.
+              </span>
             </p>
           )}
           <div className={styles.modalActions}>
-            <Button onClick={handleBooking} size="md">
+            <Button onClick={openConfirmationModal} size="md">
               Book Now
             </Button>
 
