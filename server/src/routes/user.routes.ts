@@ -1,5 +1,12 @@
 import express from "express";
-import { GET_ALL_USERS, SIGN_UP, LOG_IN, GET_USER_BY_ID, DELETE_USER_BY_ID } from "../controllers/user/index";
+import {
+  GET_ALL_USERS,
+  SIGN_UP,
+  LOG_IN,
+  GET_USER_BY_ID,
+  DELETE_USER_BY_ID,
+  CHANGE_PASSWORD,
+} from "../controllers/user/index";
 import { userAuth } from "../middleware/user-auth";
 import { validateTokenExpiration } from "../middleware/validate-token-expiration";
 
@@ -12,6 +19,8 @@ userRoutes.get("/protected", validateTokenExpiration, (req, res) => {
 userRoutes.post("/register", SIGN_UP);
 
 userRoutes.post("/login", LOG_IN);
+
+userRoutes.post("/change-password/:id", userAuth, CHANGE_PASSWORD);
 
 userRoutes.get("/users", GET_ALL_USERS);
 

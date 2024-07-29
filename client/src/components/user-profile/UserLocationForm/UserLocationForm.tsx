@@ -19,6 +19,7 @@ export const UserLocationForm = ({ className }: UserLocationFormProps) => {
       birthday: Yup.date().required("Required"),
     }),
     onSubmit: (values) => {
+      // eslint-disable-next-line no-console
       console.log("Address Updated:", values);
     },
   });

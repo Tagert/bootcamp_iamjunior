@@ -5,7 +5,10 @@ export const routes = {
   CONTACT_US: "/contact-us",
   LOGIN: "/login",
   REGISTER: "/register",
-  USER_PROFILE: "/user/profile",
+  USER_PROFILE: {
+    path: "/user/profile/:id",
+    url: (id: string) => `/user/profile/${id}`,
+  },
   SEARCH_CATEGORY: {
     path: "/search/:category",
     url: (category: string) => `search/${category}`,

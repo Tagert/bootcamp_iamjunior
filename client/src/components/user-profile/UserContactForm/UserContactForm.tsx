@@ -22,6 +22,7 @@ export const UserContactForm = ({ className }: UserContactFormProps) => {
       email: Yup.string().email("Invalid email address").required("Required"),
     }),
     onSubmit: (values) => {
+      // eslint-disable-next-line no-console
       console.log("Profile Updated:", values);
     },
   });

@@ -21,7 +21,7 @@ const UserManage = () => {
   };
 
   const handleNavigateToProfile = () => {
-    navigate(routes.USER_PROFILE);
+    navigate(routes.USER_PROFILE.url(user.id).toLocaleLowerCase());
   };
 
   const toggleUserBox = () => {

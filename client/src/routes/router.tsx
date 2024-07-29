@@ -47,7 +47,7 @@ const routeObjects = [
     element: <Register />,
   },
   {
-    path: routes.USER_PROFILE,
+    path: routes.USER_PROFILE.path,
     element: <UserProfile />,
   },
   {

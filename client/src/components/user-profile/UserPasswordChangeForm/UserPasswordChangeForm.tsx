@@ -23,7 +23,7 @@ export const UserPasswordChangeForm = ({
         .required("Required"),
     }),
     onSubmit: (values) => {
-      // Handle password change submission
+      // eslint-disable-next-line no-console
       console.log("Password Changed:", values);
     },
   });
