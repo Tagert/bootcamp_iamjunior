@@ -6,7 +6,7 @@ const CORS_POLICY = "no-cors";
 const ALLOW_ORIGIN = "*";
 
 const BASE_URL = PROD
-  ? "https://home-service-app-heroku-e3f44bc25426.herokuapp.com/"
+  ? "https://bootcamp-iamjunior.onrender.com"
   : import.meta.env.VITE_API_URL;
 
 export const axiosConfig: AxiosRequestConfig = {
