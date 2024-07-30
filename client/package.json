@@ -4,9 +4,10 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "start": "vite",
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "test": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
