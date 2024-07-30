@@ -23,10 +23,19 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      width: 28rem;
+      margin-top: 4rem;
       padding: 2rem;
       border: solid 0.1rem $gray-color-025;
       border-radius: 0.6rem;
-      width: 25rem;
     }
   }
+}
+
+.list {
+  width: 28rem;
+}
+
+.tabLabel {
+  font-size: 0.95rem;
 }
