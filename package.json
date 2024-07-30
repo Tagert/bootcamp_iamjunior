@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cd server && npm install && npm run build && npm start",
     "heroku-postbuild": "cd client && npm install && npm run build",
-    "deploy": "git push heroku main"
+    "deploy": "git push heroku master"
   },
   "engines": {
     "node": "20.x",
