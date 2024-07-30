@@ -6,7 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "types": ["vite/client", "jest", "node"],
+    "types": ["jest", "node"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -21,12 +21,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
-
-    //absolute import
-    // "baseUrl": "./src",
-    // "paths": {
-    //   "@/*": ["./*"]
-    // }
   },
   "include": ["src", "./jest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
