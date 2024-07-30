@@ -2,6 +2,7 @@ import { handleDateChange } from "../handle-date-change";
 import { WorkingHoursType } from "../../types/business.type";
 import { generateTimeSlots } from "../generate-time-slots";
 import { format, startOfDay } from "date-fns";
+import { BookingType } from "../../types/booking.type";
 
 jest.mock("../generate-time-slots", () => ({
   generateTimeSlots: jest.fn(),
@@ -11,6 +12,7 @@ describe("handleDateChange", () => {
   let setSelectedDateMock: jest.Mock;
   let setTimeSlotsMock: jest.Mock;
   let workingHours: WorkingHoursType;
+  let bookings: BookingType[];
 
   beforeEach(() => {
     setSelectedDateMock = jest.fn();
@@ -24,6 +26,7 @@ describe("handleDateChange", () => {
       saturday: { status: "closed" },
       sunday: { status: "closed" },
     };
+    bookings = [];
   });
 
   test("should set selected date to null and time slots to empty array when date is null", () => {
@@ -32,6 +35,7 @@ describe("handleDateChange", () => {
       working_hours: workingHours,
       setSelectedDate: setSelectedDateMock,
       setTimeSlots: setTimeSlotsMock,
+      bookings: bookings,
     });
 
     expect(setSelectedDateMock).toHaveBeenCalledWith(null);
@@ -46,10 +50,11 @@ describe("handleDateChange", () => {
       working_hours: workingHours,
       setSelectedDate: setSelectedDateMock,
       setTimeSlots: setTimeSlotsMock,
+      bookings: bookings,
     });
 
-    expect(setSelectedDateMock).not.toHaveBeenCalled();
-    expect(setTimeSlotsMock).not.toHaveBeenCalled();
+    expect(setSelectedDateMock).toHaveBeenCalledWith(pastDate);
+    expect(setTimeSlotsMock).toHaveBeenCalledWith([]);
   });
 
   test("should generate time slots when date is in the future and working hours are open", () => {
@@ -62,6 +67,7 @@ describe("handleDateChange", () => {
       working_hours: workingHours,
       setSelectedDate: setSelectedDateMock,
       setTimeSlots: setTimeSlotsMock,
+      bookings: bookings,
     });
 
     expect(setSelectedDateMock).toHaveBeenCalledWith(futureDate);
@@ -81,6 +87,7 @@ describe("handleDateChange", () => {
       working_hours: workingHours,
       setSelectedDate: setSelectedDateMock,
       setTimeSlots: setTimeSlotsMock,
+      bookings: bookings,
     });
 
     expect(setSelectedDateMock).toHaveBeenCalledWith(futureDate);
@@ -100,6 +107,7 @@ describe("handleDateChange", () => {
       working_hours: workingHours,
       setSelectedDate: setSelectedDateMock,
       setTimeSlots: setTimeSlotsMock,
+      bookings: bookings,
     });
 
     expect(setSelectedDateMock).toHaveBeenCalledWith(futureDate);
