@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import { BusinessModel } from "../../../models/business.model";
+import { handleError } from "../../../utils/handleError";
 
 export const GET_SIMILAR_BUSINESSES: RequestHandler = async (req, res) => {
   const { id } = req.params;
@@ -21,10 +22,6 @@ export const GET_SIMILAR_BUSINESSES: RequestHandler = async (req, res) => {
 
     res.status(200).json(similarBusinesses);
   } catch (err) {
-    console.error("Error fetching similar businesses:", err);
-    res.status(500).json({
-      error: "An error occurred while fetching similar businesses.",
-      details: err instanceof Error ? err.message : String(err),
-    });
+    handleError(err, res, "getting similar businesses");
   }
 };
