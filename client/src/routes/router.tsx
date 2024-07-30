@@ -48,7 +48,7 @@ const routeObjects = [
   },
   {
     path: routes.USER_PROFILE.path,
-    element: <UserProfile />,
+    element: protectedRoute(<UserProfile />),
   },
   {
     path: routes.SEARCH_CATEGORY.path,
@@ -57,7 +57,7 @@ const routeObjects = [
   { path: routes.BUSINESS_ID.path, element: protectedRoute(<Business />) },
   {
     path: routes.USER_BOOKINGS.path,
-    element: <MyBookings />,
+    element: protectedRoute(<MyBookings />),
   },
   {
     path: routes.NOT_FOUND,
