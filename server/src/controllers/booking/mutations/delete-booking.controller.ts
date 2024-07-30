@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import { BookingModel } from "../../../models/booking.model";
+import { handleError } from "../../../utils/handleError";
 
 export const DELETE_BOOKING_BY_ID: RequestHandler = async (req, res) => {
   try {
@@ -27,18 +28,6 @@ export const DELETE_BOOKING_BY_ID: RequestHandler = async (req, res) => {
       response: deletionResult,
     });
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error("Error during booking deletion:", err);
-      return res.status(500).json({
-        error: "An error occurred during the deletion process.",
-        details: err.message,
-      });
-    } else {
-      console.error("Unknown error during booking deletion:", err);
-      return res.status(500).json({
-        error: "An unknown error occurred during the deletion process.",
-        details: String(err),
-      });
-    }
+    handleError(err, res, "booking deletion");
   }
 };

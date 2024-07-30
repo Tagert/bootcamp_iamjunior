@@ -2,6 +2,7 @@ import type { RequestHandler } from "express";
 import { BookingModel } from "../../../models/booking.model.js";
 import { isValidTime } from "../../../utils/validations/time.validation.js";
 import { formatDate } from "../../../utils/helpers/format-date.js";
+import { handleError } from "../../../utils/handleError.js";
 
 export const INSERT_BOOKING: RequestHandler = async (req, res) => {
   try {
@@ -41,18 +42,6 @@ export const INSERT_BOOKING: RequestHandler = async (req, res) => {
       message: `Booking for ${user_name} was added successfully`,
     });
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error("Error during booking deletion:", err);
-      return res.status(500).json({
-        error: "An unknown error occurred while trying to insert the data.",
-        details: err.message,
-      });
-    } else {
-      console.error("Unknown error occurred while trying to insert booking data:", err);
-      return res.status(500).json({
-        error: "An unknown error occurred while trying to insert the data.",
-        details: String(err),
-      });
-    }
+    handleError(err, res, "inserting booking");
   }
 };

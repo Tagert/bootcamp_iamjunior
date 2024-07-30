@@ -2,6 +2,7 @@ import type { RequestHandler } from "express";
 import { BookingModel } from "../../../models/booking.model.js";
 import { BusinessModel } from "../../../models/business.model.js";
 import { formatDate } from "../../../utils/helpers/format-date.js";
+import { handleError } from "../../../utils/handleError.js";
 
 export const GET_BUSINESS_ID_BOOKINGS_BY_DATE: RequestHandler = async (req, res) => {
   try {
@@ -27,18 +28,6 @@ export const GET_BUSINESS_ID_BOOKINGS_BY_DATE: RequestHandler = async (req, res)
       message: `Bookings for business ID (${id}) on date (${date}) retrieved successfully`,
     });
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error("Error during getting booking by date:", err);
-      return res.status(500).json({
-        error: "An error occurred during the getting process.",
-        details: err.message,
-      });
-    } else {
-      console.error("Unknown error during the getting process:", err);
-      return res.status(500).json({
-        error: "An unknown error occurred during the getting process.",
-        details: String(err),
-      });
-    }
+    handleError(err, res, "getting bookings by date");
   }
 };
