@@ -7,7 +7,7 @@ import { loginApiCall, LoginCredentials } from "../../services/auth.service";
 import { LOGIN_USER_QUERY_KEY } from "../query-keys";
 import { LoginResponseType } from "../../types/user.types";
 import { useAuthStore } from "../../store/use-auth.store";
-import { getErrorMessage } from "../../utils/helpers/error-message-handler";
+import { getErrorMessage } from "../../utils/error-message-handler";
 
 export const useLoginUser = () => {
   const queryClient = useQueryClient();

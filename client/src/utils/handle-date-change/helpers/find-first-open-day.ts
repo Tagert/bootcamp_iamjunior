@@ -1,4 +1,4 @@
-import { WorkingHoursType } from "../types/business.type";
+import { WorkingHoursType } from "../../../types/business.type";
 
 export const findFirstOpenDay = (working_hours: WorkingHoursType) => {
   const days = Object.entries(working_hours);

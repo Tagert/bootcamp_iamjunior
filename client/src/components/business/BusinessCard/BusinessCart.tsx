@@ -8,7 +8,7 @@ import { ContactType } from "../../../types/contact.type";
 import { ImagesType, WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useState } from "react";
-import { findFirstOpenDay } from "../../../utils/find-first-open-day";
+import { findFirstOpenDay } from "../../../utils/handle-date-change/helpers/find-first-open-day";
 import { formatWorkingHours } from "../../../utils/format-working-hours";
 
 export type BusinessCardProps = {

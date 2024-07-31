@@ -10,7 +10,7 @@ import { DatePicker } from "@mantine/dates";
 import { WorkingHoursType } from "../../../types/business.type";
 import { useInsertBooking } from "../../../api/booking/mutation/insertBooking";
 import { formatDate } from ".././../../utils/format-date";
-import { handleDateChange } from "../../../utils/handle-date-change";
+import { handleDateChange } from "../../../utils/handle-date-change/handle-date-change";
 import { useBusinessBookings } from "../../../api/booking/queries/fetchBookingsByBusiness";
 
 type CalendarModalProps = {
@@ -20,6 +20,7 @@ type CalendarModalProps = {
   isCalendarModalVisible: boolean;
   setIsCalendarModalVisible: (state: boolean) => void;
 };
+
 export const CalendarModal = ({
   business_id,
   business_category,
@@ -105,6 +106,8 @@ export const CalendarModal = ({
       );
     }
   };
+
+  // console.log("businessBooking:", bookings);
 
   return (
     <section className={styles.calendarModal}>
