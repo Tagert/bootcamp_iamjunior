@@ -1,4 +1,4 @@
-import { generateTimeSlots } from "../generate-time-slots";
+import { generateTimeSlots } from "../handle-date-change/helpers/generate-time-slots";
 
 describe("generateTimeSlots", () => {
   test("generates correct time slots for given open and close times", () => {

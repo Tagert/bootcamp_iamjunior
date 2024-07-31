@@ -1,4 +1,4 @@
-import { findFirstOpenDay } from "../find-first-open-day";
+import { findFirstOpenDay } from "../handle-date-change/helpers/find-first-open-day";
 import { WorkingHoursType } from "../../types/business.type";
 
 describe("findFirstOpenDay", () => {

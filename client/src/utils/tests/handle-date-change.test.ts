@@ -1,10 +1,10 @@
-import { handleDateChange } from "../handle-date-change";
+import { handleDateChange } from "../handle-date-change/handle-date-change";
 import { WorkingHoursType } from "../../types/business.type";
-import { generateTimeSlots } from "../generate-time-slots";
+import { generateTimeSlots } from "../handle-date-change/helpers/generate-time-slots";
 import { format, startOfDay } from "date-fns";
 import { BookingType } from "../../types/booking.type";
 
-jest.mock("../generate-time-slots", () => ({
+jest.mock("../handle-date-change/helpers/generate-time-slots", () => ({
   generateTimeSlots: jest.fn(),
 }));
 
