@@ -11,15 +11,19 @@ import { useAuthStore } from "../../store/use-auth.store";
 import { Text } from "@mantine/core";
 import { modals } from "@mantine/modals";
 import { useNavigate } from "react-router-dom";
+import { QueryObserverResult } from "@tanstack/react-query";
 
 type BookingCardProps = {
   booking: BookingType;
+  refetch: () => Promise<QueryObserverResult<BookingType[], AxiosError>>;
 };
 
-export const BookingCard = ({ booking }: BookingCardProps) => {
+export const BookingCard = ({ booking, refetch }: BookingCardProps) => {
   const navigate = useNavigate();
+
   const { data: business } = useBusiness(booking.business_id ?? "");
   const { mutate: deleteBooking, isPending } = useDeleteBooking();
+
   const { user } = useAuthStore();
 
   const handleDeleteBooking = () => {
@@ -60,12 +64,18 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
       onConfirm: () => {
         if (booking.id && user.id) {
           deleteBooking(
-            { booking_id: booking.id, user_id: user.id },
+            {
+              booking_id: booking.id,
+              user_id: user.id,
+              business_id: booking.business_id,
+            },
             {
               onSuccess: () => {
                 toast.success(
                   `Booking cancellation request has been successful.`
                 );
+
+                refetch();
               },
               onError: (error) => {
                 const axiosError = error as AxiosError<{ message: string }>;

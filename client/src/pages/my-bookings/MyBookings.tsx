@@ -15,7 +15,9 @@ export const MyBookings = () => {
 
   const validId = id ?? "";
 
-  const { data: bookings } = useUserBookings(validId);
+  const { data: bookings, refetch } = useUserBookings(validId);
+
+  // console.log("userBookings:", bookings);
 
   return (
     <Page>
@@ -49,7 +51,11 @@ export const MyBookings = () => {
                     booking.status === "approved"
                 )
                 .map((booking: BookingType) => (
-                  <BookingCard key={booking.id} booking={booking} />
+                  <BookingCard
+                    key={booking.id}
+                    booking={booking}
+                    refetch={refetch}
+                  />
                 ))
             ) : (
               <p>No booked bookings found.</p>
@@ -63,7 +69,11 @@ export const MyBookings = () => {
                   (booking: BookingType) => booking.status === "completed"
                 )
                 .map((booking: BookingType) => (
-                  <BookingCard key={booking.id} booking={booking} />
+                  <BookingCard
+                    key={booking.id}
+                    booking={booking}
+                    refetch={refetch}
+                  />
                 ))
             ) : (
               <p>No completed bookings found.</p>
