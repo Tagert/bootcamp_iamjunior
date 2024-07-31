@@ -6,26 +6,31 @@ import { Page } from "../../components/template/Page";
 import { Spinner } from "../../components/common/Spinner/Spinner";
 import { useBusinesses } from "../../api/business/queries/fetchBusinesses";
 import { useCategories } from "../../api/category/queries/fetchCategories";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { PopularBusinessesWrapper } from "../../components/home/PopularBusinessesWrapper/PopularBusinessesWrapper";
 
 type LocationState = {
   fromLogin?: boolean;
+  searchQuery?: string;
 };
 
 export const Home = () => {
-  const [onSearch, setOnSearch] = useState<string>("");
-
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     const state = location.state as LocationState;
 
     if (state?.fromLogin) {
       toast.success(`Successfully logged in!`);
-
       window.history.replaceState({}, document.title);
+    }
+
+    if (state?.searchQuery) {
+      setSearchQuery(state.searchQuery);
     }
   }, [location.state]);
 
@@ -40,10 +45,19 @@ export const Home = () => {
     error: businessesError,
   } = useBusinesses();
 
+  const handleSearchRedirect = (query: string) => {
+    navigate("/services", { state: { searchQuery: query } });
+  };
+
   return (
     <Page>
       <main className={styles.homePage}>
-        <Hero onSearch={onSearch} setOnSearch={setOnSearch} />
+        <Hero
+          onSearch={searchQuery}
+          setOnSearch={setSearchQuery}
+          onSearchRedirect={handleSearchRedirect}
+        />
+
         {!isCategoriesLoading ? (
           <CategoryWrapper categories={categories} error={categoriesError} />
         ) : (
