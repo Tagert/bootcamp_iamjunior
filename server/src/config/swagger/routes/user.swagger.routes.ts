@@ -212,3 +212,73 @@
  *                   type: string
  *                   description: Detailed error message
  */
+
+/**
+ * @swagger
+ * /user/{id}/favorites:
+ *   post:
+ *     summary: Add a business to user favorites
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - business_id
+ *             properties:
+ *               business_id:
+ *                 type: string
+ *                 description: The business ID to be added to favorites
+ *                 example: 60b8d295f9b3a4d2e8f91b4e
+ *     responses:
+ *       200:
+ *         description: Business successfully added to favorites
+ *       404:
+ *         description: User or business not found
+ *       500:
+ *         description: Server error
+ */
+
+/**
+ * @swagger
+ * /user/{id}/favorites:
+ *   delete:
+ *     summary: Remove a business from user favorites
+ *     tags: [User]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - business_id
+ *             properties:
+ *               business_id:
+ *                 type: string
+ *                 description: The business ID to be removed from favorites
+ *                 example: 60b8d295f9b3a4d2e8f91b4e
+ *     responses:
+ *       200:
+ *         description: Business successfully removed from favorites
+ *       404:
+ *         description: User or business not found
+ *       500:
+ *         description: Server error
+ */

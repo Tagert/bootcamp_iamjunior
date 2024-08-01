@@ -36,6 +36,7 @@ type BusinessBody = {
     saturday: DayWorkingHours;
     sunday: DayWorkingHours;
   };
+  favorite_count: number;
 };
 
 type BusinessType = BusinessBody & Entity;
@@ -78,6 +79,7 @@ const businessSchema = new mongoose.Schema<BusinessType>(
       saturday: { type: dayWorkingHoursSchema, required: true },
       sunday: { type: dayWorkingHoursSchema, required: true },
     },
+    favorite_count: { type: Number, required: false, default: 0 },
   },
   {
     timestamps: {

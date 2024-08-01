@@ -66,6 +66,7 @@ export const BusinessSchema = {
       $ref: "#/components/schemas/WorkingHoursStructure",
       description: "Working hours by day",
     },
+    favorite_count: { type: "number", description: "Count number of users favored businesses" },
     created_at: { type: "string", format: "date-time", description: "Creation timestamp" },
     updated_at: { type: "string", format: "date-time", description: "Update timestamp" },
   },

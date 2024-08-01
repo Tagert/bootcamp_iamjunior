@@ -6,6 +6,8 @@ import {
   GET_USER_BY_ID,
   DELETE_USER_BY_ID,
   CHANGE_PASSWORD,
+  ADD_FAVORITE,
+  REMOVE_FAVORITE,
 } from "../controllers/user/index";
 import { userAuth } from "../middleware/user-auth";
 import { validateTokenExpiration } from "../middleware/validate-token-expiration";
@@ -27,3 +29,7 @@ userRoutes.get("/users", GET_ALL_USERS);
 userRoutes.get("/user/:id", GET_USER_BY_ID);
 
 userRoutes.delete("/user/:id", userAuth, DELETE_USER_BY_ID);
+
+userRoutes.post("/user/:id/favorites", userAuth, ADD_FAVORITE);
+
+userRoutes.delete("/user/:id/favorites", userAuth, REMOVE_FAVORITE);

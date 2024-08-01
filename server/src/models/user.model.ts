@@ -6,6 +6,7 @@ type UserBody = {
   email: string;
   password: string;
   role: string;
+  favorites: [string];
 };
 
 type UserType = UserBody & Entity;
@@ -19,6 +20,7 @@ const userSchema = new mongoose.Schema<UserType>(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: { type: String, required: true, default: "user" },
+    favorites: { type: [String], required: false, default: [] },
   },
   {
     timestamps: {

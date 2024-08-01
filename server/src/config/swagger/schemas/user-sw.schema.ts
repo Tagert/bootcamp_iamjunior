@@ -22,5 +22,12 @@ export const UserSchema = {
       type: "string",
       description: "User role",
     },
+    favorites: {
+      type: "array",
+      items: {
+        type: "string",
+      },
+      description: "List of user's favorite business IDs",
+    },
   },
 };
