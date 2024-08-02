@@ -1,0 +1,20 @@
+.favoriteButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0.3rem;
+  top: 5%;
+  right: 5%;
+  border-radius: 0.6rem;
+  background-color: hsla(240, 10%, 96%, 0.35);
+
+  .filledStar,
+  .emptyStar {
+    width: 100%;
+    height: 100%;
+    color: #f7c632;
+  }
+}

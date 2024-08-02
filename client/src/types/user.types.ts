@@ -2,6 +2,7 @@ export type LoginUserResponse = {
   id: string;
   name: string;
   email: string;
+  favorites: string[];
 };
 
 export type CreateUserResponse = {
@@ -33,11 +34,12 @@ export type LoginFormValues = {
 };
 
 export type UserType = {
-  id?: number;
+  id?: string;
   name?: string;
   email: string;
   password?: string;
   role?: string;
+  favorites?: string[];
   created_at?: Date;
   updated_at?: Date;
 };

@@ -6,13 +6,11 @@ import carousel from "../../../styles/mantine_ui/carousel.module.scss";
 import { Carousel } from "@mantine/carousel";
 
 type PopularBusinessesWrapperProps = {
-  category?: string;
   businesses?: BusinessType[] | undefined;
   isLoading?: boolean;
   error?: Error | null;
 };
 export const PopularBusinessesWrapper = ({
-  category,
   businesses,
   error,
 }: PopularBusinessesWrapperProps) => {
@@ -24,14 +22,13 @@ export const PopularBusinessesWrapper = ({
     return <div>No businesses to display</div>;
   }
 
-  const filteredBusinesses =
-    category && businesses
-      ? businesses.filter(
-          (business) =>
-            business.category.toLocaleLowerCase() ===
-            category.toLocaleLowerCase()
-        )
-      : businesses;
+  //TODO: need to decide if I need to mutate original array or not..
+  const sortedBusinesses = [...businesses].sort((a, b) => {
+    const aCount = a.favorite_count ?? 0;
+    const bCount = b.favorite_count ?? 0;
+
+    return bCount - aCount;
+  });
 
   return (
     <section className={styles.popularBusinessesWrapper}>
@@ -51,7 +48,7 @@ export const PopularBusinessesWrapper = ({
         controlsOffset={"lg"}
         slideSize={{ base: "100%", sm: "50%", md: "25%" }}
       >
-        {filteredBusinesses.map((business) => (
+        {sortedBusinesses.map((business) => (
           <Carousel.Slide key={business.id}>
             <PopularBusinessCard
               id={business.id ?? "unknown-id"}
@@ -61,7 +58,7 @@ export const PopularBusinessesWrapper = ({
           </Carousel.Slide>
         ))}
 
-        {!filteredBusinesses?.length && (
+        {!sortedBusinesses?.length && (
           <p>There is no businesses in this category</p>
         )}
       </Carousel>

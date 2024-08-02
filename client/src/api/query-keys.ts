@@ -19,3 +19,9 @@ export const BUSINESS_BOOKINGS = "bookingsByBusinessId";
 export const SIMILAR_BUSINESSES = "similarBusinesses";
 
 export const CHANGE_PASSWORD = "changePassword";
+
+export const ADD_FAVORITE = "addFavorite";
+
+export const REMOVE_FAVORITE = "removeFavorite";
+
+export const USER_QUERY_KEY = "user";

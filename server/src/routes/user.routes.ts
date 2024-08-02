@@ -26,10 +26,10 @@ userRoutes.post("/change-password/:id", userAuth, CHANGE_PASSWORD);
 
 userRoutes.get("/users", GET_ALL_USERS);
 
+userRoutes.post("/user/favorites", userAuth, ADD_FAVORITE);
+
+userRoutes.delete("/user/favorites", userAuth, REMOVE_FAVORITE);
+
 userRoutes.get("/user/:id", GET_USER_BY_ID);
 
 userRoutes.delete("/user/:id", userAuth, DELETE_USER_BY_ID);
-
-userRoutes.post("/user/:id/favorites", userAuth, ADD_FAVORITE);
-
-userRoutes.delete("/user/:id/favorites", userAuth, REMOVE_FAVORITE);

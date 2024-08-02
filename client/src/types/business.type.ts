@@ -34,4 +34,5 @@ export type BusinessType = {
   images_url: ImagesType[];
   price: number;
   working_hours: WorkingHoursType;
+  favorite_count?: number;
 };

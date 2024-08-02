@@ -1,12 +1,12 @@
 import styles from "./ServiceCard.module.scss";
 import { useEffect, useState } from "react";
 import { routes } from "../../../routes/routes";
-import { FaStar, FaRegStar } from "react-icons/fa";
-import { useLocalStorage } from "../../../hooks/useLocalStorage";
 import { Button } from "../../common/Button/Button";
 import { ContactType } from "../../../types/contact.type";
 import { useNavigate } from "react-router-dom";
 import { ImagesType } from "../../../types/business.type";
+import { useAuthStore } from "../../../store/use-auth.store";
+import { FavoriteButton } from "../../common/FavoriteButton/FavoriteButton";
 
 export type CardProp = {
   id: string;
@@ -31,27 +31,30 @@ export const ServiceCard = ({
   price,
 }: CardProp) => {
   const navigate = useNavigate();
-  const keyName: string = "favoritesId";
 
-  const [favoritesId, setFavoritesId] = useLocalStorage<string[]>(keyName, []);
-  const [isFavorite, setIsFavorite] = useState<boolean>(
-    favoritesId.includes(id)
+  const { user, updateUser } = useAuthStore();
+
+  const [isFavorite, setIsFavorite] = useState(
+    user?.favorites?.includes(id) ?? false
   );
 
   useEffect(() => {
-    setIsFavorite(favoritesId.includes(id));
-  }, [favoritesId, id]);
-
-  const toggleFavorite = () => {
-    if (id === undefined) {
-      console.error("Id is undefined. Cannot toggle favorite");
-      return;
+    if (user) {
+      setIsFavorite(user.favorites.includes(id));
     }
+  }, [user, id]);
 
-    if (isFavorite) {
-      setFavoritesId(favoritesId.filter((favId: string) => favId !== id));
-    } else {
-      setFavoritesId([...favoritesId, id]);
+  const handleFavoriteChange = async (newFavoriteStatus: boolean) => {
+    if (user) {
+      setIsFavorite(newFavoriteStatus);
+
+      const updatedFavorites = newFavoriteStatus
+        ? [...user.favorites, id]
+        : user.favorites.filter((favId) => favId !== id);
+
+      updateUser({
+        favorites: updatedFavorites,
+      });
     }
   };
 
@@ -64,13 +67,14 @@ export const ServiceCard = ({
       <div className={styles.imageBox}>
         <img src={images_url[0].url} alt={images_url[0].alt_text} />
 
-        <button className={styles.favoriteButton} onClick={toggleFavorite}>
-          {isFavorite ? (
-            <FaStar className={styles.filledStar} />
-          ) : (
-            <FaRegStar className={styles.emptyStar} />
-          )}
-        </button>
+        {user && (
+          <FavoriteButton
+            user_id={user.id}
+            business_id={id}
+            isFavorite={isFavorite}
+            onFavoriteChange={handleFavoriteChange}
+          />
+        )}
       </div>
 
       <div className={styles.descriptionBox}>
