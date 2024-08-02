@@ -15,7 +15,7 @@ export const useFavorite = (business_id: string) => {
 
   useEffect(() => {
     if (user) {
-      setIsFavorite(user.favorites.includes(business_id));
+      setIsFavorite(user.favorites?.includes(business_id) ?? false);
     }
   }, [user, business_id]);
 

@@ -38,7 +38,7 @@ export const PopularBusinessCard = ({
 
   useEffect(() => {
     if (user) {
-      setIsFavorite(user.favorites.includes(id));
+      setIsFavorite(user.favorites?.includes(id) ?? false);
     }
   }, [user, id]);
 

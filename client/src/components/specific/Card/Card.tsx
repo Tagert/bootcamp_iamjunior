@@ -39,7 +39,7 @@ export const Card = ({
 
   useEffect(() => {
     if (user) {
-      setIsFavorite(user.favorites.includes(id));
+      setIsFavorite(user.favorites?.includes(id) ?? false);
     }
   }, [user, id]);
   //FIXME: There is differences in this and ServiceCard, PopularBusinessCard, find out which method is better, through props or local variable-> newFavoriteStatus; Do I really need - fetchUserData(user.id) for get up to date user data?
