@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ImagesType } from "../../../types/business.type";
 import { FavoriteButton } from "../../common/FavoriteButton/FavoriteButton";
 import { useAuthStore } from "../../../store/use-auth.store";
-import { useEffect, useState } from "react";
+import { useFavorite } from "../../../hooks/useFavorite";
 
 type PopularBusinessCardProps = {
   id: string;
@@ -30,31 +30,9 @@ export const PopularBusinessCard = ({
   price,
 }: PopularBusinessCardProps) => {
   const navigate = useNavigate();
-  const { user, updateUser } = useAuthStore();
 
-  const [isFavorite, setIsFavorite] = useState(
-    user?.favorites?.includes(id) ?? false
-  );
-
-  useEffect(() => {
-    if (user) {
-      setIsFavorite(user.favorites?.includes(id) ?? false);
-    }
-  }, [user, id]);
-
-  const handleFavoriteChange = async (newFavoriteStatus: boolean) => {
-    if (user) {
-      setIsFavorite(newFavoriteStatus);
-
-      const updatedFavorites = newFavoriteStatus
-        ? [...user.favorites, id]
-        : user.favorites.filter((favId) => favId !== id);
-
-      updateUser({
-        favorites: updatedFavorites,
-      });
-    }
-  };
+  const { user } = useAuthStore();
+  const { isFavorite, toggleFavorite, isUpdating } = useFavorite(id);
 
   const handleNavigateToBusinessId = () => {
     navigate(routes.BUSINESS_ID.url(id).toLocaleLowerCase());
@@ -67,10 +45,9 @@ export const PopularBusinessCard = ({
 
         {user && (
           <FavoriteButton
-            user_id={user.id}
-            business_id={id}
             isFavorite={isFavorite}
-            onFavoriteChange={handleFavoriteChange}
+            onFavoriteChange={toggleFavorite}
+            isUpdating={isUpdating}
           />
         )}
       </div>

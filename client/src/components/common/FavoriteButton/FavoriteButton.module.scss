@@ -17,4 +17,13 @@
     height: 100%;
     color: #f7c632;
   }
+
+  &:hover {
+    background-color: hsla(240, 10%, 96%, 0.6);
+  }
+
+  // &:disabled {
+  //   cursor: not-allowed;
+  //   opacity: 0.6;
+  // }
 }
