@@ -1,0 +1,22 @@
+.heroTitleDescription {
+  h2 {
+    text-align: center;
+    font-size: 3.5rem;
+    font-weight: 500;
+    line-height: 5rem;
+
+    span {
+      color: $primary-btn-color;
+      cursor: pointer;
+
+      &:hover {
+        color: $primary-btn-color-hover;
+      }
+    }
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    color: $grayish-text-color;
+  }
+}

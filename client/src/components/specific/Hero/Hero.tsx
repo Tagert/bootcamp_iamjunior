@@ -2,6 +2,7 @@ import styles from "./Hero.module.scss";
 import search from "../../../assets/search.svg";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useNavigate } from "react-router-dom";
+import { HeroTitleDescription } from "../../home/HeroTitleDescription/HeroTitleDescription";
 
 type HeroProp = {
   onSearch?: string;
@@ -30,12 +31,15 @@ export const Hero = ({ onSearch, setOnSearch, onSearchRedirect }: HeroProp) => {
 
   return (
     <section className={styles.hero}>
-      <h2>
-        Find Home <span>Service/Repair</span>
-        <br /> Near You
-      </h2>
+      {/* <div className={styles.homeDescriptionHolder}>
+        <h2>
+          Find Home <span>Service/Repair</span>
+          <br /> Near You
+        </h2>
 
-      <h4>Explore Best Home Service & Repair near you</h4>
+        <h4>Explore Best Home Service & Repair near you</h4>
+      </div> */}
+      <HeroTitleDescription />
 
       <div className={styles.searchBarHolder}>
         <input
