@@ -24,6 +24,10 @@ const UserManage = () => {
     navigate(routes.USER_PROFILE.url(user.id).toLocaleLowerCase());
   };
 
+  const handleNavigateToFavorites = () => {
+    navigate(routes.MY_FAVORITES);
+  };
+
   const toggleUserBox = () => {
     setUserBoxVisible(!isUserBoxVisible);
   };
@@ -59,6 +63,13 @@ const UserManage = () => {
                   onClick={handleNavigateToMyBookings}
                 >
                   <p>My Bookings</p>
+                </button>
+
+                <button
+                  className={styles.myFavorites}
+                  onClick={handleNavigateToFavorites}
+                >
+                  <p>Favorites</p>
                 </button>
 
                 <button className={styles.signOut} onClick={handleSignOut}>

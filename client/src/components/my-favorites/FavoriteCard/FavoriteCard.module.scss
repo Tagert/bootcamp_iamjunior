@@ -1,0 +1,110 @@
+.card {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  width: 40rem;
+  padding: 1rem;
+  border: 0.1rem solid $dark-box-shadow;
+  border-radius: 0.8rem;
+  box-shadow: $dark-box-shadow $box-shadow-axis-bottom-right;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: $hover-box-shadow $box-shadow-axis-bottom-right-hover;
+  }
+
+  .imageBox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 50%;
+    height: 100%;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 14rem;
+      border-radius: 0.8rem;
+    }
+
+    .favoriteButton {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2.2rem;
+      height: 2.2rem;
+      padding: 0.3rem;
+      top: 5%;
+      right: 5%;
+      border-radius: 0.6rem;
+      background-color: hsla(240, 10%, 96%, 0.35);
+
+      .filledStar,
+      .emptyStar {
+        width: 100%;
+        height: 100%;
+        color: #f7c632;
+      }
+    }
+  }
+
+  .descriptionBox {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0rem 1em 0rem 1rem;
+
+    p {
+      text-transform: capitalize;
+
+      &:nth-child(1) {
+        display: flex;
+        justify-content: center;
+        max-width: 6.5rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        border-radius: 2rem;
+        color: $primary-btn-color;
+        background-color: $secondary-btn-color;
+      }
+
+      &:nth-child(2) {
+        padding-left: 0.5rem;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+
+      &:nth-child(3) {
+        padding-left: 0.5rem;
+        font-size: 1.1rem;
+        color: $primary-btn-color;
+      }
+
+      &:nth-child(4) {
+        padding-left: 0.5rem;
+        color: $grayish-text-color;
+      }
+    }
+
+    .bookBox {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+
+      .bookBtn {
+        max-width: 7.5rem;
+        padding: 0.6rem 1rem;
+      }
+
+      p {
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding: none;
+      }
+    }
+  }
+}

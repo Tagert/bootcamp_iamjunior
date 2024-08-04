@@ -17,8 +17,6 @@ export const MyBookings = () => {
 
   const { data: bookings, refetch } = useUserBookings(validId);
 
-  // console.log("userBookings:", bookings);
-
   return (
     <Page>
       <main className={styles.MyBookings}>

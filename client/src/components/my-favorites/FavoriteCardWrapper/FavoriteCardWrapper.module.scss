@@ -1,0 +1,9 @@
+.cardWrapper {
+  padding: 1rem 0rem;
+
+  .cardHolder {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+}

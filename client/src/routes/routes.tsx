@@ -5,6 +5,7 @@ export const routes = {
   CONTACT_US: "/contact-us",
   LOGIN: "/login",
   REGISTER: "/register",
+  MY_FAVORITES: "/my-favorites",
   USER_PROFILE: {
     path: "/user/profile/:id",
     url: (id: string) => `/user/profile/${id}`,

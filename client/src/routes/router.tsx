@@ -16,6 +16,7 @@ import { Business } from "../pages/business/Business";
 import { AuthWrapper } from "../components/specific/AuthWrapper/AuthWrapper";
 import { MyBookings } from "../pages/my-bookings/MyBookings";
 import { UserProfile } from "../pages/user-profile/UserProfile";
+import { MyFavorites } from "../pages/my-favorites/MyFavorites";
 
 const protectedRoute = (element: JSX.Element) => (
   <AuthWrapper>{element}</AuthWrapper>
@@ -45,6 +46,10 @@ const routeObjects = [
   {
     path: routes.REGISTER,
     element: <Register />,
+  },
+  {
+    path: routes.MY_FAVORITES,
+    element: protectedRoute(<MyFavorites />),
   },
   {
     path: routes.USER_PROFILE.path,
