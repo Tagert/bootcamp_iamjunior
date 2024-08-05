@@ -282,3 +282,72 @@
  *       500:
  *         description: Server error
  */
+
+/**
+ * @swagger
+ * /user:
+ *   put:
+ *     summary: Update user by ID
+ *     tags: [User]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: string
+ *                 description: The user ID
+ *                 example: 60b8d295f9b3a4d2e8f91b4e
+ *               email:
+ *                 type: string
+ *                 description: The user's email
+ *                 example: johndoe@email.com
+ *               password:
+ *                 type: string
+ *                 description: The user's password
+ *                 example: password1
+ *               name:
+ *                 type: string
+ *                 description: The user's name
+ *                 example: John Doe
+ *     responses:
+ *       200:
+ *         description: User successfully updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Success message
+ *                   example: User with ID ({id}) was successfully updated
+ *                 updatedUser:
+ *                   $ref: '#/components/schemas/User'
+ *       404:
+ *         description: User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: Error message
+ *                   example: The entered ID ({id}) does not exist. Please try entering a different ID.
+ *       500:
+ *         description: Server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message
+ *                 details:
+ *                   type: string
+ *                   description: Detailed error message
+ */

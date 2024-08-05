@@ -1,13 +1,14 @@
 import express from "express";
 import {
-  GET_ALL_USERS,
   SIGN_UP,
   LOG_IN,
-  GET_USER_BY_ID,
-  DELETE_USER_BY_ID,
   CHANGE_PASSWORD,
+  GET_ALL_USERS,
+  UPDATE_USER_BY_ID,
   ADD_FAVORITE,
   REMOVE_FAVORITE,
+  GET_USER_BY_ID,
+  DELETE_USER_BY_ID,
 } from "../controllers/user/index";
 import { userAuth } from "../middleware/user-auth";
 import { validateTokenExpiration } from "../middleware/validate-token-expiration";
@@ -25,6 +26,8 @@ userRoutes.post("/login", LOG_IN);
 userRoutes.post("/change-password/:id", userAuth, CHANGE_PASSWORD);
 
 userRoutes.get("/users", GET_ALL_USERS);
+
+userRoutes.put("/user", userAuth, UPDATE_USER_BY_ID);
 
 userRoutes.post("/user/favorites", userAuth, ADD_FAVORITE);
 
