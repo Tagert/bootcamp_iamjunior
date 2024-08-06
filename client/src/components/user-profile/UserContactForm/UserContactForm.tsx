@@ -1,102 +1,105 @@
 import styles from "./UserContactForm.module.scss";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { Formik, Form, FormikHelpers } from "formik";
+import { useAuthStore } from "../../../store/use-auth.store";
+import { useUpdateUser } from "../../../api/user/mutation/updateUser";
+import { userContactsValidationSchema } from "../../../constants/yup.schemas";
+import { useUser } from "../../../api/user/queries/fetchUserById";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { toast } from "react-toastify";
+import { FormField } from "../../common/FormField/FormField";
+import { SelectField } from "../../common/SelectField/SelectField";
 
 type UserContactFormProps = {
   className?: string;
 };
 
-export const UserContactForm = ({ className }: UserContactFormProps) => {
-  const profileFormik = useFormik({
-    initialValues: {
-      username: "",
-      gender: "",
-      phoneNumber: "",
-      email: "",
-    },
+type FormValues = {
+  name: string;
+  gender: string;
+  phone_number: string;
+  contact_email: string;
+};
 
-    validationSchema: Yup.object({
-      username: Yup.string().required("Required"),
-      gender: Yup.string().required("Required"),
-      phoneNumber: Yup.string().required("Required"),
-      email: Yup.string().email("Invalid email address").required("Required"),
-    }),
-    onSubmit: (values) => {
-      // eslint-disable-next-line no-console
-      console.log("Profile Updated:", values);
-    },
-  });
+export const UserContactForm = ({ className }: UserContactFormProps) => {
+  const { user } = useAuthStore();
+  const { mutate, isPending: isUpdating } = useUpdateUser();
+  const { data: userData, isLoading: isLoadingUser } = useUser(user?.id || "");
+
+  const initialValues: FormValues = {
+    name: userData?.name || user?.name || "",
+    gender: userData?.gender || "",
+    phone_number: userData?.phone_number || "",
+    contact_email: userData?.contact_email || "",
+  };
+
+  const handleSubmit = (
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>
+  ) => {
+    if (user?.id) {
+      mutate({ id: user.id, ...values });
+    } else {
+      console.error("User ID is undefined");
+    }
+
+    toast.success("Contacts have been successfully updated.");
+    setSubmitting(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent, submitForm: () => void) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitForm();
+    }
+  };
+
+  if (isLoadingUser || !user?.id) {
+    return <Spinner />;
+  }
 
   return (
-    <form onSubmit={profileFormik.handleSubmit} className={className}>
-      <div className={styles.userContacts}>
-        <div className={styles.formGroup}>
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            onChange={profileFormik.handleChange}
-            onBlur={profileFormik.handleBlur}
-            value={profileFormik.values.username}
-          />
-          {profileFormik.touched.username && profileFormik.errors.username ? (
-            <div className={styles.error}>{profileFormik.errors.username}</div>
-          ) : null}
-        </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={userContactsValidationSchema}
+      onSubmit={handleSubmit}
+      enableReinitialize
+    >
+      {({ submitForm }) => (
+        <Form
+          className={className}
+          onKeyDown={(e) => handleKeyDown(e, submitForm)}
+        >
+          <div className={styles.userContacts}>
+            <FormField label="Name" name="name" type="text" />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="gender">Gender</label>
-          <input
-            id="gender"
-            name="gender"
-            type="text"
-            onChange={profileFormik.handleChange}
-            onBlur={profileFormik.handleBlur}
-            value={profileFormik.values.gender}
-          />
-          {profileFormik.touched.gender && profileFormik.errors.gender ? (
-            <div className={styles.error}>{profileFormik.errors.gender}</div>
-          ) : null}
-        </div>
+            <SelectField
+              label="Gender"
+              name="gender"
+              options={[
+                { value: "", label: "Select Gender" },
+                { value: "male", label: "Male" },
+                { value: "female", label: "Female" },
+              ]}
+            />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="phoneNumber">Phone Number</label>
-          <input
-            id="phoneNumber"
-            name="phoneNumber"
-            type="text"
-            onChange={profileFormik.handleChange}
-            onBlur={profileFormik.handleBlur}
-            value={profileFormik.values.phoneNumber}
-          />
-          {profileFormik.touched.phoneNumber &&
-          profileFormik.errors.phoneNumber ? (
-            <div className={styles.error}>
-              {profileFormik.errors.phoneNumber}
-            </div>
-          ) : null}
-        </div>
+            <FormField label="Phone Number" name="phone_number" type="text" />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            onChange={profileFormik.handleChange}
-            onBlur={profileFormik.handleBlur}
-            value={profileFormik.values.email}
-          />
-          {profileFormik.touched.email && profileFormik.errors.email ? (
-            <div className={styles.error}>{profileFormik.errors.email}</div>
-          ) : null}
-        </div>
-      </div>
+            <FormField
+              label="Contact Email"
+              name="contact_email"
+              type="email"
+            />
+          </div>
 
-      <button type="submit" className={styles.submitButton}>
-        Update Profile Info
-      </button>
-    </form>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isUpdating || !user?.id}
+          >
+            {isUpdating ? "Updating..." : "Update Profile Info"}
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 };

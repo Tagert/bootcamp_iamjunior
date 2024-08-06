@@ -4,10 +4,11 @@ import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { routes } from "../../routes/routes";
 import { loginApiCall, LoginCredentials } from "../../services/auth.service";
-import { LOGIN_USER_QUERY_KEY } from "../query-keys";
+import { LOGIN_USER_QUERY_KEY, USER_QUERY_KEY } from "../query-keys";
 import { LoginResponseType } from "../../types/user.types";
 import { useAuthStore } from "../../store/use-auth.store";
 import { getErrorMessage } from "../../utils/error-message-handler";
+import { fetchUserById } from "../user/queries/fetchUserById";
 
 export const useLoginUser = () => {
   const queryClient = useQueryClient();
@@ -21,9 +22,14 @@ export const useLoginUser = () => {
     error,
   } = useMutation<LoginResponseType, Error, LoginCredentials>({
     mutationFn: loginApiCall,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       login(data);
       setError(false, "");
+
+      await queryClient.fetchQuery({
+        queryKey: [USER_QUERY_KEY, data.user.id],
+        queryFn: () => fetchUserById(data.user.id),
+      });
 
       navigate(routes.HOME, { state: { fromLogin: true } });
 
@@ -42,11 +48,6 @@ export const useLoginUser = () => {
   });
 
   const validateAndLogin = (email: string, password: string) => {
-    // if (!validateEmail(email)) {
-    //   setError(true, "Please enter a valid email");
-    //   return;
-    // }
-
     if (!email || !password) {
       setError(true, "Please fill in all fields");
       return;

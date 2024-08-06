@@ -24,3 +24,18 @@ export const loginValidationSchema = Yup.object().shape({
     .required("Email required"),
   password: Yup.string().required("Password required"),
 });
+
+export const userContactsValidationSchema = Yup.object({
+  name: Yup.string().required("Required"),
+  gender: Yup.string().required("Required"),
+  phone_number: Yup.string().required("Required"),
+  contact_email: Yup.string()
+    .email("Invalid email address")
+    .required("Required"),
+});
+
+export const userAddressValidationSchema = Yup.object({
+  city: Yup.string().required("Required"),
+  address: Yup.string().required("Required"),
+  birthday: Yup.date().required("Required"),
+});

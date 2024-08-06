@@ -3,6 +3,12 @@ export type LoginUserResponse = {
   name: string;
   email: string;
   favorites: string[];
+  gender?: string;
+  phone_number?: string;
+  contact_email?: string;
+  city?: string;
+  address?: string;
+  birthday?: Date;
 };
 
 export type CreateUserResponse = {
@@ -33,9 +39,26 @@ export type LoginFormValues = {
   password: string;
 };
 
+export type UserBody = {
+  id?: string;
+  name?: string;
+  gender?: string;
+  phone_number?: string;
+  contact_email?: string;
+  city?: string;
+  address?: string;
+  birthday?: Date;
+};
+
 export type UserType = {
   id?: string;
   name?: string;
+  gender?: string;
+  phone_number?: string;
+  contact_email?: string;
+  city?: string;
+  address?: string;
+  birthday?: Date;
   email: string;
   password?: string;
   role?: string;

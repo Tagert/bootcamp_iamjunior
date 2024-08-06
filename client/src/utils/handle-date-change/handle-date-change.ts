@@ -24,11 +24,11 @@ export const handleDateChange = ({
   if (!date) {
     setSelectedDate(null);
     setTimeSlots([]);
+
     return;
   }
 
   setSelectedDate(date);
-  console.log("Current bookings:", bookings);
 
   const dayHours = getDayHours(date, working_hours);
 
@@ -43,6 +43,5 @@ export const handleDateChange = ({
     isValidSlot(slot, date, reservedSlots)
   );
 
-  console.log("validSlots:", validSlots);
   setTimeSlots(validSlots);
 };

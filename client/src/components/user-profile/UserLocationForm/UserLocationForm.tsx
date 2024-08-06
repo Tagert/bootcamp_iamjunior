@@ -1,81 +1,97 @@
 import styles from "./UserLocationForm.module.scss";
-import { useFormik } from "formik";
-import * as Yup from "yup";
+import { Formik, Form, FormikHelpers } from "formik";
+import { toast } from "react-toastify";
+import { format, isValid } from "date-fns";
+import { useUser } from "../../../api/user/queries/fetchUserById";
+import { useUpdateUser } from "../../../api/user/mutation/updateUser";
+import { useAuthStore } from "../../../store/use-auth.store";
+import { userAddressValidationSchema } from "../../../constants/yup.schemas";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { FormField } from "../../common/FormField/FormField";
 
 type UserLocationFormProps = {
   className?: string;
 };
 
+type FormValues = {
+  city: string;
+  address: string;
+  birthday: string;
+};
+
 export const UserLocationForm = ({ className }: UserLocationFormProps) => {
-  const addressFormik = useFormik({
-    initialValues: {
-      city: "",
-      address: "",
-      birthday: "",
-    },
-    validationSchema: Yup.object({
-      city: Yup.string().required("Required"),
-      address: Yup.string().required("Required"),
-      birthday: Yup.date().required("Required"),
-    }),
-    onSubmit: (values) => {
-      // eslint-disable-next-line no-console
-      console.log("Address Updated:", values);
-    },
-  });
+  const { user } = useAuthStore();
+  const { mutate, isPending: isUpdating } = useUpdateUser();
+  const { data: userData, isLoading: isLoadingUser } = useUser(user?.id || "");
+
+  const initialValues: FormValues = {
+    city: userData?.city || "",
+    address: userData?.address || "",
+    birthday:
+      userData?.birthday && isValid(new Date(userData.birthday))
+        ? format(new Date(userData.birthday), "yyyy-MM-dd")
+        : "",
+  };
+
+  const handleSubmit = (
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>
+  ) => {
+    if (user?.id) {
+      const updatedValues = {
+        ...values,
+        birthday: values.birthday ? new Date(values.birthday) : undefined,
+      };
+
+      mutate({ id: user.id, ...updatedValues });
+    } else {
+      console.error("User ID is undefined");
+    }
+
+    toast.success("Address have been successfully updated.");
+    setSubmitting(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent, submitForm: () => void) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      submitForm();
+    }
+  };
+
+  if (isLoadingUser || !user?.id) {
+    return <Spinner />;
+  }
 
   return (
-    <form onSubmit={addressFormik.handleSubmit} className={className}>
-      <div className={styles.userAddress}>
-        <div className={styles.formGroup}>
-          <label htmlFor="city">City</label>
-          <input
-            id="city"
-            name="city"
-            type="text"
-            onChange={addressFormik.handleChange}
-            onBlur={addressFormik.handleBlur}
-            value={addressFormik.values.city}
-          />
-          {addressFormik.touched.city && addressFormik.errors.city ? (
-            <div className={styles.error}>{addressFormik.errors.city}</div>
-          ) : null}
-        </div>
+    <Formik
+      initialValues={initialValues}
+      validationSchema={userAddressValidationSchema}
+      onSubmit={handleSubmit}
+      enableReinitialize
+    >
+      {({ submitForm }) => (
+        <Form
+          className={className}
+          onKeyDown={(e) => handleKeyDown(e, submitForm)}
+        >
+          <div className={styles.userAddress}>
+            <FormField label="City" name="city" type="text" />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="address">Address</label>
-          <input
-            id="address"
-            name="address"
-            type="text"
-            onChange={addressFormik.handleChange}
-            onBlur={addressFormik.handleBlur}
-            value={addressFormik.values.address}
-          />
-          {addressFormik.touched.address && addressFormik.errors.address ? (
-            <div className={styles.error}>{addressFormik.errors.address}</div>
-          ) : null}
-        </div>
+            <FormField label="Address" name="address" type="text" />
 
-        <div className={styles.formGroup}>
-          <label htmlFor="birthday">Birthday</label>
-          <input
-            id="birthday"
-            name="birthday"
-            type="date"
-            onChange={addressFormik.handleChange}
-            onBlur={addressFormik.handleBlur}
-            value={addressFormik.values.birthday}
-          />
-          {addressFormik.touched.birthday && addressFormik.errors.birthday ? (
-            <div className={styles.error}>{addressFormik.errors.birthday}</div>
-          ) : null}
-        </div>
-      </div>
+            <FormField label="Birthday" name="birthday" type="date" />
+          </div>
 
-      <button type="submit" className={styles.submitButton}>
-        Update Address Info
-      </button>
-    </form>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isUpdating || !user?.id}
+          >
+            {isUpdating ? "Updating..." : "Update Address Info"}
+          </button>
+        </Form>
+      )}
+    </Formik>
   );
 };

@@ -25,3 +25,5 @@ export const ADD_FAVORITE = "addFavorite";
 export const REMOVE_FAVORITE = "removeFavorite";
 
 export const USER_QUERY_KEY = "user";
+
+export const UPDATE_USER = "updateUser";
