@@ -7,11 +7,11 @@ import { ApiService } from "../../../services/api.services";
 import { ChangePasswordResponse } from "../../../types/user.types";
 import { CHANGE_PASSWORD } from "../../query-keys";
 
-interface ChangePasswordParams {
+type ChangePasswordParams = {
   id: string | undefined;
   currentPassword: string;
   newPassword: string;
-}
+};
 
 export const changePassword = async ({
   id,

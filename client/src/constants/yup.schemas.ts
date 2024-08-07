@@ -39,3 +39,11 @@ export const userAddressValidationSchema = Yup.object({
   address: Yup.string().required("Required"),
   birthday: Yup.date().required("Required"),
 });
+
+export const userPasswordValidationSchema = Yup.object({
+  currentPassword: Yup.string().required("Required"),
+  newPassword: Yup.string().required("Required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("newPassword")], "Passwords must match")
+    .required("Required"),
+});

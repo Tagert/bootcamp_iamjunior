@@ -8,15 +8,11 @@ import { useAuthStore } from "../../../store/use-auth.store";
 import { userAddressValidationSchema } from "../../../constants/yup.schemas";
 import { Spinner } from "../../common/Spinner/Spinner";
 import { FormField } from "../../common/FormField/FormField";
+import { LocationFormValues } from "../../../types/form.type";
+import { handleKeyDown } from "../../../utils/handle-key-down";
 
 type UserLocationFormProps = {
   className?: string;
-};
-
-type FormValues = {
-  city: string;
-  address: string;
-  birthday: string;
 };
 
 export const UserLocationForm = ({ className }: UserLocationFormProps) => {
@@ -24,7 +20,7 @@ export const UserLocationForm = ({ className }: UserLocationFormProps) => {
   const { mutate, isPending: isUpdating } = useUpdateUser();
   const { data: userData, isLoading: isLoadingUser } = useUser(user?.id || "");
 
-  const initialValues: FormValues = {
+  const initialValues: LocationFormValues = {
     city: userData?.city || "",
     address: userData?.address || "",
     birthday:
@@ -34,8 +30,8 @@ export const UserLocationForm = ({ className }: UserLocationFormProps) => {
   };
 
   const handleSubmit = (
-    values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>
+    values: LocationFormValues,
+    { setSubmitting }: FormikHelpers<LocationFormValues>
   ) => {
     if (user?.id) {
       const updatedValues = {
@@ -52,13 +48,6 @@ export const UserLocationForm = ({ className }: UserLocationFormProps) => {
     setSubmitting(false);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent, submitForm: () => void) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      submitForm();
-    }
-  };
-
   if (isLoadingUser || !user?.id) {
     return <Spinner />;
   }
@@ -73,7 +62,7 @@ export const UserLocationForm = ({ className }: UserLocationFormProps) => {
       {({ submitForm }) => (
         <Form
           className={className}
-          onKeyDown={(e) => handleKeyDown(e, submitForm)}
+          onKeyDown={(e) => handleKeyDown(e, submitForm, "Enter")}
         >
           <div className={styles.userAddress}>
             <FormField label="City" name="city" type="text" />

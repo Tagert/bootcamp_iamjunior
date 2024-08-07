@@ -8,16 +8,11 @@ import { Spinner } from "../../common/Spinner/Spinner";
 import { toast } from "react-toastify";
 import { FormField } from "../../common/FormField/FormField";
 import { SelectField } from "../../common/SelectField/SelectField";
+import { ContactsFormValues } from "../../../types/form.type";
+import { handleKeyDown } from "../../../utils/handle-key-down";
 
 type UserContactFormProps = {
   className?: string;
-};
-
-type FormValues = {
-  name: string;
-  gender: string;
-  phone_number: string;
-  contact_email: string;
 };
 
 export const UserContactForm = ({ className }: UserContactFormProps) => {
@@ -25,7 +20,7 @@ export const UserContactForm = ({ className }: UserContactFormProps) => {
   const { mutate, isPending: isUpdating } = useUpdateUser();
   const { data: userData, isLoading: isLoadingUser } = useUser(user?.id || "");
 
-  const initialValues: FormValues = {
+  const initialValues: ContactsFormValues = {
     name: userData?.name || user?.name || "",
     gender: userData?.gender || "",
     phone_number: userData?.phone_number || "",
@@ -33,8 +28,8 @@ export const UserContactForm = ({ className }: UserContactFormProps) => {
   };
 
   const handleSubmit = (
-    values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>
+    values: ContactsFormValues,
+    { setSubmitting }: FormikHelpers<ContactsFormValues>
   ) => {
     if (user?.id) {
       mutate({ id: user.id, ...values });
@@ -44,13 +39,6 @@ export const UserContactForm = ({ className }: UserContactFormProps) => {
 
     toast.success("Contacts have been successfully updated.");
     setSubmitting(false);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent, submitForm: () => void) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      submitForm();
-    }
   };
 
   if (isLoadingUser || !user?.id) {
@@ -67,7 +55,7 @@ export const UserContactForm = ({ className }: UserContactFormProps) => {
       {({ submitForm }) => (
         <Form
           className={className}
-          onKeyDown={(e) => handleKeyDown(e, submitForm)}
+          onKeyDown={(e) => handleKeyDown(e, submitForm, "Enter")}
         >
           <div className={styles.userContacts}>
             <FormField label="Name" name="name" type="text" />
