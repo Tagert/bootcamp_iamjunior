@@ -1,6 +1,8 @@
 import styles from "./BusinessExtrasWrapper.module.scss";
 import { useState } from "react";
 import { Modal } from "@mantine/core";
+import { Tabs } from "@mantine/core";
+import { FaStar, FaRegStar } from "react-icons/fa";
 import { ImagesType, WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useSimilarBusiness } from "../../../api/business/queries/fetchSimilarBusinesses";
@@ -48,29 +50,63 @@ export const BusinessExtrasWrapper = ({
 
   return (
     <section className={`${styles.businessExtrasWrapper} ${className}`}>
-      <div className={styles.descriptionContainer}>
-        <div className={styles.descriptionBox}>
-          <h2>Description</h2>
+      <Tabs
+        defaultValue="about"
+        classNames={{
+          list: styles.list,
+          tab: styles.tab,
+        }}
+      >
+        <Tabs.List>
+          <Tabs.Tab value="about">About</Tabs.Tab>
+          <Tabs.Tab value="reviews">Reviews</Tabs.Tab>
+          <Tabs.Tab value="photos">Photos</Tabs.Tab>
+        </Tabs.List>
 
-          <p className={styles.descriptionText}>{description}</p>
-        </div>
+        <Tabs.Panel value="about">
+          <div className={styles.descriptionContainer}>
+            <div className={styles.descriptionBox}>
+              <h2>Description</h2>
 
-        <div className={styles.galleryBox}>
-          <h2>Gallery</h2>
-
-          <div className={styles.imagesWrapper}>
-            {images_url.map((image) => (
-              <div className={styles.imageBox} key={image.id ?? image.url}>
-                <img
-                  src={image.url}
-                  alt={image.alt_text}
-                  onClick={() => handleImageClick(image)}
-                />
-              </div>
-            ))}
+              <p className={styles.descriptionText}>{description}</p>
+            </div>
           </div>
-        </div>
-      </div>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="reviews">
+          <div className={styles.reviewContainer}>
+            <h2>
+              Review <span>(0)</span>
+            </h2>
+
+            <div className={styles.ratingBox}>
+              <FaRegStar className={styles.emptyStar} />
+              <FaRegStar className={styles.emptyStar} />
+              <FaRegStar className={styles.emptyStar} />
+              <FaRegStar className={styles.emptyStar} />
+              <FaRegStar className={styles.emptyStar} />
+            </div>
+          </div>
+        </Tabs.Panel>
+
+        <Tabs.Panel value="photos">
+          <div className={styles.galleryBox}>
+            <h2>Gallery</h2>
+
+            <div className={styles.imagesWrapper}>
+              {images_url.map((image) => (
+                <div className={styles.imageBox} key={image.id ?? image.url}>
+                  <img
+                    src={image.url}
+                    alt={image.alt_text}
+                    onClick={() => handleImageClick(image)}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </Tabs.Panel>
+      </Tabs>
 
       <div className={styles.bookingContainer}>
         <ButtonImage

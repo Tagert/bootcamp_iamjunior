@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./FavoriteButton.module.scss";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 type FavoriteButtonProps = {
   isFavorite: boolean;
@@ -14,25 +14,38 @@ export const FavoriteButton = ({
   isUpdating,
 }: FavoriteButtonProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isCooldown, setIsCooldown] = useState(false);
+
+  const handleClick = () => {
+    onFavoriteChange();
+
+    setIsCooldown(true);
+
+    setIsHovered(false);
+
+    setTimeout(() => {
+      setIsCooldown(false);
+    }, 300);
+  };
 
   return (
     <button
-      onClick={onFavoriteChange}
+      onClick={handleClick}
       className={styles.favoriteButton}
       disabled={isUpdating}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => !isCooldown && setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {isFavorite ? (
-        isHovered ? (
-          <FaRegStar className={styles.emptyStar} />
+        isHovered && !isCooldown ? (
+          <FaRegHeart className={styles.emptyHeart} />
         ) : (
-          <FaStar className={styles.filledStar} />
+          <FaHeart className={styles.filledHeart} />
         )
-      ) : isHovered ? (
-        <FaStar className={styles.filledStar} />
+      ) : isHovered && !isCooldown ? (
+        <FaHeart className={styles.filledHeart} />
       ) : (
-        <FaRegStar className={styles.emptyStar} />
+        <FaRegHeart className={styles.emptyHeart} />
       )}
     </button>
   );

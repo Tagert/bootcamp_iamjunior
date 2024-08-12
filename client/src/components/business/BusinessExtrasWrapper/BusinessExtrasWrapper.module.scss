@@ -6,48 +6,63 @@
   h2 {
     font-size: 1.4rem;
     font-weight: 700;
-    padding-bottom: 1.5rem;
+    padding: 1.5rem 0rem;
   }
 
   .descriptionContainer {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    max-width: 50rem;
 
     .descriptionBox {
-      max-width: 50rem;
-
       p {
         text-align: justify;
       }
     }
+  }
 
-    .galleryBox {
+  .reviewContainer {
+    width: 50rem;
+
+    .ratingBox {
       display: flex;
-      flex-direction: column;
+      gap: 0.3rem;
 
-      .imagesWrapper {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        padding: 1rem 0.5rem;
+      .emptyStar {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: #f7c632;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .galleryBox {
+    display: flex;
+    flex-direction: column;
+    width: 50rem;
+
+    .imagesWrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      cursor: pointer;
+
+      .imageBox {
+        border: 0.1rem solid $gray-color-025;
+        border-radius: 0.6rem;
+        box-shadow: $dark-box-shadow $box-shadow-axis-bottom-right;
+        overflow: hidden;
         cursor: pointer;
 
-        .imageBox {
-          border: 0.1rem solid $gray-color-025;
-          border-radius: 0.6rem;
-          box-shadow: $dark-box-shadow $box-shadow-axis-bottom-right;
-          overflow: hidden;
-          cursor: pointer;
+        &:hover {
+          box-shadow: $hover-box-shadow $box-shadow-axis-bottom-right-hover;
+        }
 
-          &:hover {
-            box-shadow: $hover-box-shadow $box-shadow-axis-bottom-right-hover;
-          }
-
-          img {
-            object-fit: cover;
-            width: 12rem;
-          }
+        img {
+          object-fit: cover;
+          width: 12rem;
         }
       }
     }
@@ -71,4 +86,13 @@
       }
     }
   }
+}
+
+.list {
+  height: 2.826rem;
+}
+
+.tab {
+  font-size: 1rem;
+  font-weight: 500;
 }

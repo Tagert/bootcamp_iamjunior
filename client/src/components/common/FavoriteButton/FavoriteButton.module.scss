@@ -12,11 +12,11 @@
   background-color: hsla(240, 10%, 96%, 0.35);
   transition: all 0.1s ease-in-out;
 
-  .filledStar,
-  .emptyStar {
+  .filledHeart,
+  .emptyHeart {
     width: 100%;
     height: 100%;
-    color: #f7c632;
+    color: #d44960;
   }
 
   &:hover {
