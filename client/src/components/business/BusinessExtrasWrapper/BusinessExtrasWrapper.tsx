@@ -2,7 +2,10 @@ import styles from "./BusinessExtrasWrapper.module.scss";
 import { useState } from "react";
 import { Modal } from "@mantine/core";
 import { Tabs } from "@mantine/core";
-import { FaStar, FaRegStar } from "react-icons/fa";
+import {
+  // FaStar,
+  FaRegStar,
+} from "react-icons/fa";
 import { ImagesType, WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useSimilarBusiness } from "../../../api/business/queries/fetchSimilarBusinesses";
