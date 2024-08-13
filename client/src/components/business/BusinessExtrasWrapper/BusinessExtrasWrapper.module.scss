@@ -25,16 +25,10 @@
   .reviewContainer {
     width: 50rem;
 
-    .ratingBox {
+    .addReview {
       display: flex;
-      gap: 0.3rem;
-
-      .emptyStar {
-        width: 1.5rem;
-        height: 1.5rem;
-        color: #f7c632;
-        cursor: pointer;
-      }
+      justify-content: space-between;
+      align-items: center;
     }
   }
 
@@ -95,4 +89,8 @@
 .tab {
   font-size: 1rem;
   font-weight: 500;
+}
+
+.btnLabel {
+  color: $primary-btn-color;
 }

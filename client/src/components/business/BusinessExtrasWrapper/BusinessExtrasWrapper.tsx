@@ -1,16 +1,13 @@
 import styles from "./BusinessExtrasWrapper.module.scss";
 import { useState } from "react";
-import { Modal } from "@mantine/core";
+import { Button, Modal } from "@mantine/core";
 import { Tabs } from "@mantine/core";
-import {
-  // FaStar,
-  FaRegStar,
-} from "react-icons/fa";
 import { ImagesType, WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useSimilarBusiness } from "../../../api/business/queries/fetchSimilarBusinesses";
 import { CalendarModal } from "../CalendarModal/CalendarModal";
 import { SimilarBusinessWrapper } from "../SimilarBusinessesWrapper/SimilarBusinessesWrapper";
+import { BusinessReviewWrapper } from "../BusinessReviewWrapper/BusinessReviewWrapper";
 
 type BusinessExtrasWrapperProps = {
   className?: string;
@@ -78,17 +75,17 @@ export const BusinessExtrasWrapper = ({
 
         <Tabs.Panel value="reviews">
           <div className={styles.reviewContainer}>
-            <h2>
-              Review <span>(0)</span>
-            </h2>
+            <div className={styles.addReview}>
+              <h2>
+                Review <span>(0)</span>
+              </h2>
 
-            <div className={styles.ratingBox}>
-              <FaRegStar className={styles.emptyStar} />
-              <FaRegStar className={styles.emptyStar} />
-              <FaRegStar className={styles.emptyStar} />
-              <FaRegStar className={styles.emptyStar} />
-              <FaRegStar className={styles.emptyStar} />
+              <Button variant="default" classNames={{ label: styles.btnLabel }}>
+                Leave Review
+              </Button>
             </div>
+
+            <BusinessReviewWrapper test={""} />
           </div>
         </Tabs.Panel>
 
