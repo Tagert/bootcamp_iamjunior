@@ -1,56 +1,81 @@
 import styles from "./BusinessReviewWrapper.module.scss";
-import { RatingStars } from "../../common/RatingStars/RatingStars";
-import { CheckboxStar } from "../../common/CheckboxStar/CheckboxStar";
+import { useRef } from "react";
+import { modals } from "@mantine/modals";
+import { Button } from "@mantine/core";
+import { FormikHelpers, FormikProps } from "formik";
+import { LeaveReviewFormValues } from "../../../types/form.type";
+import { LeaveReviewModal } from "../LeaveReviewModal/LeaveReviewModal";
+import { ReviewCard } from "../ReviewCard/ReviewCard";
+import { RatingSummary } from "../RatingSummary/RatingSummary";
 
 type BusinessReviewWrapperProps = {
-  test?: string;
+  provider: string;
 };
 
-export const BusinessReviewWrapper = ({ test }: BusinessReviewWrapperProps) => {
+export const BusinessReviewWrapper = ({
+  provider,
+}: BusinessReviewWrapperProps) => {
+  const formikRef = useRef<FormikProps<LeaveReviewFormValues>>(null);
+
+  const handleSubmit = (
+    values: LeaveReviewFormValues,
+    actions: FormikHelpers<LeaveReviewFormValues>
+  ) => {
+    // eslint-disable-next-line no-console
+    console.log("Form Submitted with values:", values);
+
+    actions.setSubmitting(false);
+  };
+
+  const openLeaveReviewModal = () =>
+    modals.openConfirmModal({
+      classNames: {
+        header: styles.modalHeader,
+        title: styles.modalTitle,
+      },
+      title: (
+        <p>
+          Leave a review for <span className={styles.provider}>{provider}</span>
+          .
+        </p>
+      ),
+      children: (
+        <LeaveReviewModal
+          provider={provider}
+          onSubmit={handleSubmit}
+          formRef={formikRef}
+        />
+      ),
+      labels: { confirm: "Confirm", cancel: "Cancel" },
+      // onCancel: () => console.log("Cancel"),
+      onConfirm: () => {
+        if (formikRef.current) {
+          formikRef.current.submitForm();
+        }
+      },
+    });
+
   return (
     <section className={styles.businessReviewWrapper}>
       <div className={styles.ratingHolder}>
-        <div className={styles.ratingScore}>
-          <h4>5 / 5 {test}</h4>
+        <div className={styles.addReview}>
+          <h2>
+            Review <span>(0)</span>
+          </h2>
 
-          <RatingStars />
-
-          <p>130 customer reviews</p>
+          <Button
+            variant="default"
+            classNames={{ label: styles.btnLabel }}
+            onClick={openLeaveReviewModal}
+          >
+            Leave Review
+          </Button>
         </div>
 
-        <div className={styles.ratingFilter}>
-          <CheckboxStar ratingNumber={5} progressValue={45} />
-          <CheckboxStar ratingNumber={4} progressValue={15} />
-          <CheckboxStar ratingNumber={3} progressValue={5} />
-          <CheckboxStar ratingNumber={2} progressValue={2.5} />
-          <CheckboxStar ratingNumber={1} progressValue={2.5} />
-        </div>
+        <RatingSummary />
       </div>
 
-      <div className={styles.reviewCard}>
-        <div className={styles.addedUser}>
-          <h3>User name</h3>
-
-          <p>Date</p>
-        </div>
-
-        <div className={styles.givenUserRating}>
-          <RatingStars
-            className={styles.userStarBox}
-            starStyle={styles.userStars}
-          />
-        </div>
-
-        <div className={styles.descriptionBox}>
-          <h4>Title Title</h4>
-
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
-            quidem, id inventore architecto dicta dolores voluptatibus sequi
-            culpa quos assumenda rerum, ullam, dolor explicabo provident?
-          </p>
-        </div>
-      </div>
+      <ReviewCard />
     </section>
   );
 };

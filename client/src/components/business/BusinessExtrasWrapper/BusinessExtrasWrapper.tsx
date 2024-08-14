@@ -1,7 +1,6 @@
 import styles from "./BusinessExtrasWrapper.module.scss";
 import { useState } from "react";
-import { Button, Modal } from "@mantine/core";
-import { Tabs } from "@mantine/core";
+import { Modal, Tabs } from "@mantine/core";
 import { ImagesType, WorkingHoursType } from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useSimilarBusiness } from "../../../api/business/queries/fetchSimilarBusinesses";
@@ -12,6 +11,7 @@ import { BusinessReviewWrapper } from "../BusinessReviewWrapper/BusinessReviewWr
 type BusinessExtrasWrapperProps = {
   className?: string;
   business_id: string;
+  provider: string;
   business_category: string;
   description: string;
   images_url: ImagesType[];
@@ -21,6 +21,7 @@ type BusinessExtrasWrapperProps = {
 export const BusinessExtrasWrapper = ({
   className,
   business_id,
+  provider,
   business_category,
   description,
   images_url,
@@ -75,17 +76,7 @@ export const BusinessExtrasWrapper = ({
 
         <Tabs.Panel value="reviews">
           <div className={styles.reviewContainer}>
-            <div className={styles.addReview}>
-              <h2>
-                Review <span>(0)</span>
-              </h2>
-
-              <Button variant="default" classNames={{ label: styles.btnLabel }}>
-                Leave Review
-              </Button>
-            </div>
-
-            <BusinessReviewWrapper test={""} />
+            <BusinessReviewWrapper provider={provider} />
           </div>
         </Tabs.Panel>
 

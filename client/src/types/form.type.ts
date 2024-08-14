@@ -16,3 +16,8 @@ export type PasswordFormValues = {
   newPassword: string;
   confirmPassword: string;
 };
+
+export type LeaveReviewFormValues = {
+  title: string;
+  description: string;
+};

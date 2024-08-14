@@ -47,3 +47,22 @@ export const userPasswordValidationSchema = Yup.object({
     .oneOf([Yup.ref("newPassword")], "Passwords must match")
     .required("Required"),
 });
+
+export const leaveReviewValidationSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(
+      3,
+      "Please provide a longer title. It should be at least 3 characters."
+    )
+    .required("Please enter a title for your review."),
+  description: Yup.string()
+    .min(
+      10,
+      "Please provide more details in your review. It should be at least 10 characters."
+    )
+    .max(
+      100,
+      "Please keep your review concise. It should be no more than 100 characters."
+    )
+    .required("Please share your experience in the review."),
+});

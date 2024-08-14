@@ -1,0 +1,28 @@
+.leaveReviewModal {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .clickToRateBox {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 500;
+      border-bottom: 0.1rem solid $gray-color-045;
+    }
+
+    .rateBtn {
+      width: 1.4rem;
+      height: 1.4rem;
+    }
+  }
+
+  .formFields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

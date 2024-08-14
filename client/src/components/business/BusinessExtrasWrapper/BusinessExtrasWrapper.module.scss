@@ -24,12 +24,6 @@
 
   .reviewContainer {
     width: 50rem;
-
-    .addReview {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
   }
 
   .galleryBox {
@@ -89,8 +83,4 @@
 .tab {
   font-size: 1rem;
   font-weight: 500;
-}
-
-.btnLabel {
-  color: $primary-btn-color;
 }

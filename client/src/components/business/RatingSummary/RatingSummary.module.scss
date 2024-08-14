@@ -1,0 +1,26 @@
+.ratingBox {
+  display: flex;
+  gap: 4rem;
+  width: 100%;
+
+  .ratingScore {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    h4 {
+      font-weight: 600;
+    }
+
+    p {
+      font-weight: 500;
+      color: $gray-color-045;
+    }
+  }
+
+  .ratingFilter {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

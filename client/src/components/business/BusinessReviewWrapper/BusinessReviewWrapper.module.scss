@@ -1,25 +1,43 @@
 .businessReviewWrapper {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 
   .ratingHolder {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 4rem;
+    gap: 2rem;
 
-    .ratingScore {
+    .addReview {
       display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
 
-      h4 {
-        font-weight: 600;
+      .btnLabel {
+        color: $primary-btn-color;
       }
+    }
 
-      p {
-        font-weight: 500;
-        color: $gray-color-045;
+    .ratingBox {
+      display: flex;
+      gap: 4rem;
+      width: 100%;
+
+      .ratingScore {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        h4 {
+          font-weight: 600;
+        }
+
+        p {
+          font-weight: 500;
+          color: $gray-color-045;
+        }
       }
     }
 
@@ -29,62 +47,16 @@
       gap: 0.5rem;
     }
   }
+}
 
-  .reviewCard {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-    width: 35rem;
+.modalTitle {
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
 
-    .addedUser {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-
-      h3 {
-        font-size: 1.1rem;
-        font-weight: 600;
-      }
-
-      p {
-        font-weight: 500;
-        color: $gray-color-045;
-      }
-    }
-
-    .givenUserRating {
-      .userStarBox {
-        display: flex;
-
-        .userStars {
-          width: 1.2rem;
-          height: 1.2rem;
-        }
-      }
-    }
-
-    .descriptionBox {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-
-      &::before {
-        content: "";
-        position: absolute;
-        border-bottom: 0.15rem solid $gray-color-010;
-        bottom: -1.5rem;
-        width: 100%;
-      }
-
-      h4 {
-        font-size: 1rem;
-        font-weight: 500;
-      }
-
-      p {
-        text-align: justify;
-      }
-    }
-  }
+.provider {
+  font-style: italic;
+  color: $primary-btn-color;
 }
