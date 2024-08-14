@@ -1,13 +1,14 @@
 import styles from "./RatingSummary.module.scss";
-import { RatingStars } from "../../common/RatingStars/RatingStars";
 import { CheckboxStar } from "../../common/CheckboxStar/CheckboxStar";
+import { UserRatedStars } from "../../common/UserRatedStars/UserRatedStars";
 
 export const RatingSummary = () => {
   return (
     <div className={styles.ratingBox}>
       <div className={styles.ratingScore}>
         <h4>5 / 5</h4>
-        <RatingStars />
+        <UserRatedStars rating={3.99} />
+
         <p>130 customer reviews</p>
       </div>
 

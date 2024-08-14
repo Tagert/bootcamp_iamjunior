@@ -25,12 +25,20 @@ export const LeaveReviewModal = ({
     description: "",
   };
 
+  const handleRatingChange = (rating: number) => {
+    // eslint-disable-next-line no-console
+    console.log("Selected Rating:", rating);
+  };
+
   return (
     <section className={styles.leaveReviewModal}>
       <div className={styles.clickToRateBox}>
         <h4>Click to rate:</h4>
 
-        <RatingStars starStyle={styles.rateBtn} />
+        <RatingStars
+          starStyle={styles.rateBtn}
+          onRatingChange={handleRatingChange}
+        />
       </div>
 
       <Formik

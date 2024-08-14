@@ -1,5 +1,5 @@
 import styles from "./ReviewCard.module.scss";
-import { RatingStars } from "../../common/RatingStars/RatingStars";
+import { UserRatedStars } from "../../common/UserRatedStars/UserRatedStars";
 
 export const ReviewCard = () => {
   return (
@@ -9,9 +9,10 @@ export const ReviewCard = () => {
         <p>Date</p>
       </div>
       <div className={styles.givenUserRating}>
-        <RatingStars
+        <UserRatedStars
           className={styles.userStarBox}
           starStyle={styles.userStars}
+          rating={4}
         />
       </div>
       <div className={styles.descriptionBox}>
