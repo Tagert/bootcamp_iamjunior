@@ -39,6 +39,17 @@ export const ImagesSchema = {
   },
 };
 
+export const ReviewSchema = {
+  type: "object",
+  required: ["rating", "comment"],
+  properties: {
+    user_id: { type: "string", description: "ID of the user leaving the review" },
+    rating: { type: "number", description: "Rating given by the user", minimum: 1, maximum: 5 },
+    comment: { type: "string", description: "Comment left by the user", nullable: true },
+    date: { type: "string", format: "date-time", description: "Date and time when the review was created" },
+  },
+};
+
 export const BusinessSchema = {
   type: "object",
   required: ["name", "category", "address", "contacts", "images_url", "price", "working_hours"],
@@ -67,6 +78,13 @@ export const BusinessSchema = {
       description: "Working hours by day",
     },
     favorite_count: { type: "number", description: "Count number of users favored businesses" },
+    reviews: {
+      type: "array",
+      items: { $ref: "#/components/schemas/Review" },
+      description: "List of user reviews",
+    },
+    review_count: { type: "number", description: "Total number of reviews", default: 0 },
+    average_rating: { type: "number", description: "Average rating from all reviews", default: 0 },
     created_at: { type: "string", format: "date-time", description: "Creation timestamp" },
     updated_at: { type: "string", format: "date-time", description: "Update timestamp" },
   },

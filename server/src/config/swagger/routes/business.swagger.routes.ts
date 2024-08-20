@@ -200,3 +200,53 @@
  *             schema:
  *               $ref: '#/components/schemas/Business'
  */
+
+/**
+ * @swagger
+ * /business/{id}/review:
+ *   post:
+ *     summary: Leave a review for a business
+ *     tags: [Business]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The ID of the business
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - rating
+ *               - comment
+ *             properties:
+ *               rating:
+ *                 type: number
+ *                 description: The rating given by the user, from 1 to 5
+ *                 example: 5
+ *               comment:
+ *                 type: string
+ *                 description: The user's comment
+ *                 example: "Great service!"
+ *     responses:
+ *       200:
+ *         description: Review added successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Business'
+ *       400:
+ *         description: Bad request
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: Business not found
+ *       500:
+ *         description: Internal server error
+ */

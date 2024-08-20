@@ -6,8 +6,9 @@ import {
   GET_BUSINESS_BY_ID,
   UPDATE_BUSINESS_BY_ID,
   GET_SIMILAR_BUSINESSES,
-} from "../controllers/business/index.js";
-import { userAuth } from "../middleware/user-auth.js";
+  LEAVE_REVIEW,
+} from "../controllers/business/index";
+import { userAuth } from "../middleware/user-auth";
 
 export const businessRoutes = express.Router();
 
@@ -20,5 +21,7 @@ businessRoutes.get("/business/:id", GET_BUSINESS_BY_ID);
 businessRoutes.get("/business/:id/similar", GET_SIMILAR_BUSINESSES);
 
 businessRoutes.post("/business", userAuth, INSERT_BUSINESS);
+
+businessRoutes.post("/business/:id/review", userAuth, LEAVE_REVIEW);
 
 businessRoutes.put("/business/:id", userAuth, UPDATE_BUSINESS_BY_ID);
