@@ -17,6 +17,13 @@ type DayWorkingHours = {
   status: "open" | "closed";
 };
 
+type ReviewType = {
+  user_id: string;
+  rating: number;
+  comment: string;
+  date: string;
+};
+
 type BusinessBody = {
   user_id: string;
   name: string;
@@ -39,7 +46,19 @@ type BusinessBody = {
   favorite_count: number;
 };
 
-type BusinessType = BusinessBody & Entity;
+type BusinessType = BusinessBody &
+  Entity & {
+    reviews: ReviewType[];
+    review_count: number;
+    average_rating: number;
+  };
+
+const reviewSchema = new mongoose.Schema<ReviewType>({
+  user_id: { type: String, required: true },
+  rating: { type: Number, required: true, min: 1, max: 5 },
+  comment: { type: String, required: false },
+  date: { type: String, required: true },
+});
 
 const contactSchema = new mongoose.Schema<ContactType>({
   contact_person: { type: String, required: true },
@@ -80,6 +99,9 @@ const businessSchema = new mongoose.Schema<BusinessType>(
       sunday: { type: dayWorkingHoursSchema, required: true },
     },
     favorite_count: { type: Number, required: false, default: 0 },
+    reviews: { type: [reviewSchema], required: false, default: [] },
+    review_count: { type: Number, required: false, default: 0 },
+    average_rating: { type: Number, required: false, default: 0 },
   },
   {
     timestamps: {
