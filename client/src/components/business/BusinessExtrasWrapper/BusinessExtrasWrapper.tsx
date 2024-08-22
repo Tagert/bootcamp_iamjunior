@@ -76,7 +76,10 @@ export const BusinessExtrasWrapper = ({
 
         <Tabs.Panel value="reviews">
           <div className={styles.reviewContainer}>
-            <BusinessReviewWrapper provider={provider} />
+            <BusinessReviewWrapper
+              provider={provider}
+              business_id={business_id}
+            />
           </div>
         </Tabs.Panel>
 

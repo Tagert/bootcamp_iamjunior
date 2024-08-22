@@ -10,10 +10,12 @@ import { RatingSummary } from "../RatingSummary/RatingSummary";
 
 type BusinessReviewWrapperProps = {
   provider: string;
+  business_id: string;
 };
 
 export const BusinessReviewWrapper = ({
   provider,
+  business_id,
 }: BusinessReviewWrapperProps) => {
   const formikRef = useRef<FormikProps<LeaveReviewFormValues>>(null);
 
@@ -42,6 +44,7 @@ export const BusinessReviewWrapper = ({
       children: (
         <LeaveReviewModal
           provider={provider}
+          business_id={business_id}
           onSubmit={handleSubmit}
           formRef={formikRef}
         />

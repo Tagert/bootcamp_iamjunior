@@ -5,9 +5,11 @@ import { TextField } from "../../common/TextField/TextField";
 import { RatingStars } from "../../common/RatingStars/RatingStars";
 import { leaveReviewValidationSchema } from "../../../constants/yup.schemas";
 import { LeaveReviewFormValues } from "../../../types/form.type";
+// import { useInsertReview } from "../../../api/business/mutations/insertBusinessReview";
 
 type LeaveReviewModalProps = {
   provider: string;
+  business_id: string;
   onSubmit: (
     values: LeaveReviewFormValues,
     actions: FormikHelpers<LeaveReviewFormValues>
@@ -20,6 +22,8 @@ export const LeaveReviewModal = ({
   onSubmit,
   formRef,
 }: LeaveReviewModalProps) => {
+  // const { mutate: insertReview } = useInsertReview();
+
   const initialValues: LeaveReviewFormValues = {
     title: "",
     description: "",
