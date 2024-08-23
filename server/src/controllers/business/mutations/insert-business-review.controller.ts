@@ -6,7 +6,7 @@ import { handleError } from "../../../utils/handleError";
 export const LEAVE_REVIEW: RequestHandler = async (req, res) => {
   try {
     const { id } = req.params;
-    const { user_id, rating, comment } = req.body;
+    const { user_id, rating, title, description } = req.body;
 
     const business = await BusinessModel.findOne({ id });
 
@@ -25,7 +25,8 @@ export const LEAVE_REVIEW: RequestHandler = async (req, res) => {
     business.reviews.push({
       user_id,
       rating,
-      comment,
+      title,
+      description,
       date: formattedDate,
     });
 

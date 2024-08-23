@@ -20,4 +20,5 @@ export type PasswordFormValues = {
 export type LeaveReviewFormValues = {
   title: string;
   description: string;
+  rating: number;
 };

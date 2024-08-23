@@ -2,8 +2,9 @@ import styles from "./BusinessReviewWrapper.module.scss";
 import { useRef } from "react";
 import { modals } from "@mantine/modals";
 import { Button } from "@mantine/core";
-import { FormikHelpers, FormikProps } from "formik";
+import { FormikProps } from "formik";
 import { LeaveReviewFormValues } from "../../../types/form.type";
+import { ReviewType } from "../../../types/business.type";
 import { LeaveReviewModal } from "../LeaveReviewModal/LeaveReviewModal";
 import { ReviewCard } from "../ReviewCard/ReviewCard";
 import { RatingSummary } from "../RatingSummary/RatingSummary";
@@ -11,23 +12,19 @@ import { RatingSummary } from "../RatingSummary/RatingSummary";
 type BusinessReviewWrapperProps = {
   provider: string;
   business_id: string;
+  reviews: ReviewType[];
+  review_count: number;
+  average_rating: number;
 };
 
 export const BusinessReviewWrapper = ({
   provider,
   business_id,
+  reviews,
+  review_count,
+  average_rating,
 }: BusinessReviewWrapperProps) => {
   const formikRef = useRef<FormikProps<LeaveReviewFormValues>>(null);
-
-  const handleSubmit = (
-    values: LeaveReviewFormValues,
-    actions: FormikHelpers<LeaveReviewFormValues>
-  ) => {
-    // eslint-disable-next-line no-console
-    console.log("Form Submitted with values:", values);
-
-    actions.setSubmitting(false);
-  };
 
   const openLeaveReviewModal = () =>
     modals.openConfirmModal({
@@ -45,7 +42,6 @@ export const BusinessReviewWrapper = ({
         <LeaveReviewModal
           provider={provider}
           business_id={business_id}
-          onSubmit={handleSubmit}
           formRef={formikRef}
         />
       ),
@@ -63,7 +59,7 @@ export const BusinessReviewWrapper = ({
       <div className={styles.ratingHolder}>
         <div className={styles.addReview}>
           <h2>
-            Review <span>(0)</span>
+            Review <span>({review_count})</span>
           </h2>
 
           <Button
@@ -75,10 +71,21 @@ export const BusinessReviewWrapper = ({
           </Button>
         </div>
 
-        <RatingSummary />
+        <RatingSummary
+          review_count={review_count}
+          average_rating={average_rating}
+        />
       </div>
-
-      <ReviewCard />
+      {reviews.map((review) => (
+        <ReviewCard
+          key={review._id}
+          rating={review.rating}
+          title={review.title}
+          description={review.description}
+          date={review.date}
+          user_id={review.user_id}
+        />
+      ))}
     </section>
   );
 };

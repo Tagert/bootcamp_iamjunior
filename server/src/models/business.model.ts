@@ -20,7 +20,8 @@ type DayWorkingHours = {
 type ReviewType = {
   user_id: string;
   rating: number;
-  comment: string;
+  title: string;
+  description: string;
   date: string;
 };
 
@@ -56,7 +57,8 @@ type BusinessType = BusinessBody &
 const reviewSchema = new mongoose.Schema<ReviewType>({
   user_id: { type: String, required: true },
   rating: { type: Number, required: true, min: 1, max: 5 },
-  comment: { type: String, required: false },
+  title: { type: String, required: true },
+  description: { type: String, required: false },
   date: { type: String, required: true },
 });
 

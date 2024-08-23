@@ -32,6 +32,9 @@ export const BusinessWrapper = ({
             description={business.description}
             images_url={business.images_url}
             working_hours={business.working_hours}
+            reviews={business.reviews ?? []}
+            review_count={business.review_count ?? 0}
+            average_rating={business.average_rating ?? 0}
           />
         </>
       )}

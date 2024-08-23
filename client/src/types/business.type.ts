@@ -22,6 +22,15 @@ export type ImagesType = {
   alt_text: string;
 };
 
+export type ReviewType = {
+  _id?: string;
+  user_id: string;
+  rating: number;
+  title: string;
+  description: string;
+  date: string;
+};
+
 export type BusinessType = {
   id?: string;
   user_id?: string;
@@ -35,4 +44,7 @@ export type BusinessType = {
   price: number;
   working_hours: WorkingHoursType;
   favorite_count?: number;
+  reviews?: ReviewType[];
+  review_count?: number;
+  average_rating?: number;
 };

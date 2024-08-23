@@ -1,37 +1,71 @@
 import styles from "./LeaveReviewModal.module.scss";
+import { useState } from "react";
 import { Formik, Form, FormikHelpers, FormikProps } from "formik";
 import { FormField } from "../../common/FormField/FormField";
 import { TextField } from "../../common/TextField/TextField";
 import { RatingStars } from "../../common/RatingStars/RatingStars";
 import { leaveReviewValidationSchema } from "../../../constants/yup.schemas";
 import { LeaveReviewFormValues } from "../../../types/form.type";
-// import { useInsertReview } from "../../../api/business/mutations/insertBusinessReview";
+import { useInsertReview } from "../../../api/business/mutations/insertBusinessReview";
+import { toast } from "react-toastify";
+import { AxiosError } from "axios";
 
 type LeaveReviewModalProps = {
   provider: string;
   business_id: string;
-  onSubmit: (
-    values: LeaveReviewFormValues,
-    actions: FormikHelpers<LeaveReviewFormValues>
-  ) => void;
   formRef: React.Ref<FormikProps<LeaveReviewFormValues>>;
 };
 
 export const LeaveReviewModal = ({
   provider,
-  onSubmit,
+  business_id,
   formRef,
 }: LeaveReviewModalProps) => {
-  // const { mutate: insertReview } = useInsertReview();
+  const { mutate: insertReview } = useInsertReview();
+  const [rating, setRating] = useState(0);
 
   const initialValues: LeaveReviewFormValues = {
     title: "",
     description: "",
+    rating: 0,
   };
 
-  const handleRatingChange = (rating: number) => {
-    // eslint-disable-next-line no-console
-    console.log("Selected Rating:", rating);
+  const handleRatingChange = (ratingValue: number) => {
+    setRating(ratingValue);
+  };
+
+  const handleSubmit = async (
+    values: LeaveReviewFormValues,
+    actions: FormikHelpers<LeaveReviewFormValues>
+  ) => {
+    const reviewValues = { ...values, rating };
+
+    try {
+      insertReview(
+        {
+          ...reviewValues,
+          business_id,
+        },
+        {
+          onSuccess: () => {
+            toast.success(
+              `Thank you for reviewing ${provider}! Your feedback has been submitted.`
+            );
+
+            actions.setSubmitting(false);
+          },
+          onError: (error: Error) => {
+            const axiosError = error as AxiosError<{ error: string }>;
+
+            toast.error(axiosError.response?.data.error || "An error occurred");
+            actions.setSubmitting(false);
+          },
+        }
+      );
+    } catch (err) {
+      toast.error("An unexpected error occurred.");
+      actions.setSubmitting(false);
+    }
   };
 
   return (
@@ -48,7 +82,7 @@ export const LeaveReviewModal = ({
       <Formik
         initialValues={initialValues}
         validationSchema={leaveReviewValidationSchema}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         innerRef={formRef}
         enableReinitialize
       >

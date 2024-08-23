@@ -1,7 +1,11 @@
 import styles from "./BusinessExtrasWrapper.module.scss";
 import { useState } from "react";
 import { Modal, Tabs } from "@mantine/core";
-import { ImagesType, WorkingHoursType } from "../../../types/business.type";
+import {
+  ImagesType,
+  ReviewType,
+  WorkingHoursType,
+} from "../../../types/business.type";
 import { ButtonImage } from "../../common/ButtonImage/ButtonImage";
 import { useSimilarBusiness } from "../../../api/business/queries/fetchSimilarBusinesses";
 import { CalendarModal } from "../CalendarModal/CalendarModal";
@@ -16,6 +20,9 @@ type BusinessExtrasWrapperProps = {
   description: string;
   images_url: ImagesType[];
   working_hours: WorkingHoursType;
+  reviews: ReviewType[];
+  review_count: number;
+  average_rating: number;
 };
 
 export const BusinessExtrasWrapper = ({
@@ -26,6 +33,9 @@ export const BusinessExtrasWrapper = ({
   description,
   images_url,
   working_hours,
+  reviews,
+  review_count,
+  average_rating,
 }: BusinessExtrasWrapperProps) => {
   const {
     data: similarBusinesses,
@@ -79,6 +89,9 @@ export const BusinessExtrasWrapper = ({
             <BusinessReviewWrapper
               provider={provider}
               business_id={business_id}
+              reviews={reviews}
+              review_count={review_count}
+              average_rating={average_rating}
             />
           </div>
         </Tabs.Panel>
