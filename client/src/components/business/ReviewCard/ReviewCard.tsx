@@ -1,5 +1,8 @@
 import styles from "./ReviewCard.module.scss";
 import { UserRatedStars } from "../../common/UserRatedStars/UserRatedStars";
+import { useUser } from "../../../api/user/queries/fetchUserById";
+import { Spinner } from "../../common/Spinner/Spinner";
+import { UserType } from "../../../types/user.types";
 
 type ReviewCardProp = {
   rating: number;
@@ -16,10 +19,20 @@ export const ReviewCard = ({
   date,
   user_id,
 }: ReviewCardProp) => {
+  const { data: userData, isLoading } = useUser(user_id || "") as {
+    data: UserType | undefined;
+    isLoading: boolean;
+  };
+
   return (
     <div className={styles.reviewCard}>
       <div className={styles.addedUser}>
-        <h3>{user_id}</h3>
+        {!isLoading ? (
+          <h3>{userData ? userData.name : "Unknown User"}</h3>
+        ) : (
+          <Spinner />
+        )}
+
         <p>{date}</p>
       </div>
       <div className={styles.givenUserRating}>

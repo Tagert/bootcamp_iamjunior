@@ -6,15 +6,19 @@ import { FaStar } from "react-icons/fa";
 type CheckboxStarProps = {
   ratingNumber: number;
   progressValue: number;
+  onChange: () => void;
+  checked: boolean;
 };
 
 export const CheckboxStar = ({
   ratingNumber,
   progressValue,
+  onChange,
+  checked,
 }: CheckboxStarProps) => {
   return (
     <div className={styles.checkboxStarHolder}>
-      <Checkbox label={ratingNumber} />
+      <Checkbox label={ratingNumber} checked={checked} onChange={onChange} />
 
       <FaStar className={styles.filledStar} />
 

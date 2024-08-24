@@ -61,8 +61,8 @@ export const leaveReviewValidationSchema = Yup.object().shape({
       "Please provide more details in your review. It should be at least 10 characters."
     )
     .max(
-      100,
-      "Please keep your review concise. It should be no more than 100 characters."
+      150,
+      "Please keep your review concise. It should be no more than 150 characters."
     )
     .required("Please share your experience in the review."),
 });

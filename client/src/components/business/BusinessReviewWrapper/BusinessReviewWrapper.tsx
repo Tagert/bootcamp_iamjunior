@@ -1,5 +1,5 @@
 import styles from "./BusinessReviewWrapper.module.scss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { modals } from "@mantine/modals";
 import { Button } from "@mantine/core";
 import { FormikProps } from "formik";
@@ -25,6 +25,8 @@ export const BusinessReviewWrapper = ({
   average_rating,
 }: BusinessReviewWrapperProps) => {
   const formikRef = useRef<FormikProps<LeaveReviewFormValues>>(null);
+
+  const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
 
   const openLeaveReviewModal = () =>
     modals.openConfirmModal({
@@ -54,6 +56,18 @@ export const BusinessReviewWrapper = ({
       },
     });
 
+  const filteredReviews = reviews.filter((review) =>
+    selectedRatings.length > 0 ? selectedRatings.includes(review.rating) : true
+  );
+
+  const handleRatingChange = (rating: number) => {
+    setSelectedRatings((prev) =>
+      prev.includes(rating)
+        ? prev.filter((r) => r !== rating)
+        : [...prev, rating]
+    );
+  };
+
   return (
     <section className={styles.businessReviewWrapper}>
       <div className={styles.ratingHolder}>
@@ -72,11 +86,14 @@ export const BusinessReviewWrapper = ({
         </div>
 
         <RatingSummary
+          reviews={reviews}
           review_count={review_count}
           average_rating={average_rating}
+          handleRatingChange={handleRatingChange}
+          selectedRatings={selectedRatings}
         />
       </div>
-      {reviews.map((review) => (
+      {filteredReviews.map((review) => (
         <ReviewCard
           key={review._id}
           rating={review.rating}

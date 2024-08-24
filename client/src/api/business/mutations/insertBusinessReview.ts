@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ApiService } from "../../../services/api.services";
-import { REVIEW_KEY } from "../../query-keys";
+import { BUSINESS_QUERY_KEY } from "../../query-keys";
 import { LeaveReviewFormValues } from "../../../types/form.type";
 
 const insertReview = async (
@@ -24,7 +24,7 @@ export const useInsertReview = () => {
   return useMutation({
     mutationFn: insertReview,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [REVIEW_KEY] });
+      queryClient.invalidateQueries({ queryKey: [BUSINESS_QUERY_KEY] });
     },
   });
 };
