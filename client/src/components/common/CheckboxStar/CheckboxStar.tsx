@@ -25,6 +25,7 @@ export const CheckboxStar = ({
       <Progress
         classNames={{ root: styles.progressBar }}
         value={progressValue}
+        color="rgb(247, 198, 50)"
       />
     </div>
   );
