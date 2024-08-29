@@ -98,7 +98,7 @@ export const BusinessExtrasWrapper = ({
 
         <Tabs.Panel value="photos">
           <div className={styles.galleryBox}>
-            <h2>Gallery</h2>
+            <h2>Gallery ({images_url.length})</h2>
 
             <div className={styles.imagesWrapper}>
               {images_url.map((image) => (
@@ -148,6 +148,7 @@ export const BusinessExtrasWrapper = ({
           onClose={closeImageModal}
           size={800}
           title="Image Preview"
+          classNames={{ title: styles.title, body: styles.body }}
         >
           <div className={styles.enlargedImageWrapper}>
             <img
